@@ -1,4 +1,4 @@
- ## Flask Handling Forms And IF-For Structure Test Application
+ ## Flask Handling Routes And IF-For Structure Test Application
 
  ## Description
  WEB SERVER APPLICATION FITH FLASK FRAMEWORK. 
