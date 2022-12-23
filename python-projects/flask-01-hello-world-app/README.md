@@ -20,3 +20,4 @@ python hello-world-app.py
 ```
 
  ## How to Use the Project
+ This project can be use to test a port of an host or server
