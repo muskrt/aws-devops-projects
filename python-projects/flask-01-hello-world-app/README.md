@@ -11,17 +11,7 @@
 3. [How to Install and Run the Project](#How-to-Install-and-Run-the-Project)
 4. [How to Use the Project](#How-to-Use-the-Project) 
 
-# Table of Contents
-1. [Example](#example)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
 
-
-## Example
-## Example2
-## Third Example
-## [Fourth Example](http://www.fourthexample.com) 
  ## How to Install and Run the Project
 ```python
 wget https://raw.githubusercontent.com/muskrt/aws-devops-projects/main/python-projects/flask-01-hello-world-app/hello-world-app.py
