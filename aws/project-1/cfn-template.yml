@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |  
+Resources:
+  myEc2:
+    Type: AWS::EC2::Instance
+    Properties:
+     
+      ImageId: "String"
+      
+      InstanceType: "t2.micro"
+
+      KeyName: "linux"
+
+
+      SecurityGroupIds:
+        SecurityGroupIds
+      SecurityGroups:
+        SecurityGroups
+
+      Tags:
+        - Key: "Name"
+          Value: "myEc2"
+
+
+      UserData: "String"
+
+  
+Outputs:
