@@ -1,4 +1,4 @@
- ## Flask Hello-World Application
+ ## Flask jinja Templates Application
 
  ## Description
  WEB SERVER APPLICATION FITH FLASK 
@@ -21,4 +21,4 @@ python jinja.py
 ```
 
  ## How to Use the Project
- This project can be use to test a port of an host or server
+ This project can be use to test and understand basis web server facilities.
