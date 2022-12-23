@@ -4,7 +4,12 @@
  BASIC WEB SERVER APPLICATION FITH FLASK 
  FRAMEWORK
 
- ## Table of Contents 
+ ## Table of Contents
+ 
+1. [Example](#example)
+2. [Example2](#example2)
+3. [Third Example](#third-example)
+4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom) 
 
  ## How to Install and Run the Project
 ```python
