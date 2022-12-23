@@ -18,4 +18,4 @@ pip install flask
 python hello-world-app.py
 ```
 
- # 5.How-to-Use-the-Project
+ # 5.How to Use the Project
