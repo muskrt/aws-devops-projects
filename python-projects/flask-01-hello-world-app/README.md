@@ -9,8 +9,8 @@
 1. [Title](#1.Flask-Hello-World-Application)
 2. [Description](#2.Description)
 3. [Table of Contents](#3.Table-of-Contents)
-4. [How to Install and Run the Project](#3.How-to-Install-and-Run-the-Project)
-5. [How to Use the Project](#How-to-Use-the-Project) 
+4. [How to Install and Run the Project](#4.How-to-Install-and-Run-the-Project)
+5. [How to Use the Project](#5.How-to-Use-the-Project) 
 
  ## 4.How to Install and Run the Project
 ```python
