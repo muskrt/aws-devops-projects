@@ -1,4 +1,4 @@
- ## Flask Hello-World Application
+ ## 1.Flask Hello-World Application
 
  ## Description
  BASIC WEB SERVER APPLICATION FITH FLASK 
@@ -6,7 +6,7 @@
 
  ## Table of Contents
  
-1. [Example](#example)
+1. [Exale](#example)
 2. [Example2](#example2)
 3. [Third Example](#third-example)
 4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom) 
