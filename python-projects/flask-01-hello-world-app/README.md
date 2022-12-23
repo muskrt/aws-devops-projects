@@ -6,10 +6,10 @@
 
  ## Table of Contents
  
-1. [Exale](#example)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom) 
+1. [Title](#example)
+2. [Description](#example2)
+3. [How to Install and Run the Project](#third-example)
+4. [How to Use the Project](#fourth-examplehttpwwwfourthexamplecom) 
 
  ## How to Install and Run the Project
 ```python
