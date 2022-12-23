@@ -4,7 +4,13 @@
     <title>Greeting Page</title>
 </head>
 <body>
+    {% if name in personel %}
     <h1>Hello, {{ name }}!</h1>
     <h1>Welcome to my Greeting Page</h1>
+    {% else %}
+    <h1>you are not authorized!</h1>
+    {% endif %}
+
+    
 </body>
 </html>
