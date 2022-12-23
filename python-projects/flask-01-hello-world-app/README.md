@@ -1,4 +1,4 @@
- ## 1.Flask Hello-World Application
+ # 1.Flask Hello-World Application
 
  ## Description
  BASIC WEB SERVER APPLICATION FITH FLASK 
@@ -6,7 +6,7 @@
 
  ## Table of Contents
  
-1. [Title](#example)
+1. [Title](#Flask Hello-World Application)
 2. [Description](#example2)
 3. [How to Install and Run the Project](#third-example)
 4. [How to Use the Project](#fourth-examplehttpwwwfourthexamplecom) 
