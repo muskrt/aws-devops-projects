@@ -1,4 +1,4 @@
- ## Flask jinja Templates Application
+ ## Flask Jinja Templates Application
 
  ## Description
  WEB SERVER APPLICATION FITH FLASK 
