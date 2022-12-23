@@ -4,7 +4,7 @@
  BASIC WEB SERVER APPLICATION FITH FLASK 
  FRAMEWORK
 
- # 3.Table of Contents
+ # Table of Contents
  
 1. [Title](#1.Flask-Hello-World-Application)
 2. [Description](#2.Description)
