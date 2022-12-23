@@ -1,4 +1,4 @@
- ## Docker Basic Hello World Application Container
+ ## Kubernates Basic Hello World Application in Cluster
 
  ## Description
  BASIC WEB SERVER APPLICATION FITH FLASK 
