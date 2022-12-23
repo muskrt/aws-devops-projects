@@ -1,6 +1,6 @@
- ## Project's Title
+ ## Flask Hello-World Application
 
- ## Project Description
+ ## Description
 
  ## Table of Contents 
 
