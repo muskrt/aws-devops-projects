@@ -2,7 +2,7 @@
 
  ## Description
  WEB SERVER APPLICATION FITH FLASK 
- FRAMEWORK and jinja Templates
+ FRAMEWORK  AND JINJA TEMPLATES
 
  # Table of Contents
  
