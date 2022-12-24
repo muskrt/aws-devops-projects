@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This template running a web-server on aws instances which runs with ... ami ids with type t2.micro 
+  Projects files pulles from public github repo and server runs with apache with security group allowing port 80.
+
+Resources:
+  webserversecuritygroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Enable http for apache and ssh"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80 
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22 
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: "Name"
+          Value: "ec2cloudformationsecgrb"
+  webserverinstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-0b5eea76982371e91"
+      InstanceType: "t2.micro"
+      KeyName: "linux"
+      SecurityGroupIds:
+        - !Ref  webserversecuritygroup
+      Tags:
+        - Key: "Name"
+          Value: !Sub web server of ${AWS::StackName} Stack
+      UserData: !Base64 |
+            #!/bin/bash
+            yum update -y 
+            yum install httpd -y
+            yum install subversion -y
+            svn export https://github.com/muskrt/aws-devops-projects.git/trunk/aws/project-1/src-files
+            mv src-files/* /var/www/html/
+            systemctl start httpd 
+            systemctl enable httpd 
+
+
+Outputs:
+  WebsiteURL:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt webserverinstance.PublicDnsName
+    Description: Kittens carousel Application
