@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
   This templates creates a security group with instance with type t2.micro
-  and ami-...... which enables apache server on port 80 
+  and ami-0b5eea76982371e91 which enables apache server on port 80 
 Parameters:
   keyName:
     Description: keyname to connect ec2
@@ -11,12 +11,8 @@ Resources:
   romannumbers:
     Type: AWS::EC2::SecurityGroup
     Properties:
+      VpcId: vpc-050f61b1a47bfb02c
       GroupDescription: "enables ssh and http to ec server" # Required
-      SecurityGroupEgress:
-        - IpProtocol: tcp
-          FromPort: 0
-          ToPort: 0
-          CidrIp: 0.0.0.0/0
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 22
@@ -30,10 +26,10 @@ Resources:
       Tags:
         - Key: "Name"
           Value: "roman-numbers-secgrb"
-  ec2:
+  webserverhost:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: "ami-"
+      ImageId: "ami-0b5eea76982371e91"
       InstanceType: "t2.micro"
       KeyName: !Ref keyName
       SecurityGroupIds:
@@ -42,6 +38,7 @@ Resources:
         - Key: "Name"
           Value: "roman-numbers"
       UserData: !Base64 |
+        #!/bin/bash
         yum update -y
         yum install python3 -y
         yum install subversion -y 
@@ -50,4 +47,10 @@ Resources:
         svn export https://github.com/muskrt/aws-devops-projects.git/trunk/aws/project-2
         cd project-2/
         python3 app.py
-        
+
+Outputs:
+  websiteurl:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt webserverhost.PublicDnsName
+
