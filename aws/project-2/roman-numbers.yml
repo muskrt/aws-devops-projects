@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This templates creates a security group with instance with type t2.micro
+  and ami-...... which enables apache server on port 80 
+Parameters:
+  keyName:
+    Description: keyname to connect ec2
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: linux
+Resources:
+  romannumbers:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "enables ssh and http to ec server" # Required
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 0
+          CidrIp: 0.0.0.0/0
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+      Tags:
+        - Key: "Name"
+          Value: "roman-numbers-secgrb"
+  ec2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-"
+      InstanceType: "t2.micro"
+      KeyName: !Ref keyName
+      SecurityGroupIds:
+        - !Ref romannumbers
+      Tags:
+        - Key: "Name"
+          Value: "roman-numbers"
+      UserData: !Base64 |
+        yum update -y
+        yum install python3 -y
+        yum install subversion -y 
+        pip3 install flask 
+        cd /home/ec2-user/
+        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/aws/project-2
+        cd project-2/
+        python3 app.py
+        
