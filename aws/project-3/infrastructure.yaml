@@ -1,0 +1,123 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  this templates designed with test goals.
+Parameters:
+  # mysubnets:
+  #   Description: chose subnet 
+  #   Type: 'List<AWS::EC2::Subnet::Id>'
+
+  # securityGroup:
+  #   Description: chose security group
+  #   Type: 'AWS::EC2::SecurityGroup::Id'
+
+  dbsecgrp:
+      Description: chose security group
+      Type: 'AWS::EC2::SecurityGroup::Id'
+
+  # myvpc:
+  #   Description: chose security group
+  #   Type: 'AWS::EC2::VPC::Id'
+  
+Resources:
+  # ecLT:
+  #   Type: AWS::EC2::LaunchTemplate
+  #   Properties:
+  #     LaunchTemplateData:
+  #       ImageId: "ami-0b5eea76982371e91"
+  #       InstanceType: "t2.micro"
+  #       KeyName: linux
+  #       SecurityGroupIds:
+  #         - !Ref securityGroup
+  #       TagSpecifications:
+  #         - ResourceType: instance 
+  #           Tags:
+  #             - Key: Name
+  #               Value: ec2-from-launchTemplate 
+  #       UserData: !Base64 |
+  #         #!/bin/bash
+  #         yum update -y
+  #         yum install httpd
+  #         chmod -R /var/www/html
+  #         echo "test" > /var/www/html/index.html
+  #         systemctl start httpd
+  #         systemctl enable httpd
+
+  #     LaunchTemplateName: "load-balancer-test"
+
+
+  # turgut:
+  #   Type: AWS::ElasticLoadBalancingV2::TargetGroup
+  #   Properties:
+  #     HealthCheckEnabled: true
+  #     HealthCheckIntervalSeconds: 10
+  #     HealthCheckPath: "/"
+  #     HealthCheckPort: "80"
+  #     HealthCheckProtocol: "HTTP"
+  #     HealthCheckTimeoutSeconds: 5
+  #     HealthyThresholdCount: 3
+  #     IpAddressType: "ipv4"
+  #     Port: 80
+  #     Protocol: "HTTP"
+  #     TargetType: "instance"
+  #     UnhealthyThresholdCount: 3
+  #     VpcId: !Ref myvpc
+  # AlB:
+  #   Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+  #   Properties:
+  #     IpAddressType: "ipv4"
+  #     Name: "alb-test"
+  #     Scheme: "internet-facing"
+  #     SecurityGroups:
+  #       - !Ref securityGroup
+  #     Subnets: !Ref mysubnets
+  #     Type: application
+  # mylistener:
+  #   Type: AWS::ElasticLoadBalancingV2::Listener
+  #   Properties:
+  #     DefaultActions: # Required
+  #       - Type: forward
+  #         TargetGroupArn: !Ref turgut
+  #     LoadBalancerArn: !Ref AlB 
+  #     Port: 80
+  #     Protocol: "HTTP"
+      
+  # ASG:
+  #   Type: AWS::AutoScaling::AutoScalingGroup
+  #   Properties:
+  #     AvailabilityZones: 
+  #       !GetAZs ""
+  #     DesiredCapacity: "2"
+  #     HealthCheckGracePeriod: 300
+  #     HealthCheckType: "ELB"
+  #     LaunchTemplate:
+  #         LaunchTemplateId: !Ref ecLT
+  #         Version: !GetAtt ecLT.LatestVersionNumber
+  #     MaxSize: "3" # Required
+  #     MinSize: "1" # Required
+  #     TargetGroupARNs:
+  #       - !Ref turgut
+  myrds:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: "10"
+      DBInstanceClass: "db.t2.micro"
+      DBInstanceIdentifier: "mustafatest"
+      DBName: "clarusway"
+      DeleteAutomatedBackups: true
+      Engine: "MySQL"
+      EngineVersion: "8.0.25"
+      MasterUserPassword: "admintoor"
+      MasterUsername: "admin"
+      MaxAllocatedStorage: 20
+      MultiAZ: false
+      Port: "3306"
+      PubliclyAccessible: true
+      StorageEncrypted: false
+
+Outputs:
+  dbendpoint:
+    Description: db endpoint
+    Value: !Sub  myrds.Ednpoint.Address
+
+
+
