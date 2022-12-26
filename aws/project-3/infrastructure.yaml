@@ -15,7 +15,7 @@ Parameters:
       Type: 'AWS::EC2::SecurityGroup::Id'
 
   # myvpc:
-  #   Description: chose security group
+  #   Description: chose secur ity group
   #   Type: 'AWS::EC2::VPC::Id'
   
 Resources:
