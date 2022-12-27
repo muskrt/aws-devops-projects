@@ -46,7 +46,7 @@ Resources:
     Type: AWS::EC2::LaunchTemplate
     Properties:
       LaunchTemplateData:
-        ImageId: ami-0cff7528ff583bf9a
+        ImageId: ami-0b5eea76982371e91
         InstanceType: t2.micro
         KeyName: !Ref KeyName
         SecurityGroupIds:
@@ -66,13 +66,13 @@ Resources:
                 pip3 install flask
                 pip3 install flask_mysql
                 echo "${MyDBURI}" > /home/ec2-user/dbserver.endpoint
-                TOKEN="XXXXXXXXXXXXXXXXXX"
-                FOLDER="https://$TOKEN@raw.githubusercontent.com/serdarcw/phonebook_app/master"
+                TOKEN="xxxxxxxxxxxxxx"
+                FOLDER="https://$TOKEN@raw.githubusercontent.com/"
                 curl -s --create-dirs -o "/home/ec2-user/templates/index.html" -L "$FOLDER"/templates/index.html
                 curl -s --create-dirs -o "/home/ec2-user/templates/add-update.html" -L "$FOLDER"/templates/add-update.html
                 curl -s --create-dirs -o "/home/ec2-user/templates/delete.html" -L "$FOLDER"/templates/delete.html
-                curl -s --create-dirs -o "/home/ec2-user/app.py" -L "$FOLDER"/phonebook-app.py
-                python3 /home/ec2-user/app.py
+                curl -s --create-dirs -o "/home/ec2-user/phonebook-app.py" -L "$FOLDER"/phonebook-app.py
+                python3 /home/ec2-user/phonebook-app.py
               - MyDBURI: !GetAtt MyDatabaseServer.Endpoint.Address
   WebServerTG:
     Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
@@ -140,9 +140,9 @@ Resources:
       DBSecurityGroups: 
         - !Ref MyDBSecurityGroup
       Engine: MySQL
-      EngineVersion: 8.0.19
+      EngineVersion: 8.0.25
       MasterUsername: admin
-      MasterUserPassword: Clarusway_1
+      MasterUserPassword: awsdevops1
       Port: 3306
       PubliclyAccessible: true
 
