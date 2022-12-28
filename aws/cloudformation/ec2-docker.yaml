@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This template file creates an ec2 instance with type t2.micro and ami-0b5eea76982371e91 in aws cloud 
+  which set up docker on target machine.
+Parameters:
+  defaultvpc:
+    Description: chose vpc for security group
+    Type: AWS::EC2::VPC::Id
+  
+Resources:
+  dockersecgrb:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "ssh security group for docker instance" # Required
+      GroupName: docker-security-groub
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      VpcId: !Ref defaultvpc
+  myEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: linux
+      ImageId: ami-0b5eea76982371e91
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref dockersecgrb
+      UserData: !Base64 |
+        #!/bin/bash
+        amazon-linux-extras install docker -y 
+        systemctl start docker  
+        systemctl enable docker  
+        usermod -a -G docker ec2-user 
+        newgrp docker 
+
+
+      Tags:
+        - Key: Name
+          Value: docker-instance
+
+  
+  
+Outputs:
+  LogicalID:
+    Description: instance public ip
+    Value: Fn::GetAtt myEC2Instance.PublicIp
