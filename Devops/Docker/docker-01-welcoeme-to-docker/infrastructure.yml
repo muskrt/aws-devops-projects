@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  This templates creates an ec2 instance with type t2.micro and a security group which
+  enables ssh on instance.
+
+Parameters: 
+  ami-id:
+    Description: 
+    Type: AWS::EC2::Image::Id 
+  vpcID:
+    Description: 
+    Type: AWS::EC2::VPC::Id 
+Resources:
+  docker-security-group:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Enables ssh" # Required
+      GroupName: "docker-ssh"
+      SecurityGroupIngress:
+        IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+
+      VpcId: !Ref vpcID 
+  docker-ec2-instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: linux
+      ImageId: !Ref ami-id
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref docker-security-group
+      UserData: !Base64 |
+        #!/bin/bash
+        amazon-linux-extras install docker -y
+        systemctl docker start 
+        systemctl enable docker  
+        usermod -a -G docker ec2-user 
+        newgrp docker 
+
+
