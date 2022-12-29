@@ -17,10 +17,10 @@ Resources:
       GroupDescription: "Enables ssh" # Required
       GroupName: "docker-ssh"
       SecurityGroupIngress:
-        IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
 
       VpcId: !Ref vpcID 
   docker-ec2-instance:
