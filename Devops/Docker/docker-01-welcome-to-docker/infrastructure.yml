@@ -35,14 +35,14 @@ Resources:
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref dockersecuritygroup
-      UserData:  !Base64 
+      UserData:  !Base64 |
         #!/bin/bash
         yum update -y
         yum install subversion -y
         svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/docker-01-welcome-to-docker
-        cd docker-01-welcome-to-docker/App
-        chmod +x docker-build.sh
-        ./docker-build.sh
+        docker-01-welcome-to-docker/App
+        chmod +x docker-01-welcome-to-docker/App/docker-build.sh
+        ./docker-01-welcome-to-docker/App/docker-build.sh
 
 
 Outputs:
