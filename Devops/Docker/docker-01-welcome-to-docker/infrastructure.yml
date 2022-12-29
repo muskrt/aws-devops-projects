@@ -39,9 +39,15 @@ Resources:
         #!/bin/bash
         yum update -y
         yum install subversion -y
+        amazon-linux-extras install docker -y
+        systemctl start docker  
+        systemctl enable docker  
+        usermod -a -G docker ec2-user 
+        newgrp docker 
         cd /home/ec2-user
         svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/docker-01-welcome-to-docker
-        cd docker-01-welcome-to-docker/App/docker-build.sh/App
+        sleep 5
+        cd docker-01-welcome-to-docker/App
         chmod +x docker-build.sh
         ./docker-build.sh
 

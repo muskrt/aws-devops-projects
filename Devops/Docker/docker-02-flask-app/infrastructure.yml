@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  THIS TEMPLATE CREATE AN EC2 WITH TYPE T2.MICRO ID AMI SECURITY GROUP WHICH ENABLES PORT 22 AND 80 AND
+  DOWNLOADS AN APPLICATION FROM GITHUB ACCOUNT WITH SVN WRITTEN WITH FLASK 
+  
+Parameters:
+  VPCID:
+    Description: CHOSE VPC 
+    Type: AWS::EC2::VPC::Id
+  
+Resources:
+  DOCKERSECURITYGROUP:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: ENABLES SSH FOR ISNTANCE # Required
+      GroupName: DOCKEREC2SECGRP
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/
+      Tags:
+        - Key: Name 
+          Value: dockersecgrp
+      VpcId: !Ref VPCID
+  DOCKEREC2INSTANCE:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: linux 
+      ImageId: 
+      InstanceType: t2.micro 
+      SecurityGroupIds:
+        - !Ref DOCKERSECURITYGROUP
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+      Tags:
+        - Key: Name
+          Value: dockerEc2
+  
+Outputs:
+  INSTANCEPUBLICIP:
+    Description: GIVE PUBLIC IP 
+    Value: !GetAtt DOCKEREC2INSTANCE.PublicIp
