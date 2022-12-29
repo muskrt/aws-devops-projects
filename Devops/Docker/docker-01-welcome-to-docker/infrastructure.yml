@@ -7,9 +7,16 @@ Parameters:
   AmiId:
     Description: chose ami-id
     Type: AWS::EC2::Image::Id 
+    Default: ami-0b5eea76982371e91
   vpcID:  
     Description: chose vpc
-    Type: AWS::EC2::VPC::Id 
+    Type: AWS::EC2::VPC::Id
+
+  InstanceType:
+    Description: chose intance type 
+    Type: string 
+    Default: t2.micro
+
 Resources:
   dockersecuritygroup:
     Type: AWS::EC2::SecurityGroup
@@ -30,7 +37,7 @@ Resources:
   dockerec2instance:
     Type: AWS::EC2::Instance
     Properties:
-      KeyName: linux
+      KeyName: xxxxx
       ImageId: !Ref AmiId
       InstanceType: t2.micro
       SecurityGroupIds:
