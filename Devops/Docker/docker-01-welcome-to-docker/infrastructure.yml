@@ -40,7 +40,7 @@ Resources:
         yum update -y
         yum install subverion -y
         svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/docker-01-welcome-to-docker
-        cd docker-01-welcome-to-docker
+        cd docker-01-welcome-to-docker/App
         chmod +x docker-build.sh
         ./docker-build.sh
 
