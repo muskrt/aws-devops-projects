@@ -52,9 +52,9 @@ Resources:
         usermod -a -G docker ec2-user 
         newgrp docker 
         cd /home/ec2-user
-        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/docker-01-welcome-to-docker
+        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/DOCKER-01-WELCOME-TO-DOCKER
         sleep 5
-        cd docker-01-welcome-to-docker/App
+        cd DOCKER-01-WELCOME-TO-DOCKER/App
         chmod +x docker-build.sh
         ./docker-build.sh
 

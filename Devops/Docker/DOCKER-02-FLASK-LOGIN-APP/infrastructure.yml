@@ -36,8 +36,22 @@ Resources:
       SecurityGroupIds:
         - !Ref DOCKERSECURITYGROUP
       UserData: !Base64 |
-        #!/bin/bash -ex
-        # put your script here
+        #!/bin/bash 
+        yum update -y 
+        yum install  subversion -y 
+        amazon-linux-extras instal docker -y 
+        systemctl start docker 
+        systemctl enable docker 
+        usermod -a -G docker ec2-user 
+        newgrp docker
+        cd /home/ec2-user 
+        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/DOCKER-02-FLASK-LOGIN-APP
+        sleep 5 
+        cd DOCKER-01-FLASK-LOGIN-APP/App
+        chmod +x build_run_image.sh
+        ./build_run_image.sh
+        
+        
       Tags:
         - Key: Name
           Value: dockerEc2
