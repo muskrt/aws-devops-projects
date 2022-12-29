@@ -4,14 +4,14 @@ Description: |
   enables ssh on instance.
 
 Parameters: 
-  ami-id:
-    Description: 
+  amiid:
+    Description: chose ami-id
     Type: AWS::EC2::Image::Id 
-  vpcID:
-    Description: 
+  vpcID:  
+    Description: chose vpc
     Type: AWS::EC2::VPC::Id 
 Resources:
-  docker-security-group:
+  dockersecuritygroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Enables ssh" # Required
@@ -23,20 +23,25 @@ Resources:
           CidrIp: 0.0.0.0/0
 
       VpcId: !Ref vpcID 
-  docker-ec2-instance:
+  dockerec2instance:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: linux
-      ImageId: !Ref ami-id
+      ImageId: !Ref amiid
       InstanceType: t2.micro
       SecurityGroupIds:
-        - !Ref docker-security-group
-      UserData: !Base64 |
+        - !Ref dockersecuritygroup
+      UserData:  !Base64 
         #!/bin/bash
-        amazon-linux-extras install docker -y
-        systemctl docker start 
-        systemctl enable docker  
-        usermod -a -G docker ec2-user 
-        newgrp docker 
+        yum update -y
+        yum install subverion -y
+        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/docker-01-welcome-to-docker
+        cd docker-01-welcome-to-docker
+        chmod +x docker-build.sh
+        ./docker-build.sh
 
 
+Outputs:
+  intancepublicip:
+    Description: instance ip
+    Value: !Sub dockerec2instance.PublicIp
