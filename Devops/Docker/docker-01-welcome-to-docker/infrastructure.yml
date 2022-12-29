@@ -41,9 +41,9 @@ Resources:
         yum install subversion -y
         cd /home/ec2-user
         svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/Docker/docker-01-welcome-to-docker
-        docker-01-welcome-to-docker/App
-        chmod +x docker-01-welcome-to-docker/App/docker-build.sh
-        ./docker-01-welcome-to-docker/App/docker-build.sh
+        cd docker-01-welcome-to-docker/App/docker-build.sh/App
+        chmod +x docker-build.sh
+        ./docker-build.sh
 
 
 Outputs:
