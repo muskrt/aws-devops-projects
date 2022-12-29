@@ -4,7 +4,7 @@ Description: |
   enables ssh on instance.
 
 Parameters: 
-  amiid:
+  AmiId:
     Description: chose ami-id
     Type: AWS::EC2::Image::Id 
   vpcID:  
@@ -21,13 +21,17 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
 
       VpcId: !Ref vpcID 
   dockerec2instance:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: linux
-      ImageId: !Ref amiid
+      ImageId: !Ref AmiId
       InstanceType: t2.micro
       SecurityGroupIds:
         - !Ref dockersecuritygroup
@@ -44,4 +48,4 @@ Resources:
 Outputs:
   intancepublicip:
     Description: instance ip
-    Value: !Sub dockerec2instance.PublicIp
+    Value: !GetAtt  dockerec2instance.PublicIp
