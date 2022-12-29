@@ -50,13 +50,11 @@ Resources:
         cd DOCKER-01-FLASK-LOGIN-APP/App
         chmod +x build_run_image.sh
         ./build_run_image.sh
-        
-        
       Tags:
         - Key: Name
           Value: dockerEc2
   
 Outputs:
   INSTANCEPUBLICIP:
-    Description: GIVE PUBLIC IP 
+    Description: GET PUBLIC IP 
     Value: !GetAtt DOCKEREC2INSTANCE.PublicIp
