@@ -1,0 +1,22 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgretoor
+      POSTGRES_USER: nate
+      POSTGRES_DB: flask_db
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    restart: always
+    depends_on:
+      - db
+
+    network_mode: "host"
+
