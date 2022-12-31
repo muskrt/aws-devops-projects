@@ -1,0 +1,7 @@
+- name: Test connectivity
+  hosts: all
+  remote_user: mustafa
+  tasks:
+    - name: ping Test
+      ping: 
+

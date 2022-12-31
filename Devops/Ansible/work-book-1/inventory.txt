@@ -1,0 +1,4 @@
+[all:vars]
+ansible_ssh_private_key_file=/home/mustafa/.ssh/id_rsa
+[webservers]
+node1 ansible_host=localhost 
