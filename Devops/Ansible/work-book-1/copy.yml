@@ -1,0 +1,16 @@
+- name: copy file to targets 
+  hosts: dbserver
+  become: true 
+  tasks:
+    - name: copy your file to the webserver 
+      copy: 
+        src: ./testfile.txt
+        dest: /home/ec2-user/testfile1
+- name: copy for ubuntu 
+  hosts: webserver 
+  become: true
+  tasks:
+    - name: copy to ubuntu
+      copy:
+        src: ./testfile.txt
+        dest: /home/ansibletestfile.txt

@@ -1,0 +1,25 @@
+- name: apache install for servers 
+  hosts: dbserver 
+  gather_facts: false 
+  become: true 
+  tasks:
+    - name: install on aws ec2 
+      yum:
+        name: httpd 
+        state: latest
+    - name: start apache 
+      shell: "service httpd start" 
+
+- name: apache install on ubuntu 
+  hosts: node2
+  gather_facts: false 
+  become: true 
+  tasks:
+    - name: update 
+      shell: "apt update -y "
+
+    - name: install on ubuntu 
+      apt: 
+        name: apache2 
+        state: latest 
+

@@ -1,6 +1,7 @@
 - name: Test connectivity
   hosts: all
-  remote_user: mustafa
+  become: true 
+  gather_facts: false
   tasks:
     - name: ping Test
       ping: 

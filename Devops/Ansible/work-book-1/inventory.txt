@@ -1,5 +1,6 @@
-[all:vars]
-ansible_ssh_private_key_file=KEYFILE
+[dbserver]
+node1 ansible_host=184.73.151.75  ansible_user=ec2-user
 
-[webservers]
-node1 ansible_host=localhost 
+[webserver]
+node2 ansible_host=44.202.50.197 ansible_user=ubuntu
+node3 ansible_host=localhost ansible_user=mustafa ansible_ssh_private_key_file=~/.ssh/id_rsa

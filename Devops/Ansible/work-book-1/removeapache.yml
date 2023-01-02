@@ -1,0 +1,25 @@
+- name: apache remove from  servers 
+  hosts: dbserver 
+  gather_facts: false 
+  become: true 
+  tasks:
+    - name: install on aws ec2 
+      yum:
+        name: httpd 
+        state: absent 
+
+
+- name: apache remove from   ubuntu 
+  hosts: node2
+  gather_facts: false 
+  become: true 
+  tasks:
+    - name: apache remove from 
+      apt: 
+        name: apache2 
+        state: absent  
+    - name: remove unwanted packages 
+      apt: 
+        autoremove: yes 
+        purge: yes 
+

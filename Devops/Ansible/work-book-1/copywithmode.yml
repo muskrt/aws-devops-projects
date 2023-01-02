@@ -1,0 +1,37 @@
+- name: Copy for linux 
+  hosts: dbserver
+  become: true 
+  gather_facts: false 
+  tasks: 
+    - name: copy file and change mode 
+      copy: 
+        src: ./testfile1
+        dest: /home/ec2-user/testfile1
+        mode: u+rw,g-wx,o-rwx
+      
+- name: Copy for linux 
+  hosts: webserver
+  become: true 
+  gather_facts: false 
+  tasks: 
+    - name: copy file and change mode 
+      copy: 
+        src: ./testfile1
+        dest: /home/testfile1
+        mode: 0640
+      
+- name: Copy for linux 
+  hosts: dbserver
+  become: true 
+  gather_facts: false 
+  tasks: 
+    - name: copy file and change mode 
+      copy: 
+        content: '# this file was move to /etc/ansible/testfile2'
+        dest: /home/ec2-user/testfile2
+        mode: u+rw,g-wx,o-rwx
+    - name: create a new test file with shell module 
+      shell: "echo hello world > /home/ec2-user/testfile3"
+
+
+      

@@ -1,0 +1,12 @@
+- name: send notify to telegram 
+  hosts: '*'
+  tasks:
+    - name: send notify
+      community.general.telegram:
+        token: xxxxxxxxxxxxx'
+        api_args:
+          chat_id: "xxxxxxxxxxxxxx"
+          parse_mode: "markdown"
+          text: "ANSIBLE Your precious application has been deployed."
+          disable_web_page_preview: true
+          disable_notification: true
