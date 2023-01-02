@@ -1,0 +1,33 @@
+- name: install apache with service 
+  hosts: node2 
+  become: true 
+  gather_facts: false 
+  
+  tasks:
+    - name: install apache 
+      apt:
+        name: apache2 
+        state: latest 
+    - name: index.html 
+      copy: 
+        content: '<h1>Hello</h1>'
+        dest: /var/www/html/index.html 
+
+    - name: restart apach2 
+      service:
+        name: apache2 
+        state: restarted 
+        enabled : yes 
+
+- name: install httpd and wget 
+  hosts: dbserver  
+  gather_facts: false 
+  become : true 
+  tasks:
+    - name: install httpd and wget 
+      yum:
+        pkg: "{{ item }}"
+        state: present 
+      loop: 
+        - httpd
+        - wget 

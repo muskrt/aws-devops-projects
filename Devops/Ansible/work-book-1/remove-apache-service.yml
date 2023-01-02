@@ -1,0 +1,29 @@
+- name: remove apache with service 
+  hosts: node2 
+  become: true 
+  gather_facts: false 
+  
+  tasks:
+    - name: remove apache 
+      apt:
+        name: apache2 
+        state: absent 
+        update_cache: yes  
+    - name: remove unwanted packages  
+      apt: 
+        autoremove: yes 
+        purge : yes 
+ 
+
+- name: remove  httpd and wget 
+  hosts: dbserver  
+  gather_facts: false 
+  become : true 
+  tasks:
+    - name: remove httpd and wget 
+      yum:
+        pkg: "{{ item }}"
+        state: absent  
+      loop: 
+        - httpd
+        - wget 
