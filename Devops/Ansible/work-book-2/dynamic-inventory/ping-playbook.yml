@@ -1,0 +1,5 @@
+- name: test connectivity 
+  become : yes 
+  hosts: "*" 
+  tasks:
+    - ping:

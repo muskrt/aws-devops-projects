@@ -1,0 +1,6 @@
+- name: TEST THE CONNECTIVITY 
+  hosts: "*"
+  become: yes
+  tasks:
+    - name: PINGING THE HOSTS 
+      ping:

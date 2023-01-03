@@ -1,0 +1,5 @@
+- name: test 
+  become : true 
+  hosts: all 
+  tasks: 
+    - ping:

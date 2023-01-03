@@ -1,6 +1,6 @@
 [dbserver]
-#node1 ansible_host=184.73.151.75  ansible_user=ec2-user
+node1 ansible_host=xxxxxxxxxx  ansible_user=ec2-user
 
 [webserver]
-#node2 ansible_host=44.202.50.197 ansible_user=ubuntu
+node2 ansible_host=xxxxxxxxxxxxxx ansible_user=ubuntu
 node3 ansible_host=localhost ansible_user=mustafa ansible_ssh_private_key_file=~/.ssh/id_rsa

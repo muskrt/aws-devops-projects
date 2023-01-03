@@ -4,4 +4,13 @@
     - name: print facts 
       debug: 
         var: ansible_facts 
+        
     - debug: var=ansible_facts["user_id"]
+
+    - debug: 
+        var: ansible_facts.hostname
+
+    - debug:
+        var: ansible_facts.mount.block_size
+# ansible all -m setup -a "filter=ansible_os_family"
+# ansible node1:node2 -m gather_facts | grep ansible_os_family

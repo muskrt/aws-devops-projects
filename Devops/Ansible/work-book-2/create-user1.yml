@@ -1,0 +1,20 @@
+- name: create user with secret 
+  hosts: node2 node1 
+  become : yes
+  gather_facts: false 
+  vars_files:
+    - secret.yml
+  tasks: 
+    - user: 
+        name: "{{ username }}"
+        password: "{{ password | password_hash('sha512') }}"
+        state: present
+
+
+  #ansible-vault view secret.yml
+  #ansible-vault encrypt secret.yml
+  #ansible-vault decrypt secret.yml 
+  #ansible-vault create secret.yml
+  #ansible-playbook create-user.yml --ask-vault-password
+  #ansible-playbook create-user.yml --vault-password-file file
+  
