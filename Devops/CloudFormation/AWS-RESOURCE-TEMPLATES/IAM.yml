@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  THIS TEMPLATE WRITTEN TO REGISTERING A NEW USER TO AWS CLOUD USING IAM SERVICE 
+  WITH MANAGING DEVELOPMENT GROUPS GOAL.
+  
+Resources:
+
+  PARKER-ACCESS-KEY:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      Status: Active
+      UserName: PARKER 
+
+
+  USER-PARKER:
+    Type: AWS::IAM::User
+    Properties:
+      LoginProfile:
+        Password: PARKER12314ADFPI
+        PasswordResetRequired: true
+      UserName: PARKER
+

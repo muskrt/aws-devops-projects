@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  THIS TEMPLATE WRITTEN TO RUN AN INSTANCE ON AWS CLOUD WITH SERVICE EC2 WITH  SECURITY GROUP 
+  WHICH ALLOWS ONLY SSH CONNECTION. 
+  
+Parameters:
+  VPCID:
+    Description: CHOOSE THE APPROPRIATE VPC
+    Type: AWS::EC2::VPC::Id
+  KEYNAME:
+    Description: CHOSE THE KEYNAME
+    Type: AWS::EC2::KeyPair::KeyName
+  AMIID:
+    Description: CHOSE THE AMI 
+    Type: AWS::EC2::Image::Id
+  INSTANCETYPE:
+    Description: ENTER A INSTANCE TYPE 
+    Type: String
+  
+Resources:
+  MYEC2SECURITYGROUP:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "ALLOWS SSH CONNECTION ONLY " # Required
+      GroupName: "EC2TEST"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: TESTSECGRP
+      VpcId: !Ref VPCID
+  MYEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KEYNAME
+      ImageId: !Ref AMIID
+      InstanceType: !Ref INSTANCETYPE
+      SecurityGroupIds:
+        - !Ref MYEC2SECURITYGROUP
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        yum update -y 
+        echo "welcome to test server" >/home/testfile.txt 
+        
+        
+      Tags:
+        - Key: Name 
+          Value: TESTSERVER
+  
+Outputs:
+  INSTANCEIP:
+    Description: PUBLICE IP OF INSTANCE
+    Value: !Sub MYEC2.PublicIp
