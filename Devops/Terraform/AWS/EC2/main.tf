@@ -1,9 +1,9 @@
 
 resource "aws_instance" "MYEC2" {
-    key_name =""
+    key_name = "linux"
     instance_type= "t2.micro" 
     count = 1 
-    ami= ""
+    ami= data.aws_ami.AMAZONLINUX.id
     vpc_security_group_ids = [aws_security_group.EC2SECURITYGROUP.id]
   
 }
@@ -12,7 +12,7 @@ resource "aws_instance" "MYEC2" {
 resource "aws_security_group" "EC2SECURITYGROUP" {
   name        = "test"
   description = "Allow SSH AND HTTP inbound traffic"
-  vpc_id      = data.aws_vpc.VPCID
+  vpc_id      = data.aws_vpc.VPCID.id
 
   ingress {
     description      = "HTTP"

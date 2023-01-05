@@ -3,6 +3,19 @@ data "aws_vpc" "VPCID" {
   
 }
 
-data "aws_ami" "AMIID" {
-  
+data "aws_ami" "AMAZONLINUX" {
+    most_recent = true
+    owners = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-kernel-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+ 
 }
