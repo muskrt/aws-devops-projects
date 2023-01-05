@@ -1,16 +1,17 @@
 
 resource "aws_instance" "MYEC2" {
     key_name =""
-    instance_type= "" 
+    instance_type= "t2.micro" 
     count = 1 
     ami= ""
+    vpc_security_group_ids = [aws_security_group.EC2SECURITYGROUP.id]
   
 }
 
 
 resource "aws_security_group" "EC2SECURITYGROUP" {
   name        = "test"
-  description = "Allow TLS inbound traffic"
+  description = "Allow SSH AND HTTP inbound traffic"
   vpc_id      = data.aws_vpc.VPCID
 
   ingress {
@@ -39,7 +40,7 @@ resource "aws_security_group" "EC2SECURITYGROUP" {
   }
 
   tags = {
-    Name = "allow_tls"
+    Name = "TFTEST"
   }
   
 }
