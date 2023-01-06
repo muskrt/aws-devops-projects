@@ -6,7 +6,7 @@ Parameters:
   keyName:
     Description: keyname to connect ec2
     Type: AWS::EC2::KeyPair::KeyName
-    Default: linux
+    Default: xxxxxxxx
 Resources:
   romannumbers:
     Type: AWS::EC2::SecurityGroup

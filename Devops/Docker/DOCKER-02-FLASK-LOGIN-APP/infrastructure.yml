@@ -30,7 +30,7 @@ Resources:
   DOCKEREC2INSTANCE:
     Type: AWS::EC2::Instance
     Properties:
-      KeyName: linux 
+      KeyName: xxxxxxxxxx 
       ImageId: 
       InstanceType: t2.micro 
       SecurityGroupIds:

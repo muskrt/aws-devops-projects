@@ -25,7 +25,7 @@ Resources:
     Properties:
       ImageId: "ami-0b5eea76982371e91"
       InstanceType: "t2.micro"
-      KeyName: "linux"
+      KeyName: "xxxxxxx"
       SecurityGroupIds:
         - !Ref  webserversecuritygroup
       Tags:
