@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  THIS TEMPLATES CREATES AN EC2 WITH SECURITY GROUP WHICH ENABLES 
+  SSH AND HTTP ON AWS CLOUD WITH PARAMETERS.  
+  
+Parameters:
+  VPCID:
+    Description: CHOOSE VPC 
+    Type: AWS::EC2::VPC::Id
+  AMIID:
+    Description:  ENTER AMI ID
+    Type: String
+  
+Resources:
+  MAVENEC2SECGROUP:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "ENABLES SSH AND HTTP"
+
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name 
+          Value: MAVENTEST 
+      VpcId: !Ref VPCID 
+  MAVENEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: linux  
+      ImageId: !Ref AMIID
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !Ref MAVENEC2SECGROUP
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+      Tags:
+        - Key: Name 
+          Value: MAVENEC2TEST
+  
+Outputs:
