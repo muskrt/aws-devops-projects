@@ -1,9 +1,8 @@
- ## Kubernates Basic Hello World Application in Cluster
+ ## FLASK HELLO WORLD APPLICATION DEPLOYED WITH KUBERNATES 
 
  ## Description
- BASIC WEB SERVER APPLICATION FITH FLASK 
- FRAMEWORK
-
+ APPLICATION WRITTEN USING FLASK, REDIS AND MONGODB WITH ADDITIONAL 
+ CONFIGURATION TO BE DEPLOYED ON KUBERNATES CLUSTER.
  # Table of Contents
  
 1. [Title](#Flask-Hello-World-Application)
@@ -14,9 +13,10 @@
 
  ## How to Install and Run the Project
 ```python
-wget https://raw.githubusercontent.com/muskrt/aws-devops-projects/main/python-projects/flask-01-hello-world-app/hello-world-app.py
-pip install flask
-python hello-world-app.py
+svn export https://.../trunk/Devops/Kubernates/FLASK-REDIS-MONDODB
+CD FLASK-REDIS-MONGODB
+kubectl apply -f .
+
 ```
 
  ## How to Use the Project
