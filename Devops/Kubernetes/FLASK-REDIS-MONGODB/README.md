@@ -13,7 +13,7 @@
 
  ## How to Install and Run the Project
 ```python
-svn export https://.../trunk/Devops/Kubernates/FLASK-REDIS-MONDODB
+svn export https://.../trunk/Devops/Kubernetes/FLASK-REDIS-MONDODB
 CD FLASK-REDIS-MONGODB
 kubectl apply -f .
 
