@@ -24,7 +24,7 @@ spec:
         io.kompose.service: web
     spec:
       containers:
-        - image: web:3.0
+        - image: web:5.0
           name: web
           ports:
             - containerPort: 5000

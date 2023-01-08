@@ -1,14 +1,18 @@
 version: "3"
-services:
+services: 
   web:
-    image: web:3.0
+    image: web:6.0
     restart: always
     depends_on:
-      - database
+      - redis 
     ports:
       - "5000:5000"
-  database:
+    
+      
+    
+  redis:
     image: "redis:alpine"
-    ports: 
+    ports:
       - "6379:6379"
+
       
