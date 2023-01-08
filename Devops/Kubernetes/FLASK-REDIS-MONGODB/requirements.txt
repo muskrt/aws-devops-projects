@@ -1,3 +1,5 @@
 flask 
 redis 
 Flask-PyMongo
+json2table
+json2html
