@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.27.0 (b0ed6a2c9)
   creationTimestamp: null
   labels:
-    io.kompose.service: web
-  name: web
+    io.kompose.service: mongodb
+  name: mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: web
+      io.kompose.service: mongodb
   strategy: {}
   template:
     metadata:
@@ -21,14 +21,16 @@ spec:
         kompose.version: 1.27.0 (b0ed6a2c9)
       creationTimestamp: null
       labels:
-        io.kompose.service: web
+        io.kompose.service: mongodb
     spec:
       containers:
-        - image: web:6.0
-          imagePullPolicy: IfNotPresent
-          name: web
+        - env:
+            - name: MONGO_INITDB_DATABASE
+              value: flask_db
+          image: mongo
+          name: mongodb
           ports:
-            - containerPort: 5000
+            - containerPort: 27017
           resources: {}
       restartPolicy: Always
 status: {}
