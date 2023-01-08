@@ -1,15 +1,20 @@
 version: "3"
 services: 
   web:
-    image: web:6.0
+    build: .
     restart: always
     depends_on:
       - redis 
+      - mongodb 
     ports:
       - "5000:5000"
     
       
-    
+  mongodb:
+    image: mongo 
+    environment:
+      MONGO_INITDB_DATABASE: flask_db
+
   redis:
     image: "redis:alpine"
     ports:

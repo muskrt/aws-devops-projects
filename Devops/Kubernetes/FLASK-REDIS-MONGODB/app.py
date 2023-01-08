@@ -1,21 +1,26 @@
-from flask import Flask , render_template,request
-import redis 
+from flask import Flask , render_template,request,jsonify
+import redis
+from pymongo import MongoClient 
 import os 
 import time
 
 
 app = Flask(__name__)
-r=redis.Redis(host='redis',port=6379)
-
+redisdb=redis.Redis(host='redis',port=6379)
+mongodb=MongoClient('mongodb', 27017).flask_db
+todos=mongodb.flask_db.todos
+mongodb.flask_db.todos.insert_one({'abcd':'abcd'})
 def db_init():
     try:
-        r.set('foo','bar')
-        r.set('mustafa','kurt')
+        redisdb.set('foo','bar')
+        redisdb.set('mustafa','kurt')
     except:
         print("cant connect")
 def db_search(name):
-    return r.get(name)
-
+    return redisdb.get(name)
+@app.route('/mongo')
+def mongo_page():
+    return jsonify(todos.find_one('abcd'))
 @app.route('/',methods=['GET','POST'])
 def main_page():
     if request.method == "POST":
