@@ -1,1 +1,2 @@
-# aws-devops-projects
+# AWS-DEVOPS-PRACTICE-PROJECTS
+# HOW TO USE THIS REPO?
