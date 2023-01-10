@@ -44,3 +44,4 @@ resource "aws_security_group" "EC2SECURITYGROUP" {
   }
   
 }
+
