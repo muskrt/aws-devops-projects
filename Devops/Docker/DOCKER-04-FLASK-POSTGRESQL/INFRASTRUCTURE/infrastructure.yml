@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  THIS TEMPLATE IS WRITTEN FOR APPLICATION DEPLOYMENT ON AWS CLOUD WITH EC2 SERVICE 
+  WITH SECURITY GROUP WHICH ALLOWS PORT 80 AND 22.
+  
+Parameters:
+  VPCID:
+    Description: 
+    Type: AWS::
+
+  
+Resources:
+  MYSERVERSECURITYGROUP:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "String" # Required
+      SecurityGroupIngress:
+        SecurityGroupIngress
+      Tags:
+        Tags
+      VpcId: !Ref VPCID
+  MYSERVER:
+   Type: AWS::EC2::Instance
+   Properties:
+     ImageId: "String"
+     InstanceType: "String"
+     KeyName: "String"
+     SecurityGroupIds:
+       SecurityGroupIds
+     SecurityGroups:
+       SecurityGroups
+     SubnetId: "String"
+     Tags:
+     UserData: "String"
+
+
+Outputs:
