@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  
+Parameters:
+  VPCID:
+    Description: CHOOSE VPC
+    Type: AWS::EC2::VPC::Id 
+
+  KEYNAME:
+    Description: CHOOSE KEYNAME
+    Type: AWS::EC2::KeyPair::KeyName
+
+  AMIID:
+    Description: CHOOSE AMI ID
+    Type: AWS::EC2::Image::Id
+
+  INSTANCETYPE:
+    Description: ENTER INSTANCE TYPE
+    Type: String
+Resources:
+  MYSERVERSECURITYGROUP:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "ENABLES SSH AND HTTP"
+      SecurityGroupIngress:
+        - IpProtocol: [tcp|udp|ip]
+          FromPort: 
+          ToPort: 
+          CidrIp: --.--.--.--/--
+
+        - IpProtocol: [tcp|udp|ip]
+          FromPort: 
+          ToPort: 
+          CidrIp: --.--.--.--/--
+      Tags:
+        - Key: name 
+          Value: MYSERVERSECURITYGROUP
+      VpcId: !Ref VPCID
+
+  MYSERVER:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KEYNAME
+      ImageId: !Ref AMIID
+      InstanceType: !Ref INSTANCETYPE
+      SecurityGroupIds:
+        - !Ref MYSERVERSECURITYGROUP
+      UserData: !Base64 |
+        #!/bin/bash 
+        yum update -y 
+        yum install subversion -y 
+        yum install amazon-linux-extras docker -y 
+        svn export ...
+        cd ...
+        docker build -t myImage . 
+        docker container run -dit --name myapp --network host -p 80:5000 myImage 
+
+
+      Tags:
+        - Key: name 
+          Value: MYSERVER
+  
+Outputs:
+  LogicalID:
+    Description: INSTANCE IP
+    Value: !Sub MYSERVER.PuplicIp
