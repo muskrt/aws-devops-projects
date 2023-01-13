@@ -4,34 +4,67 @@ Description: |
   WITH SECURITY GROUP WHICH ALLOWS PORT 80 AND 22.
   
 Parameters:
+
   VPCID:
-    Description: 
-    Type: AWS::
+    Description: CHOSE VPC
+    Type: AWS::EC2::VPC::Id
+
+  KEYNAME:
+    Description: CHOSE KEYNAME
+    Type: AWS::EC2::KeyPair::KeyName
+
+  INSTANCETYPE:
+    Description: CHOSE INSTANCETYPE
+    Type: string 
+
+  AMIID:
+    Description: CHOSE AMIID
+    Type: AWS::EC2::Image::Id
 
   
 Resources:
   MYSERVERSECURITYGROUP:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "String" # Required
+      GroupDescription: "ENABLES SSH AND HTTP"
       SecurityGroupIngress:
-        SecurityGroupIngress
+        - IpProtocol: [tcp|udp|ip]
+          FromPort: 
+          ToPort: 
+          CidrIp: --.--.--.--/--
+
+        - IpProtocol: [tcp|udp|ip]
+          FromPort: 
+          ToPort: 
+          CidrIp: --.--.--.--/--
       Tags:
-        Tags
+        - Key: name
+          Value: MYSERVERSECURITYGROUP
       VpcId: !Ref VPCID
+
   MYSERVER:
-   Type: AWS::EC2::Instance
-   Properties:
-     ImageId: "String"
-     InstanceType: "String"
-     KeyName: "String"
-     SecurityGroupIds:
-       SecurityGroupIds
-     SecurityGroups:
-       SecurityGroups
-     SubnetId: "String"
-     Tags:
-     UserData: "String"
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref KEYNAME
+      ImageId: !Ref AMIID 
+      InstanceType: !Ref INSTANCETYPE
+      SecurityGroupIds:
+        - !Ref MYSERVERSECURITYGROUP
+      UserData: !Base64 |
+        #!/bin/bash 
+        yum update -y 
+        yum install subversion -y 
+        svn export ....
+        cd ....
+        yum install amazon-linux-extras docker -y 
+        usermod -a -G docker $USER
+        newgrp docker 
+        docker build -t myapp . 
+        docker container run -dit  
+
+      Tags:
+        - Key: name
+          Value: MYSERVER
 
 
 Outputs:
