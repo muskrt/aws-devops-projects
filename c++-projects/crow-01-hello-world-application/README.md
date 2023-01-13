@@ -1,7 +1,7 @@
  ## Flask Hello-World Application
 
  ## Description
- BASIC WEB SERVER APPLICATION FITH FLASK 
+ BASIC WEB SERVER APPLICATION FITH CROW 
  FRAMEWORK
 
  # Table of Contents
@@ -13,10 +13,16 @@
 
 
  ## How to Install and Run the Project
-```python
-wget https://raw.githubusercontent.com/muskrt/aws-devops-projects/main/python-projects/flask-01-hello-world-app/hello-world-app.py
-pip install flask
-python hello-world-app.py
+```CPP
+sudo apt-get install -y libasio-dev
+sudo apt install cmake -y
+git clone https://github.com/CrowCpp/Crow.git
+cd Crow
+sudo mkdir build
+cd build
+sudo cmake .. -DCROW_BUILD_EXAMPLES=OFF -DCROW_BUILD_TESTS=OFF
+sudo make install
+g++ --std=c++11 -o test-app main.cpp -lpthread -static
 ```
 
  ## How to Use the Project
