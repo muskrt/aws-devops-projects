@@ -4,7 +4,6 @@ variable "key-name" {
 variable "instance-type" {
   
 }
-
-variable "count" {
+variable "instance-count" {
   
 }

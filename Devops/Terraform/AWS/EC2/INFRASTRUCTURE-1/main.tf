@@ -2,7 +2,7 @@
 resource "aws_instance" "MYEC2" {
     key_name = var.key-name
     instance_type= var.instance-type
-    count = var.count
+    count = var.instance-count
     ami= data.aws_ami.AMAZONLINUX.id
     vpc_security_group_ids = [aws_security_group.EC2SECURITYGROUP.id]
   
