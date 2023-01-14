@@ -14,6 +14,15 @@ get '/contact' do
     haml :index, :format => :html5 
 end
 
+get '/about' do 
+    haml :about, :format => :html5 
+end
+
+get '/rb' do 
+    erb :test 
+end
+
+
 # get '/', :host_name => /^admin\./ do
 #     "Admin Area, Access denied!"
 #   end
