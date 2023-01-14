@@ -6,8 +6,8 @@ data "aws_ami" "AMIID" {
         values = ["hvm"]
     }
     filter {
-        name = "tag:name"
-        values = ["amzn-linux-2-*"]
+        name = "name"
+        values = ["amzn2-ami-kernel-*"]
       
     }
   

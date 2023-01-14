@@ -33,7 +33,7 @@ resource "aws_security_group" "MYSERVERSEC-GROUP" {
 resource "aws_instance" "MYSERVER" {
     key_name = var.KEYNAME
     instance_type = var.INSTANCE-TYPE
-    ami = data.aws_ami.AMIID
+    ami = data.aws_ami.AMIID.id
     count = var.NUM
     vpc_security_group_ids = [aws_security_group.MYSERVERSEC-GROUP.id]
     tags={
