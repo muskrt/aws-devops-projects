@@ -35,7 +35,7 @@ resource "aws_instance" "MYSERVER" {
     instance_type = var.INSTANCE-TYPE
     ami = data.aws_ami.AMIID
     count = var.NUM
-    vpc_security_group_ids = [ MYSERVERSEC-GROUP.id]
+    vpc_security_group_ids = [aws_security_group.MYSERVERSEC-GROUP.id]
     tags={
         Name="MYTEST-SERVER"
     }
