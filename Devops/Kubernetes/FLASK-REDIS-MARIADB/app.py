@@ -25,17 +25,61 @@ def db_get(sourcedb='',query_string=''):
         return REDISDB.get(query_string)
     elif  sourcedb =="MARIADB":
         return '' 
+
 def db_delete(sourcedb=''): pass 
+
 def db_update(sourcedb=''): pass 
 
 def db_insert(sourcedb=''): pass 
 
-@app.route('/update')
-def update(): 
-    pass 
-@app.route('/delete')
+
+@app.route('/add', methods=['GET','POST'])
+def add():
+    if request.method =='GET':
+        return render_template('login.html')
+    elif request.method == "POST"
+        NAME = request.form['username']
+        USER_PASSWORD=request.form['password']
+        PASSWORD=db_get("REDISDB",NAME)
+        if PASSWORD :
+                PASSWORD=PASSWORD.decode()
+        if str(USER_PASSWORD) == PASSWORD:
+        if USERNAME == '' and PASSWORD == '':
+            return render_template('secure_page.html')
+        else:
+            return render_template('error.html')
+
+@app.route('/update', methods=['GET','POST'])
+def update():
+    if request.method =='GET':
+        return render_template('login.html')
+    elif request.method == "POST"
+        NAME = request.form['username']
+        USER_PASSWORD=request.form['password']
+        PASSWORD=db_get("REDISDB",NAME)
+        if PASSWORD :
+                PASSWORD=PASSWORD.decode()
+        if str(USER_PASSWORD) == PASSWORD:
+        if USERNAME == '' and PASSWORD == '':
+            return render_template('secure_page.html')
+        else:
+            return render_template('error.html')
+
+@app.route('/delete',methods=['GET','POST'])
 def delete():
-     pass 
+    if request.method =='GET':
+        return render_template('login.html')
+    elif request.method == "POST"
+        NAME = request.form['username']
+        USER_PASSWORD=request.form['password']
+        PASSWORD=db_get("REDISDB",NAME)
+        if PASSWORD :
+                PASSWORD=PASSWORD.decode()
+        if str(USER_PASSWORD) == PASSWORD:
+        if USERNAME == '' and PASSWORD == '':
+            return render_template('secure_page.html')
+        else:
+            return render_template('error.html')
 
 @app.route('/', methods=['GET','POST'])
 def login():
