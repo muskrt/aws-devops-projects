@@ -28,19 +28,19 @@ def db_get(sourcedb='',query_string):
 
 def db_delete(sourcedb='',query_string): 
     if sourcedb =="REDISDB":
-        REDISDB.delete(query_string)
+        REDISDB.delete(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
         MARIADB.EXECUTE()
 
 def db_update(sourcedb='',query_string): 
     if sourcedb =="REDISDB":
-        REDISDB.set(**query_string)
+        REDISDB.set(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
         MARIADB.EXECUTE()
 
 def db_insert(sourcedb='',query_string): 
     if sourcedb =="REDISDB":
-        REDISDB.set(**query_string)
+        REDISDB.set(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
         MARIADB.EXECUTE()
 
