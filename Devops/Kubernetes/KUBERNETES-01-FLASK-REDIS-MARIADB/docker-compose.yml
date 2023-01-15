@@ -3,6 +3,10 @@ services:
   web:
     build: . 
     restart: always
+    volumes:
+      - type: bind 
+        source: ./
+        target: /APP
 
   REDISDB:
     image: redis
