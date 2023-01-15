@@ -1,5 +1,15 @@
 version: "3"
 services:
   web:
+    image: myImage
+    restart: always
+
   redis:
+    image: redis
+    ports:
+      - "89:89"
+
   mariadb:
+    image: mariadb
+    ports:
+      - "343:343"
