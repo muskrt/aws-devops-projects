@@ -4,12 +4,12 @@ services:
     image: myImage
     restart: always
 
-  redis:
+  REDISDB:
     image: redis
     ports:
       - "89:89"
 
-  mariadb:
+  MARIADB:
     image: mariadb
     ports:
       - "343:343"
