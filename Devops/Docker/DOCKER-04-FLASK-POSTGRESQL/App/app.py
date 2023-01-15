@@ -3,6 +3,7 @@ import os
 import psycopg2
 from flask import Flask ,render_template
 def init_db():
+    REDISDB=redis.REdis()
     conn = psycopg2.connect(
             host="localhost",
             database="flask_db",
