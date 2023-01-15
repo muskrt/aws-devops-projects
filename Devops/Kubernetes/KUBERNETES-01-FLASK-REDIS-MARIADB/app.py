@@ -22,7 +22,7 @@ def db_init():
 
 def db_get(sourcedb='',query_string): 
     if sourcedb =="REDISDB":
-        return REDISDB.get(query_string)
+        return REDISDB.get(query_string[0])
     elif  sourcedb =="MARIADB":
         return '' 
 
