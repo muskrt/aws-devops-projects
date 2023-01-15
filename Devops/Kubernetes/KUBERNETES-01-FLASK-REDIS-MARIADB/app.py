@@ -20,17 +20,30 @@ def db_init():
     REDISDB=redis.Redis(host='REDISDB',port=6379)
     REDISDB.set('mustafa','kurt')
 
-def db_get(sourcedb='',query_string=''): 
+def db_get(sourcedb='',query_string): 
     if sourcedb =="REDISDB":
         return REDISDB.get(query_string)
     elif  sourcedb =="MARIADB":
         return '' 
 
-def db_delete(sourcedb=''): pass 
+def db_delete(sourcedb='',query_string): 
+    if sourcedb =="REDISDB":
+        REDISDB.delete(query_string)
+    elif sourcedb=="MARIADB":
+        MARIADB.EXECUTE()
 
-def db_update(sourcedb=''): pass 
+def db_update(sourcedb='',query_string): 
+    if sourcedb =="REDISDB":
+        REDISDB.set(**query_string)
+    elif sourcedb=="MARIADB":
+        MARIADB.EXECUTE()
 
-def db_insert(sourcedb=''): pass 
+def db_insert(sourcedb='',query_string): 
+    if sourcedb =="REDISDB":
+        REDISDB.set(**query_string)
+    elif sourcedb=="MARIADB":
+        MARIADB.EXECUTE()
+
 
 
 @app.route('/add', methods=['GET','POST'])
@@ -96,8 +109,6 @@ def login():
             return render_template('secure_page.html')
         else:
             return render_template('error.html')
-
-
 
 
 if __name__=="__main__":
