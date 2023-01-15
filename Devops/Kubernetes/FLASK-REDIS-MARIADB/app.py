@@ -1,11 +1,33 @@
 from flask import Flask , render_template, url_for, request
-
+import redis 
+import mariadb 
+from json2html import *
 app = Flask(__name__)
+def db_init():
+    # mariadb
+    config = {
+    'host': 'MARIADB',
+    'port': 3306,
+    'user': 'root',
+    'password': 'Password123!',
+    'database': 'demo'
+    }
+    global MARIADB 
+    MARIADB =mariadb.connect(**config).cursor()
+    
+    # redis 
+    global REDISDB 
+    REDISDB=redis.Redis(host='REDISDB',port=6379)
+    REDISDB.set('mustafa','kurt')
 
-def db_init():pass 
+def db_get(sourcedb='',query_string=''): 
+    if sourcedb =="REDISDB":
+        return REDISDB.get(query_string)
+    elif  sourcedb =="MARIADB":
+        return '' 
 def db_delete(sourcedb=''): pass 
 def db_update(sourcedb=''): pass 
-def db_get(sourcedb=''): pass 
+
 def db_insert(sourcedb=''): pass 
 
 @app.route('/update')
@@ -20,8 +42,12 @@ def login():
     if request.method =='GET':
         return render_template('login.html')
     elif request.method == "POST"
-        USERNAME=request.params['username']
-        PASSWORD=request.params['password']
+        NAME = request.form['username']
+        USER_PASSWORD=request.form['password']
+        PASSWORD=db_get("REDISDB",NAME)
+        if PASSWORD :
+                PASSWORD=PASSWORD.decode()
+        if str(USER_PASSWORD) == PASSWORD:
         if USERNAME == '' and PASSWORD == '':
             return render_template('secure_page.html')
         else:
@@ -31,4 +57,5 @@ def login():
 
 
 if __name__=="__main__":
+    db_init()
     app.run()
