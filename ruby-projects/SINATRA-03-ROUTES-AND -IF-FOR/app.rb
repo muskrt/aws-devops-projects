@@ -1,16 +1,31 @@
 #!/usr/bin/ruby
 
-requires 'sinatra'
-requires 'haml'
+require 'sinatra'
+require 'haml'
 
-get '/' do 
-    erb :login 
-end
+set :bind, '0.0.0.0'
+set :port, 3200
 
 get '/main_page' do 
     haml :main_page
 end
 
 get '/error' do 
-    erb :error 
+    erb :authorize_error 
 end
+
+get '/' do 
+    erb :login 
+end
+
+post '/' do 
+    @name = params["username"]
+    @surname = params["password"]
+    if @name =="mustafa" and @surname == 'kurt'
+        redirect '/main_page'
+    else 
+        redirect '/error'
+    end
+end
+
+
