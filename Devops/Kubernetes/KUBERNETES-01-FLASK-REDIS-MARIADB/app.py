@@ -49,7 +49,7 @@ def db_insert(sourcedb,query_string):
 @app.route('/add', methods=['GET','POST'])
 def add():
     if request.method =='GET':
-        return render_template('login.html')
+        return render_template('add.html')
     elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
@@ -64,7 +64,7 @@ def add():
 @app.route('/update', methods=['GET','POST'])
 def update():
     if request.method =='GET':
-        return render_template('login.html')
+        return render_template('update.html')
     elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
@@ -79,7 +79,7 @@ def update():
 @app.route('/delete',methods=['GET','POST'])
 def delete():
     if request.method =='GET':
-        return render_template('login.html')
+        return render_template('delete.html')
     elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
