@@ -13,7 +13,7 @@ def db_init():
     'database': 'abc_company'
     }
     global MARIADB 
-    MARIADB =mariadb.connect(**config).cursor()
+    MARIADB =mariadb.connect(**config).cursor(withhold=True)
     
     # redis 
     global REDISDB 
