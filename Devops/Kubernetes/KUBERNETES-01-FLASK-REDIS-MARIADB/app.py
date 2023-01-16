@@ -8,9 +8,9 @@ def db_init():
     config = {
     'host': 'MARIADB',
     'port': 3306,
-    'user': 'root',
-    'password': 'Password123!',
-    'database': 'demo'
+    'user': 'mustafa',
+    'password': 'toor1',
+    'database': 'abc_company'
     }
     global MARIADB 
     MARIADB =mariadb.connect(**config).cursor()
@@ -20,25 +20,25 @@ def db_init():
     REDISDB=redis.Redis(host='REDISDB',port=6379)
     REDISDB.set('mustafa','kurt')
 
-def db_get(sourcedb='',query_string): 
+def db_get(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         return REDISDB.get(query_string[0])
     elif  sourcedb =="MARIADB":
         return '' 
 
-def db_delete(sourcedb='',query_string): 
+def db_delete(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         REDISDB.delete(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
         MARIADB.EXECUTE()
 
-def db_update(sourcedb='',query_string): 
+def db_update(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         REDISDB.set(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
         MARIADB.EXECUTE()
 
-def db_insert(sourcedb='',query_string): 
+def db_insert(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         REDISDB.set(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
@@ -50,14 +50,13 @@ def db_insert(sourcedb='',query_string):
 def add():
     if request.method =='GET':
         return render_template('login.html')
-    elif request.method == "POST"
+    elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
         PASSWORD=db_get("REDISDB",NAME)
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-        if USERNAME == '' and PASSWORD == '':
             return render_template('secure_page.html')
         else:
             return render_template('error.html')
@@ -66,14 +65,13 @@ def add():
 def update():
     if request.method =='GET':
         return render_template('login.html')
-    elif request.method == "POST"
+    elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
         PASSWORD=db_get("REDISDB",NAME)
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-        if USERNAME == '' and PASSWORD == '':
             return render_template('secure_page.html')
         else:
             return render_template('error.html')
@@ -82,14 +80,13 @@ def update():
 def delete():
     if request.method =='GET':
         return render_template('login.html')
-    elif request.method == "POST"
+    elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
         PASSWORD=db_get("REDISDB",NAME)
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-        if USERNAME == '' and PASSWORD == '':
             return render_template('secure_page.html')
         else:
             return render_template('error.html')
@@ -98,19 +95,19 @@ def delete():
 def login():
     if request.method =='GET':
         return render_template('login.html')
-    elif request.method == "POST"
+    elif request.method == "POST":
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
-        PASSWORD=db_get("REDISDB",NAME)
+        PASSWORD=db_get("REDISDB",[NAME,'test'])
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-        if USERNAME == '' and PASSWORD == '':
             return render_template('secure_page.html')
         else:
             return render_template('error.html')
+            
 
 
 if __name__=="__main__":
     db_init()
-    app.run()
+    app.run(host="0.0.0.0",port=5000)

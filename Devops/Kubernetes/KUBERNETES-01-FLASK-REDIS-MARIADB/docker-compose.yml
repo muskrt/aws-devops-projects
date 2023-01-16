@@ -3,17 +3,29 @@ services:
   web:
     build: . 
     restart: always
+    depends_on:
+      - REDISDB
+      - MARIADB
+    # network_mode: "host"
+    ports:
+      - "5000:5000"
     # volumes:
     #   - type: bind 
     #     source: ./
     #     target: /APP
 
   REDISDB:
-    image: redis
+    image: redis:alpine
     ports:
       - "6379:6379"
 
   MARIADB:
     image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: toor
+      MARIADB_USER: mustafa 
+      MARIADB_PASSWORD: toor1
+      MARIADB_DATABASE: abc_company
     ports:
       - "3306:3306"
+
