@@ -5,28 +5,28 @@
 justify-content: center;">Welcome to the abc Company.</h1>
 
 
-<form action="#",method="POST">
+<form action="#"  method="GET" >
 
 <li style="margin:0 0 10px 75%">
-	<a href="{{ url_for('/add') }}">
-   <button>add</button>
-</a>
+	<a href="{{ url_for('add') }}">
+   <button formaction="{{ url_for('add') }}">add</button>
+
 </li>
 <li style="margin:0 0 10px 75%">
 	<a href="/update">
-   <button>update</button>
+   <button formaction="{{ url_for('update') }}">update</button>
 </a> </li>
 <li style="margin:0 0 10px 75%">
 	<a href="/delete">
-   <button>delete</button>
+   <button formaction="{{ url_for('delete') }}">delete</button>
 </a></li>
 <li style="margin:0 0 10px 75%">
 	<a href="/add_admin">
-   <button>Add Admin</button>
+   <button formaction="{{ url_for('add_admin') }}">Add Admin</button>
 </a></li>
 <li style="margin:0 0 10px 75%">
 	<a href="/delete_admin">
-   <button>Delete Admin</button>
+   <button formaction="{{ url_for('delete_admin') }}">Delete Admin</button>
 </a></li>
 
 </form>

@@ -44,7 +44,35 @@ def db_insert(sourcedb,query_string):
     elif sourcedb=="MARIADB":
         MARIADB.EXECUTE()
 
+@app.route('/add_admin', methods=['GET','POST'])
+def add_admin():
+    if request.method =='GET':
+        return render_template('add_admin.html')
+    elif request.method == "POST":
+        NAME = request.form['username']
+        USER_PASSWORD=request.form['password']
+        PASSWORD=db_get("REDISDB",NAME)
+        if PASSWORD :
+                PASSWORD=PASSWORD.decode()
+        if str(USER_PASSWORD) == PASSWORD:
+            return render_template('secure_page.html')
+        else:
+            return render_template('error.html')
 
+@app.route('/delete_admin', methods=['GET','POST'])
+def delete_admin():
+    if request.method =='GET':
+        return render_template('delete_admin.html')
+    elif request.method == "POST":
+        NAME = request.form['username']
+        USER_PASSWORD=request.form['password']
+        PASSWORD=db_get("REDISDB",NAME)
+        if PASSWORD :
+                PASSWORD=PASSWORD.decode()
+        if str(USER_PASSWORD) == PASSWORD:
+            return render_template('secure_page.html')
+        else:
+            return render_template('error.html')
 
 @app.route('/add', methods=['GET','POST'])
 def add():
@@ -110,4 +138,4 @@ def login():
 
 if __name__=="__main__":
     db_init()
-    app.run(host="0.0.0.0",port=5000)
+    app.run(host="0.0.0.0",debug=True,port=5000)
