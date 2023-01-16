@@ -3,17 +3,17 @@ services:
   web:
     build: . 
     restart: always
-    volumes:
-      - type: bind 
-        source: ./
-        target: /APP
+    # volumes:
+    #   - type: bind 
+    #     source: ./
+    #     target: /APP
 
   REDISDB:
     image: redis
     ports:
-      - "89:89"
+      - "6379:6379"
 
   MARIADB:
     image: mariadb
     ports:
-      - "343:343"
+      - "3306:3306"
