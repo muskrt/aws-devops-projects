@@ -6,6 +6,10 @@ require 'haml'
 set :bind, '0.0.0.0'
 set :port, 3200
 
+get '/main_page' do 
+    erb :error
+end
+
 get '/main_page/:username' do 
     erb :main_page, { :locals => { :username => params[:username] } }
 end
