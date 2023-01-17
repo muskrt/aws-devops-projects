@@ -17,6 +17,10 @@ end
 get '/error' do 
     erb :authorize_error 
 end
+get '/items' do 
+    @features = [ 1,2,3,4]
+    erb :items, { :locals => { :features => @features } }
+end
 
 get '/' do 
     erb :login 
