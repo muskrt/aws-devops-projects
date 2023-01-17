@@ -7,7 +7,7 @@ set :bind, '0.0.0.0'
 set :port, 3200
 
 get '/main_page/:username' do 
-    haml :main_page, :locals => {:username => @username}
+    erb :main_page, { :locals => { :username => params[:username] } }
 end
 
 get '/error' do 
