@@ -2003,3 +2003,126 @@ Processing by RegistrationsController#new as HTML
 Completed 200 OK in 24ms (Views: 22.0ms | ActiveRecord: 0.0ms | Allocations: 3937)
 
 
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:11 +0300
+  
+SyntaxError (/home/mustafa/Desktop/aws-devops-projects/ruby-projects/RAILS-01/app/controllers/registrations_controller.rb:7: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/registrations_controller.rb:7: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/registrations_controller.rb:7: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/registrations_controller.rb:7: syntax error, unexpected end-of-input, expecting `end'
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:18 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 6.8ms | Allocations: 1427)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 97)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 26.4ms | Allocations: 15603)
+Completed 200 OK in 34ms (Views: 28.3ms | ActiveRecord: 0.8ms | Allocations: 19208)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:19 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:19 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 6.0ms | Allocations: 1190)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 20.4ms | Allocations: 3590)
+Completed 200 OK in 23ms (Views: 21.7ms | ActiveRecord: 0.0ms | Allocations: 3935)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:21 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:21 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 5.3ms | Allocations: 1192)
+  Rendered shared/_navbar.erb (Duration: 0.1ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | Allocations: 3608)
+Completed 200 OK in 16ms (Views: 15.1ms | ActiveRecord: 0.0ms | Allocations: 3929)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:21 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:21 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 3.3ms | Allocations: 1192)
+  Rendered shared/_navbar.erb (Duration: 0.1ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.6ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 3608)
+Completed 200 OK in 16ms (Views: 13.7ms | ActiveRecord: 0.0ms | Allocations: 3929)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:21 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:22 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.3ms | Allocations: 1182)
+  Rendered shared/_navbar.erb (Duration: 0.4ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 3582)
+Completed 200 OK in 13ms (Views: 12.0ms | ActiveRecord: 0.0ms | Allocations: 3903)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:22 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:22 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 3.0ms | Allocations: 1192)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 3594)
+Completed 200 OK in 10ms (Views: 9.6ms | ActiveRecord: 0.0ms | Allocations: 3915)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:22 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:22 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.3ms | Allocations: 1190)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | Allocations: 3604)
+Completed 200 OK in 14ms (Views: 13.7ms | ActiveRecord: 0.0ms | Allocations: 3926)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:23 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:41:23 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 4.9ms | Allocations: 1186)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.4ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 3602)
+Completed 200 OK in 21ms (Views: 20.0ms | ActiveRecord: 0.0ms | Allocations: 3924)
+
+

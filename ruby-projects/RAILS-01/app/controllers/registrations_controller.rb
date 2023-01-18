@@ -4,4 +4,5 @@ class RegistrationsController < ApplicationController
     end
     def create 
         render plain: "Thanks!"
+    end
  end
