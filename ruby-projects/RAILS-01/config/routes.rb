@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   get "/", to: "main#index"
   get "/sign_up", to: "registrations#new"
-  post "users", to: "registrations#create"
+  post "/sign_up",   to: "registrations#create"
 end

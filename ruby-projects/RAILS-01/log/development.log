@@ -2126,3 +2126,133 @@ Processing by RegistrationsController#new as HTML
 Completed 200 OK in 21ms (Views: 20.0ms | ActiveRecord: 0.0ms | Allocations: 3924)
 
 
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:42:35 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:42:35 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 4.4ms | Allocations: 1429)
+  Rendered shared/_navbar.erb (Duration: 0.1ms | Allocations: 97)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 29.5ms | Allocations: 15605)
+Completed 200 OK in 42ms (Views: 31.3ms | ActiveRecord: 1.3ms | Allocations: 19195)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:42:59 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:00 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 5.0ms | Allocations: 1190)
+  Rendered shared/_navbar.erb (Duration: 0.1ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 3590)
+Completed 200 OK in 12ms (Views: 10.8ms | ActiveRecord: 0.0ms | Allocations: 3935)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:03 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:03 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 1.9ms | Allocations: 1180)
+  Rendered shared/_navbar.erb (Duration: 1.6ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.5ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 3582)
+Completed 200 OK in 14ms (Views: 13.2ms | ActiveRecord: 0.0ms | Allocations: 3903)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:07 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:07 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 4.5ms | Allocations: 1190)
+  Rendered shared/_navbar.erb (Duration: 0.4ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.3ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | Allocations: 3606)
+Completed 200 OK in 15ms (Views: 13.7ms | ActiveRecord: 0.0ms | Allocations: 3928)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:09 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:09 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.3ms | Allocations: 1198)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 3614)
+Completed 200 OK in 14ms (Views: 13.4ms | ActiveRecord: 0.0ms | Allocations: 3936)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:31 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.7ms | Allocations: 1429)
+  Rendered shared/_navbar.erb (Duration: 0.1ms | Allocations: 97)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | Allocations: 15605)
+Completed 200 OK in 35ms (Views: 26.6ms | ActiveRecord: 0.9ms | Allocations: 19195)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:33 +0300
+Processing by RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  Rendering text template
+  Rendered text template (Duration: 0.4ms | Allocations: 9)
+Completed 200 OK in 27ms (Views: 25.3ms | ActiveRecord: 0.0ms | Allocations: 835)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:43:35 +0300
+Processing by RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  Rendering text template
+  Rendered text template (Duration: 0.1ms | Allocations: 4)
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 560)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:44:53 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 13.5ms | Allocations: 4739)
+  Rendered shared/_navbar.erb (Duration: 0.7ms | Allocations: 336)
+  Rendered shared/_flash.erb (Duration: 0.5ms | Allocations: 189)
+  Rendered layout layouts/application.html.erb (Duration: 89.6ms | Allocations: 39817)
+Completed 200 OK in 128ms (Views: 93.3ms | ActiveRecord: 0.9ms | Allocations: 62679)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:44:55 +0300
+Processing by RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  Rendering text template
+  Rendered text template (Duration: 0.0ms | Allocations: 10)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.0ms | Allocations: 873)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:45:02 +0300
+Processing by RegistrationsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"kadf", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign Up"}
+  Rendering text template
+  Rendered text template (Duration: 0.0ms | Allocations: 5)
+Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 566)
+
+
