@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask , render_template, request, url_for
 import redis 
 import psycopg2
 
@@ -47,7 +47,7 @@ def db_update(sourcedb=''): pass
 
 @app.route('/')
 def login():
-    return test 
+    return render_template('login.html') 
 @app.route('/update')
 def update(): 
     pass
