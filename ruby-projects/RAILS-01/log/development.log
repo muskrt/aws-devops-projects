@@ -1276,3 +1276,4 @@ Migrating to CreateUsers (20230118190134)
   [1m[36mActiveRecord::InternalMetadata Create (90.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-01-18 19:02:01.351726"], ["updated_at", "2023-01-18 19:02:01.351726"]]
   [1m[36mTRANSACTION (13.6ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
