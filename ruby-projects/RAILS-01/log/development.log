@@ -1298,3 +1298,537 @@ Migrating to CreateUsers (20230118190134)
   [1m[36mTRANSACTION (3.3ms)[0m  [1m[36mcommit transaction[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:24:39 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+Zeitwerk::NameError (expected file /home/mustafa/Desktop/aws-devops-projects/ruby-projects/RAILS-01/app/controllers/registrations_controller.rb to define constant RegistrationsController, but didn't):
+  
+zeitwerk (2.6.6) lib/zeitwerk/loader/callbacks.rb:25:in `on_file_autoloaded'
+zeitwerk (2.6.6) lib/zeitwerk/kernel.rb:31:in `require'
+activesupport (7.0.4) lib/active_support/inflector/methods.rb:280:in `const_get'
+activesupport (7.0.4) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (7.0.4) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (7.0.4) lib/action_dispatch/http/request.rb:90:in `controller_class_for'
+actionpack (7.0.4) lib/action_dispatch/request/utils.rb:95:in `action_encoding_template'
+actionpack (7.0.4) lib/action_dispatch/request/utils.rb:83:in `encode'
+actionpack (7.0.4) lib/action_dispatch/request/utils.rb:45:in `set_binary_encoding'
+actionpack (7.0.4) lib/action_dispatch/http/parameters.rb:68:in `path_parameters='
+actionpack (7.0.4) lib/action_dispatch/journey/router.rb:48:in `block in serve'
+actionpack (7.0.4) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.4) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.5) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.5) lib/rack/etag.rb:27:in `call'
+rack (2.2.5) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.5) lib/rack/head.rb:12:in `call'
+actionpack (7.0.4) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.4) lib/action_dispatch/http/content_security_policy.rb:36:in `call'
+rack (2.2.5) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.5) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/cookies.rb:696:in `call'
+activerecord (7.0.4) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.5) lib/rack/method_override.rb:24:in `call'
+rack (2.2.5) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.5) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:25:16 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 0.9ms | Allocations: 154)
+  Rendered shared/_navbar.erb (Duration: 0.9ms | Allocations: 323)
+  Rendered shared/_flash.erb (Duration: 0.6ms | Allocations: 189)
+  Rendered layout layouts/application.html.erb (Duration: 88.3ms | Allocations: 35443)
+Completed 200 OK in 130ms (Views: 94.1ms | ActiveRecord: 1.6ms | Allocations: 56457)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:25:19 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 9.8ms | Allocations: 135)
+  Rendered shared/_navbar.erb (Duration: 0.4ms | Allocations: 93)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 49.7ms | Allocations: 2800)
+Completed 200 OK in 71ms (Views: 55.0ms | ActiveRecord: 0.0ms | Allocations: 4074)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:25:19 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.8ms | Allocations: 128)
+  Rendered shared/_navbar.erb (Duration: 1.5ms | Allocations: 93)
+  Rendered shared/_flash.erb (Duration: 0.3ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | Allocations: 3055)
+Completed 200 OK in 19ms (Views: 15.9ms | ActiveRecord: 0.0ms | Allocations: 4042)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:25:20 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.5ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 17)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 2393)
+Completed 200 OK in 10ms (Views: 7.9ms | ActiveRecord: 0.0ms | Allocations: 2938)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:25:21 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 15.8ms | Allocations: 2584)
+Completed 200 OK in 17ms (Views: 16.6ms | ActiveRecord: 0.0ms | Allocations: 2899)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:25:28 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 0.1ms | Allocations: 10)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 2603)
+Completed 200 OK in 15ms (Views: 13.1ms | ActiveRecord: 0.0ms | Allocations: 2933)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:27:38 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 3.7ms | Allocations: 1585)
+  Rendered shared/_navbar.erb (Duration: 0.8ms | Allocations: 249)
+  Rendered shared/_flash.erb (Duration: 0.6ms | Allocations: 172)
+  Rendered layout layouts/application.html.erb (Duration: 27.5ms | Allocations: 16420)
+Completed 200 OK in 40ms (Views: 33.4ms | ActiveRecord: 0.9ms | Allocations: 20296)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:29:03 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 12.8ms | Allocations: 2084)
+  Rendered shared/_navbar.erb (Duration: 1.7ms | Allocations: 258)
+  Rendered shared/_flash.erb (Duration: 0.8ms | Allocations: 189)
+  Rendered layout layouts/application.html.erb (Duration: 120.0ms | Allocations: 37078)
+Completed 200 OK in 177ms (Views: 125.5ms | ActiveRecord: 5.0ms | Allocations: 59943)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:29:21 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.7ms | Allocations: 972)
+  Rendered shared/_navbar.erb (Duration: 0.7ms | Allocations: 239)
+  Rendered shared/_flash.erb (Duration: 0.5ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 22.5ms | Allocations: 4276)
+Completed 200 OK in 32ms (Views: 27.4ms | ActiveRecord: 0.0ms | Allocations: 5457)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:29:42 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 28.9ms | Allocations: 7826)
+  Rendered shared/_navbar.erb (Duration: 1.2ms | Allocations: 245)
+  Rendered shared/_flash.erb (Duration: 16.5ms | Allocations: 174)
+  Rendered layout layouts/application.html.erb (Duration: 56.9ms | Allocations: 11215)
+Completed 200 OK in 65ms (Views: 62.3ms | ActiveRecord: 0.0ms | Allocations: 12364)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:32:33 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 17.5ms | Allocations: 8347)
+  Rendered layout layouts/application.html.erb (Duration: 17.9ms | Allocations: 8437)
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms | Allocations: 9553)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1> Sign up </h1> 
+<%= form_with model: @user, url: sign_up_path  do |form| %> 
+    <div class="mb-3">
+    <%= form.text_field :email, class="form-control" %>
+    </div>
+    <div class="mb-3">
+    <%= form.password_field :password, class="form-control" %>
+    </div>
+    <div class="mb-3">
+    <%= form.password_field :password_confirmation, class="form-control" %>
+    </div>
+
+<% end %>
+):
+1:    <h1> Sign up </h1> 
+2:    <%= form_with model: @user, url: sign_up_path  do |form| %> 
+3:        <div class="mb-3">
+4:        <%= form.text_field :email, class="form-control" %>
+5:        </div>
+6:        <div class="mb-3">
+7:        <%= form.password_field :password, class="form-control" %>
+8:        </div>
+9:        <div class="mb-3">
+10:        <%= form.password_field :password_confirmation, class="form-control" %>
+11:        </div>
+12:    
+13:    <% end %>
+  
+app/views/registrations/new.erb:4: syntax error, unexpected '='
+app/views/registrations/new.erb:7: syntax error, unexpected '='
+app/views/registrations/new.erb:10: syntax error, unexpected '='
+app/views/registrations/new.erb:4: syntax error, unexpected '='
+app/views/registrations/new.erb:7: syntax error, unexpected '='
+app/views/registrations/new.erb:10: syntax error, unexpected '='
+app/views/registrations/new.erb:4: syntax error, unexpected '='
+app/views/registrations/new.erb:7: syntax error, unexpected '='
+app/views/registrations/new.erb:10: syntax error, unexpected '='
+app/views/registrations/new.erb:4: syntax error, unexpected '='
+app/views/registrations/new.erb:7: syntax error, unexpected '='
+app/views/registrations/new.erb:10: syntax error, unexpected '='
+app/views/registrations/new.erb:4: syntax error, unexpected '='
+app/views/registrations/new.erb:7: syntax error, unexpected '='
+app/views/registrations/new.erb:10: syntax error, unexpected '='
+app/views/registrations/new.erb:4: syntax error, unexpected '='
+app/views/registrations/new.erb:7: syntax error, unexpected '='
+app/views/registrations/new.erb:10: syntax error, unexpected '='
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:33:03 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 8.6ms | Allocations: 1029)
+  Rendered shared/_navbar.erb (Duration: 0.8ms | Allocations: 239)
+  Rendered shared/_flash.erb (Duration: 0.5ms | Allocations: 172)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | Allocations: 4351)
+Completed 200 OK in 22ms (Views: 20.1ms | ActiveRecord: 0.0ms | Allocations: 5496)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:33:51 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 326.9ms | Allocations: 11482)
+  Rendered shared/_navbar.erb (Duration: 0.9ms | Allocations: 245)
+  Rendered shared/_flash.erb (Duration: 0.9ms | Allocations: 172)
+  Rendered layout layouts/application.html.erb (Duration: 334.5ms | Allocations: 14870)
+Completed 200 OK in 340ms (Views: 338.0ms | ActiveRecord: 0.0ms | Allocations: 16004)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:34:30 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 4.2ms | Allocations: 1658)
+  Rendered shared/_navbar.erb (Duration: 0.9ms | Allocations: 239)
+  Rendered shared/_flash.erb (Duration: 2.2ms | Allocations: 170)
+  Rendered layout layouts/application.html.erb (Duration: 15.6ms | Allocations: 4957)
+Completed 200 OK in 22ms (Views: 20.5ms | ActiveRecord: 0.0ms | Allocations: 6094)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:35:19 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 7.6ms | Allocations: 1592)
+  Rendered shared/_navbar.erb (Duration: 4.0ms | Allocations: 239)
+  Rendered shared/_flash.erb (Duration: 1.4ms | Allocations: 170)
+  Rendered layout layouts/application.html.erb (Duration: 23.5ms | Allocations: 4891)
+Completed 200 OK in 30ms (Views: 27.8ms | Allocations: 6015)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:35:21 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 2.2ms | Allocations: 128)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | Allocations: 3052)
+Completed 200 OK in 35ms (Views: 33.5ms | Allocations: 4023)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:35:22 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.9ms | Allocations: 135)
+  Rendered shared/_navbar.erb (Duration: 0.6ms | Allocations: 93)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 15.8ms | Allocations: 2799)
+Completed 200 OK in 19ms (Views: 17.4ms | Allocations: 4056)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:35:22 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.6ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | Allocations: 2393)
+Completed 200 OK in 14ms (Views: 12.7ms | Allocations: 2984)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:35:23 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered layout layouts/application.html.erb (Duration: 21.3ms | Allocations: 2392)
+Completed 200 OK in 26ms (Views: 24.5ms | Allocations: 2919)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:35:24 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.3ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 2599)
+Completed 200 OK in 19ms (Views: 18.8ms | Allocations: 2906)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:35:28 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 4.3ms | Allocations: 1159)
+  Rendered shared/_navbar.erb (Duration: 0.6ms | Allocations: 47)
+  Rendered shared/_flash.erb (Duration: 1.2ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 21.0ms | Allocations: 3521)
+Completed 200 OK in 24ms (Views: 22.3ms | Allocations: 3849)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:36:08 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 11.2ms | Allocations: 1643)
+  Rendered shared/_navbar.erb (Duration: 1.2ms | Allocations: 239)
+  Rendered shared/_flash.erb (Duration: 1.0ms | Allocations: 170)
+  Rendered layout layouts/application.html.erb (Duration: 19.5ms | Allocations: 4942)
+Completed 200 OK in 24ms (Views: 22.5ms | Allocations: 6063)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:36:51 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 17.6ms | Allocations: 5547)
+  Rendered layout layouts/application.html.erb (Duration: 18.5ms | Allocations: 5627)
+Completed 500 Internal Server Error in 24ms (Allocations: 6720)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `formsubmit' for #<ActionView::Base:0x0000000000bba8>
+Did you mean?  format):
+    13:         <%= form.password_field :password_confirmation, class: "form-control", placeholder: "password_confirmation" %>
+    14:     </div>
+    15:     <div class="mb-3">
+    16:         <%= formsubmit %>
+    17:     </div>
+    18: 
+    19: <% end %>
+  
+app/views/registrations/new.erb:16
+app/views/registrations/new.erb:2
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:36:58 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 5.7ms | Allocations: 1887)
+  Rendered shared/_navbar.erb (Duration: 2.3ms | Allocations: 239)
+  Rendered shared/_flash.erb (Duration: 1.7ms | Allocations: 172)
+  Rendered layout layouts/application.html.erb (Duration: 17.9ms | Allocations: 5204)
+Completed 200 OK in 24ms (Views: 22.7ms | Allocations: 6321)
+
+
+Started POST "/sign_up" for 127.0.0.1 at 2023-01-18 22:37:00 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/sign_up"):
+  
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:37:00 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.9ms | Allocations: 1364)
+  Rendered shared/_navbar.erb (Duration: 0.6ms | Allocations: 48)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 28)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | Allocations: 3844)
+Completed 200 OK in 14ms (Views: 13.2ms | Allocations: 4204)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:38:04 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 5.4ms | Allocations: 1855)
+  Rendered shared/_navbar.erb (Duration: 0.7ms | Allocations: 318)
+  Rendered shared/_flash.erb (Duration: 0.4ms | Allocations: 170)
+  Rendered layout layouts/application.html.erb (Duration: 27.8ms | Allocations: 16766)
+Completed 200 OK in 36ms (Views: 30.3ms | ActiveRecord: 0.3ms | Allocations: 20325)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:38:24 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 10.0ms | Allocations: 1826)
+  Rendered shared/_navbar.erb (Duration: 2.5ms | Allocations: 317)
+  Rendered shared/_flash.erb (Duration: 0.9ms | Allocations: 170)
+  Rendered layout layouts/application.html.erb (Duration: 19.8ms | Allocations: 5201)
+Completed 200 OK in 24ms (Views: 22.8ms | ActiveRecord: 0.0ms | Allocations: 6334)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:38:24 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 3.2ms | Allocations: 1294)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | Allocations: 3694)
+Completed 200 OK in 12ms (Views: 11.0ms | ActiveRecord: 0.0ms | Allocations: 4043)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:38:25 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.6ms | Allocations: 127)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 30)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 3086)
+Completed 200 OK in 12ms (Views: 11.6ms | ActiveRecord: 0.0ms | Allocations: 4064)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:38:26 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 3.4ms | Allocations: 1348)
+  Rendered shared/_navbar.erb (Duration: 0.1ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 3748)
+Completed 200 OK in 12ms (Views: 11.3ms | ActiveRecord: 0.0ms | Allocations: 4097)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:38:27 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 1.2ms | Allocations: 134)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 134)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 20)
+  Rendered layout layouts/application.html.erb (Duration: 9.0ms | Allocations: 2839)
+Completed 200 OK in 14ms (Views: 12.9ms | ActiveRecord: 0.0ms | Allocations: 4090)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:38:27 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 99)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | Allocations: 2430)
+Completed 200 OK in 10ms (Views: 8.0ms | ActiveRecord: 0.0ms | Allocations: 3013)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:38:28 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 1.7ms | Allocations: 99)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | Allocations: 2430)
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.0ms | Allocations: 2960)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 22:38:28 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 99)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 16)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 2431)
+Completed 200 OK in 12ms (Views: 10.5ms | ActiveRecord: 0.0ms | Allocations: 2963)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:38:28 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 99)
+  Rendered shared/_flash.erb (Duration: 0.4ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | Allocations: 2631)
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.0ms | Allocations: 2941)
+
+
+Started GET "/sign_up" for 127.0.0.1 at 2023-01-18 22:38:29 +0300
+Processing by RegistrationsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering registrations/new.erb within layouts/application
+  Rendered registrations/new.erb within layouts/application (Duration: 2.8ms | Allocations: 1342)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 85)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | Allocations: 3742)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.0ms | Allocations: 4074)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 22:38:31 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.4ms | Allocations: 99)
+  Rendered shared/_flash.erb (Duration: 0.4ms | Allocations: 22)
+  Rendered layout layouts/application.html.erb (Duration: 15.1ms | Allocations: 2629)
+Completed 200 OK in 17ms (Views: 16.2ms | ActiveRecord: 0.0ms | Allocations: 2938)
+
+
