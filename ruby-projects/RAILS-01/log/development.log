@@ -565,3 +565,217 @@ Processing by AboutController#index as HTML
 Completed 200 OK in 8ms (Views: 6.9ms | Allocations: 2834)
 
 
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:49:15 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/about"):
+  
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:49:27 +0300
+  
+SyntaxError (/home/mustafa/Desktop/aws-devops-projects/ruby-projects/RAILS-01/config/routes.rb:6: syntax error, unexpected local variable or method, expecting `end'
+...bout-us" , to: "about#index" as: about
+...                             ^~
+):
+  
+config/routes.rb:6: syntax error, unexpected local variable or method, expecting `end'
+config/routes.rb:6: syntax error, unexpected local variable or method, expecting `end'
+config/routes.rb:6: syntax error, unexpected local variable or method, expecting `end'
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:49:35 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/"):
+  
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:49:48 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.2ms | Allocations: 12)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 94)
+  Rendered layout layouts/application.html.erb (Duration: 22.0ms | Allocations: 14395)
+Completed 200 OK in 26ms (Views: 24.0ms | Allocations: 15243)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:50:54 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 12)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 94)
+  Rendered layout layouts/application.html.erb (Duration: 21.3ms | Allocations: 14050)
+Completed 200 OK in 25ms (Views: 23.1ms | Allocations: 15176)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:52:27 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 2.7ms | Allocations: 135)
+  Rendered shared/_navbar.erb (Duration: 1.1ms | Allocations: 273)
+  Rendered shared/_flash.erb (Duration: 0.7ms | Allocations: 120)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | Allocations: 3474)
+Completed 200 OK in 19ms (Views: 17.0ms | Allocations: 4880)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:52:33 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.5ms | Allocations: 127)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 93)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 33)
+  Rendered layout layouts/application.html.erb (Duration: 17.9ms | Allocations: 3060)
+Completed 200 OK in 22ms (Views: 20.1ms | Allocations: 4027)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:52:34 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 1.2ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.4ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 18.2ms | Allocations: 2389)
+Completed 200 OK in 22ms (Views: 19.8ms | Allocations: 2921)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:52:34 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 23)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 2606)
+Completed 200 OK in 12ms (Views: 11.4ms | Allocations: 2912)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:52:34 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.3ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.9ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | Allocations: 2389)
+Completed 200 OK in 14ms (Views: 13.3ms | Allocations: 2911)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:11 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.5ms | Allocations: 135)
+  Rendered shared/_navbar.erb (Duration: 0.7ms | Allocations: 273)
+  Rendered shared/_flash.erb (Duration: 0.5ms | Allocations: 138)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | Allocations: 3490)
+Completed 200 OK in 18ms (Views: 17.3ms | Allocations: 4833)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:33 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 1.3ms | Allocations: 135)
+  Rendered shared/_navbar.erb (Duration: 0.8ms | Allocations: 273)
+  Rendered shared/_flash.erb (Duration: 1.8ms | Allocations: 137)
+  Rendered layout layouts/application.html.erb (Duration: 15.2ms | Allocations: 3489)
+Completed 200 OK in 23ms (Views: 19.4ms | Allocations: 4875)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:35 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.6ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 2389)
+Completed 200 OK in 10ms (Views: 8.7ms | Allocations: 2994)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:53:41 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 4.1ms | Allocations: 127)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 92)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 33)
+  Rendered layout layouts/application.html.erb (Duration: 26.2ms | Allocations: 3067)
+Completed 200 OK in 34ms (Views: 32.7ms | Allocations: 3951)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:42 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 2.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.3ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 13.0ms | Allocations: 2389)
+Completed 200 OK in 15ms (Views: 13.8ms | Allocations: 2928)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:42 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.3ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 1.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | Allocations: 2389)
+Completed 200 OK in 17ms (Views: 15.3ms | Allocations: 2923)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:53:43 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.2ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.2ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 23)
+  Rendered layout layouts/application.html.erb (Duration: 10.9ms | Allocations: 2624)
+Completed 200 OK in 19ms (Views: 15.5ms | Allocations: 2931)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:45 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 2389)
+Completed 200 OK in 13ms (Views: 11.5ms | Allocations: 2905)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:45 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 1.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.1ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | Allocations: 2389)
+Completed 200 OK in 15ms (Views: 12.7ms | Allocations: 2925)
+
+
+Started GET "/about" for 127.0.0.1 at 2023-01-18 21:53:46 +0300
+Processing by AboutController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering about/index.erb within layouts/application
+  Rendered about/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.5ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.2ms | Allocations: 23)
+  Rendered layout layouts/application.html.erb (Duration: 14.7ms | Allocations: 2626)
+Completed 200 OK in 16ms (Views: 15.5ms | Allocations: 2932)
+
+
+Started GET "/" for 127.0.0.1 at 2023-01-18 21:53:46 +0300
+Processing by MainController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering main/index.erb within layouts/application
+  Rendered main/index.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered shared/_navbar.erb (Duration: 0.3ms | Allocations: 61)
+  Rendered shared/_flash.erb (Duration: 0.0ms | Allocations: 13)
+  Rendered layout layouts/application.html.erb (Duration: 14.5ms | Allocations: 2389)
+Completed 200 OK in 16ms (Views: 15.2ms | Allocations: 2903)
+
+
