@@ -1,5 +1,5 @@
 class MainController < ApplicationController
     def index 
-        flash[:notice] = "logged in successfullly"
+        flash.now[:notice] = "logged in successfullly"
     end
 end
