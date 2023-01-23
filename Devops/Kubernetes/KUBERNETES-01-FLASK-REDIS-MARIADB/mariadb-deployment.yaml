@@ -30,7 +30,10 @@ spec:
             - name: MARIADB_PASSWORD
               value: toor1
             - name: MARIADB_ROOT_PASSWORD
-              value: toor
+              valueFrom: 
+                secretKeyRef:
+                  key: db-pass
+                  name: root_password
             - name: MARIADB_USER
               value: mustafa
           image: mariadb
