@@ -1,3 +1,35 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: demo
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: demo
+#   template:
+#     metadata:
+#       labels:
+#         app: demo
+#     spec:
+#       containers:
+#         - name:  demo
+#           image: clarusway/demo:hello-config-args
+#           imagePullPolicy: Always
+#           args:
+#             - "-greeting"
+#             - "$(GREETING)"
+#           ports:
+#             - containerPort: 8888
+#           env:
+#             - name: GREETING
+#               valueFrom:
+#                 configMapKeyRef:
+#                   name: demo-config
+#                   key: greeting
+
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,16 +46,17 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-args
-          imagePullPolicy: Always
-          args:
-            - "-greeting"
-            - "$(GREETING)"
+          image: clarusway/demo:hello-config-file
           ports:
             - containerPort: 8888
-          env:
-            - name: GREETING
-              valueFrom:
-                configMapKeyRef:
-                  name: demo-config
-                  key: greeting
+          volumeMounts:
+          - mountPath: /config/
+            name: demo-config-volume
+            readOnly: true
+      volumes:
+      - name: demo-config-volume
+        configMap:
+          name: demo-config
+          items:
+          - key: config
+            path: demo.yaml
