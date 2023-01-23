@@ -4,4 +4,4 @@ metadata:
   name: demo-config
 data:
   config: |
-    greeting: Buongiorno
+    greeting: Hola
