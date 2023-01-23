@@ -24,20 +24,22 @@ spec:
         io.kompose.service: mariadb
     spec:
       containers:
-        - env:
-            - name: MARIADB_DATABASE
-              value: abc_company
+        - envFrom:
+            - configMapRef:
+                name: db-config
+          env:
             - name: MARIADB_PASSWORD
-              value: toor1
+              valueFrom:
+                secretKeyRef:
+                  name: user-password 
+                  key: db-password
             - name: MARIADB_ROOT_PASSWORD
               valueFrom: 
                 secretKeyRef:
-                  key: db-pass
-                  name: root_password
-            - name: MARIADB_USER
-              value: mustafa
+                  key: root-password
+                  name: root-pass-word
           image: mariadb
-          name: MARIADB
+          name: mariadb-test
           ports:
             - containerPort: 3306
           resources: {}

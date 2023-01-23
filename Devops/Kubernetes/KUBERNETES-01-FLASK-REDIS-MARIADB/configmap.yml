@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  labels:
+    app: MYAPP
+data:
+  MARIADB_DATABASE: abc_company
+  MARIADB_USER: mustafa
