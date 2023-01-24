@@ -7,3 +7,5 @@ metadata:
 data:
   MARIADB_DATABASE: abc_company
   MARIADB_USER: mustafa
+  MARIADB_ROOT_PASSWORD: toor
+

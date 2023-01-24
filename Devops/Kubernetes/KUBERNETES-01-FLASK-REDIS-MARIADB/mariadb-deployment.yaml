@@ -35,9 +35,9 @@ spec:
                   key: db-password
             - name: MARIADB_ROOT_PASSWORD
               valueFrom: 
-                secretKeyRef:
-                  key: root-password
-                  name: root-pass-word
+                configMapKeyRef:
+                  key: MARIADB_ROOT_PASSWORD
+                  name: db-config
           image: mariadb
           name: mariadb-test
           ports:
