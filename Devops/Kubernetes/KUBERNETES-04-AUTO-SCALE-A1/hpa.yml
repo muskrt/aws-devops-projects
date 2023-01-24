@@ -1,12 +1,18 @@
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscal
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
 metadata:
-  name: web-deployment
+  name: web-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: web-deployment
-  minReplicas: 3
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 50 
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
