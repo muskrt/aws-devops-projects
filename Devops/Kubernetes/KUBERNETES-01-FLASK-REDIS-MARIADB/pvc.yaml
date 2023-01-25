@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: MYAPP
+  namespace: default
+  labels:
+    app: MYAPP
+spec:
+  storageClassName: myvp
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 150Mi
