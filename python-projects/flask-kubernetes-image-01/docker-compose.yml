@@ -30,6 +30,8 @@ services:
       - type: bind 
         source: ./data.sql
         target: /docker-entrypoint-initdb.d/data.sql
+        # - ./docker/mysql/data:/var/lib/mysql:rw
+
       - type: bind 
         source: ./dbconfig.cnf
         target: /etc/mysql/conf.d/dbconfig.sql
