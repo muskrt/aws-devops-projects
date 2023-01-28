@@ -1,6 +1,9 @@
 #!/bin/bash 
 file_to_create_workspace=''
 files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
+#TFPAC --CREATE TESTDIR -PROVIDER=AWS 
+#TFPAC -B ZIPPEDFOLDER WITH TEMP FOLDER REPO
+#TFPAC -PACKAGE SRC_PATH DEST_PATH
 for file in ${files_to_create[@]};
 do 
 echo $file 
