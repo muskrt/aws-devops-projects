@@ -1,7 +1,14 @@
 #!/bin/bash 
 
 files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
-mkdir /home/$USER/.TFPAC 
+if [[ /home/$USER/.TFPAC ]]
+then
+
+    mkdir /home/$USER/.TFPAC 
+else 
+echo "test"
+fi 
+
 
 
 #TFPAC --CREATE=TESTDIR --PROVIDER=AWS 
