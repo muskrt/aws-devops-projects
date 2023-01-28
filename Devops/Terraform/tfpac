@@ -5,6 +5,9 @@ files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
 # for ((i=1;i<=4;i++));
 do 
 echo "${!index}"
+NEXT=`expr $index + 1`
+echo "${!NEXT}"
+
 
 done 
 exit 
