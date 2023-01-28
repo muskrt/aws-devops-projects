@@ -1,19 +1,45 @@
 #!/bin/bash 
 
 #tfpac CREATE TESTDIR --PROVIDER=AWS 
-#tfpac BUILD package_path dest_path 
 #tfpac PACKAGE SRC_PATH DEST_PATH
 #tfpac UNPACKAGE SRC_PATH DEST_PATH
+#tfpac BUILD package_path dest_path 
 
 files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
  for index in $(seq 1 $#) ;
 # for ((i=1;i<=4;i++));
 do 
-echo "${!index}"
-NEXT=`expr $index + 1`
-echo "${!NEXT}"
+cmd="${!index}"
+    if [ "$cmd" = "create" ]; 
+    then 
+        NEXT=`expr $index + 1`
+        folder="${!NEXT}"
+        mkdir -p $folder 
+        for file in ${files_to_create[@]};
+        do 
+            touch  $folder/$file 
+        done 
 
-  
+    elif [ "$cmd" = "package" ];
+    then 
+        NEXT=`expr $index + 1`
+        src="${!NEXT}"
+        
+        NEXT=`expr $NEXT + 1`
+        dst="${!NEXT}"
+        
+        file_name="$src.tar.gz"
+
+        dst_path=${dst%%/}/$file_name
+
+        tar cvzf $dst_path $src
+        
+    fi 
+
+# NEXT=`expr $index + 1`
+# echo "${!NEXT}"
+
+done 
 exit 
 
 
@@ -56,5 +82,3 @@ for i in "${ADDR[1]}";
 do
 echo "$i"
 done
-
-
