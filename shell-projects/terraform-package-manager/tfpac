@@ -1,8 +1,9 @@
 #!/bin/bash 
 
-#tfpac --CREATE=TESTDIR --PROVIDER=AWS 
-#tfpac -B package_path dest_path 
-#tfpac -PACKAGE SRC_PATH DEST_PATH
+#tfpac CREATE TESTDIR --PROVIDER=AWS 
+#tfpac BUILD package_path dest_path 
+#tfpac PACKAGE SRC_PATH DEST_PATH
+#tfpac UNPACKAGE SRC_PATH DEST_PATH
 
 files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
  for index in $(seq 1 $#) ;
