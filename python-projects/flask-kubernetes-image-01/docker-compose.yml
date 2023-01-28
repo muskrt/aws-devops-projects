@@ -26,6 +26,13 @@ services:
       MARIADB_USER: mustafa 
       MARIADB_PASSWORD: toor1
       MARIADB_DATABASE: abc_company
+    volumes:
+      - type: bind 
+        source: ./data.sql
+        target: /docker-entrypoint-initdb.d/data.sql
+      - type: bind 
+        source: ./dbconfig.cnf
+        target: /etc/mysql/conf.d/dbconfig.sql
     ports:
       - "3306:3306"
 

@@ -13,7 +13,9 @@ def db_init():
     'database': 'abc_company'
     }
     global MARIADB 
-    MARIADB =mariadb.connect(**config).cursor(withhold=True)
+    MARIADBCON =mariadb.connect(**config)
+    MARIADBCON.autocommit = True
+    MARIADB=MARIADBCON.cursor()
     
     # redis 
     global REDISDB 
@@ -24,7 +26,12 @@ def db_get(sourcedb,query_string):
     if sourcedb =="REDISDB":
         return REDISDB.get(query_string[0])
     elif  sourcedb =="MARIADB":
-        return MARIADB.execute(query_string) 
+        MARIADB.execute(query_string)
+        data=[]
+        for i in MARIADB:
+            print("--------db server data------",i)
+            data.append(i)
+        return data
 
 def db_delete(sourcedb,query_string): 
     if sourcedb =="REDISDB":
@@ -130,7 +137,9 @@ def login():
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-            return render_template('secure_page.html')
+            db_get_data=db_get("MARIADB","SELECT * FROM  offices;")
+            return render_template('secure_page.html',db_data=db_get_data)
+            
         else:
             return render_template('error.html')
             
