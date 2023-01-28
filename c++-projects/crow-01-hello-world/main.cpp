@@ -7,6 +7,7 @@
 #include <exception.h>
 #include <resultset.h>
 #include <statement.h>
+#include <crow.h>
 using namespace std;
 using namespace sql;
 int main()
