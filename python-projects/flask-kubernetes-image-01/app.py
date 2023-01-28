@@ -24,25 +24,25 @@ def db_get(sourcedb,query_string):
     if sourcedb =="REDISDB":
         return REDISDB.get(query_string[0])
     elif  sourcedb =="MARIADB":
-        return '' 
+        return MARIADB.execute(query_string) 
 
 def db_delete(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         REDISDB.delete(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
-        MARIADB.EXECUTE()
+        MARIADB.execute()
 
 def db_update(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         REDISDB.set(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
-        MARIADB.EXECUTE()
+        MARIADB.execute()
 
 def db_insert(sourcedb,query_string): 
     if sourcedb =="REDISDB":
         REDISDB.set(query_string[0],query_string[1])
     elif sourcedb=="MARIADB":
-        MARIADB.EXECUTE()
+        MARIADB.execute()
 
 @app.route('/add_admin', methods=['GET','POST'])
 def add_admin():
