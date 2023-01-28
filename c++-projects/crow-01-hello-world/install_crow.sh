@@ -1,7 +1,6 @@
 #!/bin/bash
 apt install -y libasio-dev
-apt install cmake -y
-git clone https://github.com/CrowCpp/Crow.git
+# git clone https://github.com/CrowCpp/Crow.git
 cd Crow
 mkdir build
 cd build

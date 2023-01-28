@@ -17,8 +17,18 @@ int main()
     // con=driver->connect("tcp://127.0.0.1:3306","root","toor1");
 
     cout<<"test for db\n";
+        crow::SimpleApp app; 
+    // crow::mustache::set_base("./templates");
+    crow::mustache::context ctx;
 
-    return 0;
+    
+  CROW_ROUTE(app, "/")
+      .name("hello")([] {
+          return "Hello World!";
+      });
+
+    app.port(5000).multithreaded().run();
+   
     // crow::SimpleApp app; 
 
     
