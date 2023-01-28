@@ -1,6 +1,8 @@
 #!/bin/bash 
 
 files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
+mkdir /home/$USER/.TFPAC 
+
 
 #TFPAC --CREATE=TESTDIR --PROVIDER=AWS 
 #TFPAC -B package_path dest_path 
