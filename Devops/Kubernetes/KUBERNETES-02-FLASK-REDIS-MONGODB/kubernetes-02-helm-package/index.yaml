@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  kubernetes-02-helm-src:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-01-28T03:15:47.36449533+03:00"
+    description: A Helm chart for Kubernetes
+    digest: 1dbcde8b9e7e4cf43f1b1f1faa603ef26f74dc7e78e2ba1fdd27d557c585711e
+    name: kubernetes-02-helm-src
+    type: application
+    urls:
+    - kubernetes-02-helm-src-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-01-28T03:15:47.363918105+03:00"
