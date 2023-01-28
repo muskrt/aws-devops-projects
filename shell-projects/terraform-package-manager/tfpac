@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 #tfpac CREATE TESTDIR --PROVIDER=AWS 
-#tfpac PACKAGE SRC_PATH DEST_PATH
+#tfpac PACKAGE SRC_FOLDER_WITHOUT_TRAILING_SLASH DEST_PATH
 #tfpac UNPACKAGE SRC_PATH DEST_PATH
 #tfpac BUILD package_path dest_path 
 
@@ -33,7 +33,17 @@ cmd="${!index}"
         dst_path=${dst%%/}/$file_name
 
         tar cvzf $dst_path $src
+    elif [ "$cmd" = "unpackage" ];
+    then 
+        NEXT=`expr $index + 1`
+        src="${!NEXT}"
+
+        tar -xzvf $src 
+    elif [ "$cmd" = "build" ];
+    then 
+        echo test 
         
+
     fi 
 
 # NEXT=`expr $index + 1`
