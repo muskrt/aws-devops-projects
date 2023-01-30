@@ -1,4 +1,21 @@
 <html>
+   <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
 <body>
 
 <h1 style="display: flex;
@@ -31,28 +48,28 @@ justify-content: center;">Welcome to the abc Company.</h1>
 
 </form>
 <h1>Offices</h1>
-<table style="border-collapse: collapse; ">
-   <tr style=" border: 2px solid #dddddd;">
+<table >
+   <tr>
      <th>office_id</th>
      <th>address</th>
      <th>city</th> 
      <th>state</th> 
    </tr>
    {% for i in offices %}
-   <tr style=" border: 2px solid #dddddd;">
+   <tr >
       <td>{{ i[0] }}</td>
       <td>{{ i[1] }}</td>
       <td>{{ i[2] }}</td>
       <td>{{ i[3] }}</td>
-      <td>{{ i[4] }}</td>
-      <td>{{ i[5] }}</td>
+      
+      
     </tr>
 {% endfor %}
 
  </table>
  <h1>Employees</h>
- <table style="border-collapse: collapse; ">
-   <tr style=" border: 2px solid #dddddd;">
+ <table >
+   <tr >
      <th>employee_id</th>
      <th>first_name</th>
      <th>last_name</th> 
@@ -62,7 +79,7 @@ justify-content: center;">Welcome to the abc Company.</h1>
      <th>office_id</th> 
    </tr>
    {% for i in employees %}
-   <tr style=" border: 2px solid #dddddd;">
+   <tr >
       <td>{{ i[0] }}</td>
       <td>{{ i[1] }}</td>
       <td>{{ i[2] }}</td>
