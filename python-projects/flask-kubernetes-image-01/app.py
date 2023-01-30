@@ -137,8 +137,9 @@ def login():
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-            db_get_data=db_get("MARIADB","SELECT * FROM  offices;")
-            return render_template('secure_page.html',db_data=db_get_data)
+            db_data_offices=db_get("MARIADB","SELECT * FROM  offices;")
+            db_data_employees=db_get("MARIADB","SELECT * FROM  employees;")
+            return render_template('secure_page.html',offices=db_data_offices,employees=db_data_employees)
             
         else:
             return render_template('error.html')

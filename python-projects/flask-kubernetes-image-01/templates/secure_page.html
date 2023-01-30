@@ -30,6 +30,50 @@ justify-content: center;">Welcome to the abc Company.</h1>
 </a></li>
 
 </form>
-<h1>{{ db_data }}</h1>
+<h1>Offices</h1>
+<table style="border-collapse: collapse; ">
+   <tr style=" border: 2px solid #dddddd;">
+     <th>office_id</th>
+     <th>address</th>
+     <th>city</th> 
+     <th>state</th> 
+   </tr>
+   {% for i in offices %}
+   <tr style=" border: 2px solid #dddddd;">
+      <td>{{ i[0] }}</td>
+      <td>{{ i[1] }}</td>
+      <td>{{ i[2] }}</td>
+      <td>{{ i[3] }}</td>
+      <td>{{ i[4] }}</td>
+      <td>{{ i[5] }}</td>
+    </tr>
+{% endfor %}
+
+ </table>
+ <h1>Employees</h>
+ <table style="border-collapse: collapse; ">
+   <tr style=" border: 2px solid #dddddd;">
+     <th>employee_id</th>
+     <th>first_name</th>
+     <th>last_name</th> 
+     <th>job_title</th> 
+     <th>salary</th> 
+     <th>reports_to</th> 
+     <th>office_id</th> 
+   </tr>
+   {% for i in employees %}
+   <tr style=" border: 2px solid #dddddd;">
+      <td>{{ i[0] }}</td>
+      <td>{{ i[1] }}</td>
+      <td>{{ i[2] }}</td>
+      <td>{{ i[3] }}</td>
+      <td>{{ i[4] }}</td>
+      <td>{{ i[5] }}</td>
+      <td>{{ i[6] }}</td>
+    </tr>
+{% endfor %}
+
+ </table>
+
 </body>
 </html>
