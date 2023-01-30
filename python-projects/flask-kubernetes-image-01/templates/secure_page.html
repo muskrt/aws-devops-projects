@@ -30,12 +30,38 @@ justify-content: center;">Welcome to the abc Company.</h1>
 
 </li>
 <li style="margin:0 0 10px 75%">
+	<a >
+   <button >Add Employee</button>
+
+</li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Add Office</button>
+
+</li>
+<li style="margin:0 0 10px 75%">
 	<a href="/update">
    <button formaction="{{ url_for('update') }}">update</button>
 </a> </li>
 <li style="margin:0 0 10px 75%">
+	<a >
+   <button >Update Employee</button>
+</a> </li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Update Office</button>
+</a> </li>
+<li style="margin:0 0 10px 75%">
 	<a href="/delete">
    <button formaction="{{ url_for('delete') }}">delete</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Kick An Employee</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Burn Down Office</button>
 </a></li>
 <li style="margin:0 0 10px 75%">
 	<a href="/add_admin">
@@ -45,7 +71,10 @@ justify-content: center;">Welcome to the abc Company.</h1>
 	<a href="/delete_admin">
    <button formaction="{{ url_for('delete_admin') }}">Delete Admin</button>
 </a></li>
-
+<li style="margin:0 0 10px 75%">
+	<a href="/">
+   <button formaction="{{ url_for('login') }}"> LogOut</button>
+</a></li>
 </form>
 <h1>Offices</h1>
 <table >
