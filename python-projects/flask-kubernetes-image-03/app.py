@@ -47,8 +47,12 @@ def db_update(sourcedb=''): pass
 
 @app.route('/',methods=['GET','POST'])
 def login():
+    if req.method == "GET":
+        return render_template('login.html')  
+    elif req.method == "POST":
+        return render_template('secure_page.html')
     
-    return render_template('login.html') 
+    
 @app.route('/update')
 def update(): 
     pass
