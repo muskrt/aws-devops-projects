@@ -45,8 +45,9 @@ def db_insert(sourcedb=''): pass
 def db_delete(sourcedb=''): pass 
 def db_update(sourcedb=''): pass 
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def login():
+    
     return render_template('login.html') 
 @app.route('/update')
 def update(): 
