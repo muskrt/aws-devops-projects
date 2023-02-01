@@ -1,1 +1,0 @@
-kubectl create configmap demo-config --from-literal=greeting=Hola
