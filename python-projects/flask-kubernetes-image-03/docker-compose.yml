@@ -11,7 +11,7 @@ services:
     volumes:
       - type: bind
         source: ./
-        target: /app
+        target: /APP
   REDISDB:
     image: redis  
 
