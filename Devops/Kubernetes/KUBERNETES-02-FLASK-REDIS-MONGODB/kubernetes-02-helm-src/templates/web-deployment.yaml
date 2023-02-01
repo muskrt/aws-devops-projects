@@ -24,7 +24,7 @@ spec:
         io.kompose.service: web
     spec:
       containers:
-        - image: web:6.0
+        - image: muskrt/kubernetes-02-app
           imagePullPolicy: IfNotPresent
           name: web
           ports:
