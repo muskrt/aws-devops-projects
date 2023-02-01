@@ -1,0 +1,22 @@
+version: "3"
+services:
+
+  web:
+    build: . 
+    ports:
+      - "80:5000"
+    depends_on:
+      - REDISDB
+      - POSTGREDB
+    volumes:
+      - type: bind
+        source: ./
+        target: /APP
+  REDISDB:
+    image: redis  
+
+  POSTGREDB:
+    image: postgres
+
+
+  

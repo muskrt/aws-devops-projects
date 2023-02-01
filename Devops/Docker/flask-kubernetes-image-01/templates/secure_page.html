@@ -1,0 +1,125 @@
+<html>
+   <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+<body>
+
+<h1 style="display: flex;
+justify-content: center;">Welcome to THE ALPHA Company.</h1>
+
+
+<form action="#"  method="GET" >
+
+<li style="margin:0 0 10px 75%">
+	<a href="{{ url_for('add') }}">
+   <button formaction="{{ url_for('add') }}">add</button>
+
+</li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Add Employee</button>
+
+</li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Add Office</button>
+
+</li>
+<li style="margin:0 0 10px 75%">
+	<a href="/update">
+   <button formaction="{{ url_for('update') }}">update</button>
+</a> </li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Update Employee</button>
+</a> </li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Update Office</button>
+</a> </li>
+<li style="margin:0 0 10px 75%">
+	<a href="/delete">
+   <button formaction="{{ url_for('delete') }}">delete</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Kick An Employee</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a >
+   <button >Burn Down Office</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a href="/add_admin">
+   <button formaction="{{ url_for('add_admin') }}">Add Admin</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a href="/delete_admin">
+   <button formaction="{{ url_for('delete_admin') }}">Delete Admin</button>
+</a></li>
+<li style="margin:0 0 10px 75%">
+	<a href="/">
+   <button formaction="{{ url_for('login') }}"> LogOut</button>
+</a></li>
+</form>
+<h1>Offices</h1>
+<table >
+   <tr>
+     <th>office_id</th>
+     <th>address</th>
+     <th>city</th> 
+     <th>state</th> 
+   </tr>
+   {% for i in offices %}
+   <tr >
+      <td>{{ i[0] }}</td>
+      <td>{{ i[1] }}</td>
+      <td>{{ i[2] }}</td>
+      <td>{{ i[3] }}</td>
+      
+      
+    </tr>
+{% endfor %}
+
+ </table>
+ <h1>Employees</h>
+ <table >
+   <tr >
+     <th>employee_id</th>
+     <th>first_name</th>
+     <th>last_name</th> 
+     <th>job_title</th> 
+     <th>salary</th> 
+     <th>reports_to</th> 
+     <th>office_id</th> 
+   </tr>
+   {% for i in employees %}
+   <tr >
+      <td>{{ i[0] }}</td>
+      <td>{{ i[1] }}</td>
+      <td>{{ i[2] }}</td>
+      <td>{{ i[3] }}</td>
+      <td>{{ i[4] }}</td>
+      <td>{{ i[5] }}</td>
+      <td>{{ i[6] }}</td>
+    </tr>
+{% endfor %}
+
+ </table>
+
+</body>
+</html>
