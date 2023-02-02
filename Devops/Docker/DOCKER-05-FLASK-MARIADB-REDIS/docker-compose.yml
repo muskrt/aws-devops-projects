@@ -20,7 +20,8 @@ services:
       - "6379:6379"
 
   MARIADB:
-    image: mariadb
+    image: mariadb:10.5
+
     environment:
       MARIADB_ROOT_PASSWORD: toor
       MARIADB_USER: mustafa 
@@ -28,12 +29,13 @@ services:
       MARIADB_DATABASE: abc_company
     volumes:
       - type: bind 
-        source: ./data.sql
-        target: /docker-entrypoint-initdb.d/data.sql
+        source: ./mariadb/
+        target: /docker-entrypoint-initdb.d/
         # - ./docker/mysql/data:/var/lib/mysql:rw
+      # - ./mariadb/data.sql:/docker-entrypoint-initdb.d/data.sql:rw
 
       - type: bind 
-        source: ./dbconfig.cnf
+        source: ./mariadb/dbconfig.cnf
         target: /etc/mysql/conf.d/dbconfig.cnf
     ports:
       - "3306:3306"
