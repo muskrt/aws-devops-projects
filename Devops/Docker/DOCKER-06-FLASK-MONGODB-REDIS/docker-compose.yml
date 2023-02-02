@@ -1,7 +1,7 @@
 version: "3"
 services: 
   web:
-    build: .
+    image: muskrt/kubernetes-02-app:1.0
     restart: always
     depends_on:
       - redis 
