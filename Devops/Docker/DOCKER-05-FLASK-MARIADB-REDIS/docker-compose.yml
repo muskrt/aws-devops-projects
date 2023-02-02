@@ -34,7 +34,7 @@ services:
 
       - type: bind 
         source: ./dbconfig.cnf
-        target: /etc/mysql/conf.d/dbconfig.sql
+        target: /etc/mysql/conf.d/dbconfig.cnf
     ports:
       - "3306:3306"
 
