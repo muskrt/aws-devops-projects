@@ -117,9 +117,9 @@ def main():
     if '-cs' in sys.argv:
         create_configmap()
     
-    
-    for i in test_dict['services']:
-        create_deployment(test_dict['services'][i],i)
+    SERVICES=test_dict['services']
+    for i in SERVICES:
+        create_deployment(SERVICES[i],i)
         # deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
         # deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
         # pprint(yaml.dump(deployment))
