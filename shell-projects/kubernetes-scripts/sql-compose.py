@@ -53,7 +53,7 @@ def create_configmap(volumes,name):
     print(f'-------------{name}-----------------')
     for i in volumes:
         for key,value in i.items():
-            if value.__contains__('.sql') or value.__contains__('.cnf'):
+            if (value.__contains__('.sql') and key=='source')  or ( value.__contains__('.cnf') and key=='source'):
                 print(key,value)
     print(f'-------------{name}-----------')
     
