@@ -29,20 +29,19 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: user-password 
-                key: db-password
-          - name: MARIADB_ROOT_PASSWORD
-            valueFrom: 
-              configMapKeyRef:
-                key: MARIADB_ROOT_PASSWORD
-                name: db-config      
+                key: db-password     
         ports:
         - containerPort:  5000
           name:  my-name
-        volumeMounts:
-        - mountPath: /data
-          name: data
-      volumes:
-        - name: data
-          emptyDir: {}
+      volumeMounts:
+      - name: config
+        mountPath: DESTINATION
+        readOnly: true
+  volumes:
+  - name: config
+    configMap:
+      name: CONFIGMAPNAME
+      items:
+      - path: FILENAME
       restartPolicy: Always
       imagePullPolicy: Always

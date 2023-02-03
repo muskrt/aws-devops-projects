@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mariadb-dbconfig-cnf-configmap
+  namespace: default
+data:
+  dbconfig.cnf: |
+    [mariadb]
+    max_allowed_packet=134217728
+    max_connections=400
+    interactive_timeout=6000
