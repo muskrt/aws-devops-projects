@@ -49,36 +49,44 @@ def create_secret(vars,name):
     print(secret)
 
     
-def create_configmap():
-    SQL_FILE = str(subprocess.check_output("ls *.sql", shell=True).decode())
-    configmap=k8_files['configmap']
-    global sql_configmap_name
-    sql_configmap_name=SQL_FILE.replace('.','-')
-    sql_configmap_name=sql_configmap_name.strip('\n')
-    FILE = open(SQL_FILE.strip('\n'),'r')
-    sqldata=FILE.read()
-    configmap=eval(str(configmap).replace('KEY',SQL_FILE.strip('\n')))
-    configmap=eval(str(configmap).replace('CM',sql_configmap_name))
-    configmap['data'][SQL_FILE.strip('\n')]=sqldata
-    f=open(sql_configmap_name+'-configmap.yaml','w')
-    yaml.dump(configmap, f, sort_keys=False, default_flow_style=False)
-    f.close()
-    FILE.close()
+def create_configmap(volumes,name):
+    print(f'-------------{name}-----------------')
+    for i in volumes:
+        for key,value in i.items():
+            if value.__contains__('.sql') or value.__contains__('.cnf'):
+                print(key,value)
+    print(f'-------------{name}-----------')
     
-    CNF_FILE = str(subprocess.check_output("ls *.cnf", shell=True).decode())
-    configmap=k8_files['configmap']
-    global cnf_configmap_name
-    cnf_configmap_name=CNF_FILE.replace('.','-')
-    cnf_configmap_name=cnf_configmap_name.strip('\n')
-    FILE = open(CNF_FILE.strip('\n'),'r')
-    cnfdata=FILE.read()
-    configmap=eval(str(configmap).replace('KEY',CNF_FILE.strip('\n')))
-    configmap=eval(str(configmap).replace('CM',cnf_configmap_name))
-    configmap['data'][CNF_FILE.strip('\n')]=cnfdata
-    f=open(cnf_configmap_name+'-configmap.yaml','w')
-    yaml.dump(configmap, f, sort_keys=False, default_flow_style=False)
-    f.close()
-    FILE.close()
+
+    # SQL_FILE = str(subprocess.check_output("ls *.sql", shell=True).decode())
+    # configmap=k8_files['configmap']
+    # global sql_configmap_name
+    # sql_configmap_name=SQL_FILE.replace('.','-')
+    # sql_configmap_name=sql_configmap_name.strip('\n')
+    # FILE = open(SQL_FILE.strip('\n'),'r')
+    # sqldata=FILE.read()
+    # configmap=eval(str(configmap).replace('KEY',SQL_FILE.strip('\n')))
+    # configmap=eval(str(configmap).replace('CM',sql_configmap_name))
+    # configmap['data'][SQL_FILE.strip('\n')]=sqldata
+    # f=open(sql_configmap_name+'-configmap.yaml','w')
+    # yaml.dump(configmap, f, sort_keys=False, default_flow_style=False)
+    # f.close()
+    # FILE.close()
+    
+    # CNF_FILE = str(subprocess.check_output("ls *.cnf", shell=True).decode())
+    # configmap=k8_files['configmap']
+    # global cnf_configmap_name
+    # cnf_configmap_name=CNF_FILE.replace('.','-')
+    # cnf_configmap_name=cnf_configmap_name.strip('\n')
+    # FILE = open(CNF_FILE.strip('\n'),'r')
+    # cnfdata=FILE.read()
+    # configmap=eval(str(configmap).replace('KEY',CNF_FILE.strip('\n')))
+    # configmap=eval(str(configmap).replace('CM',cnf_configmap_name))
+    # configmap['data'][CNF_FILE.strip('\n')]=cnfdata
+    # f=open(cnf_configmap_name+'-configmap.yaml','w')
+    # yaml.dump(configmap, f, sort_keys=False, default_flow_style=False)
+    # f.close()
+    # FILE.close()
 
 
 
@@ -91,13 +99,16 @@ def create_configmap():
     # print(sqldata)
     
 
-def create_deployment(compose,i):
+def create_deployment(service,name):
     deployment=k8_files['deployment']
-    deployment['spec']['template']['spec']['containers'][0]['image']=compose['services'][i]['image']
-    deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
+    deployment['spec']['template']['spec']['containers'][0]['image']=service['image']
+    deployment=eval(str(deployment).replace('DEPLOYMENTNAME',name.lower()))
+    if  'volumes' in service:
+        create_configmap(service['volumes'],name)
     
-    if 'environment' in compose['services'][i]:
-        create_secret(compose['services'][i]['environment'],i)
+
+    # if 'environment' in compose['services'][i]:
+    #     create_secret(compose['services'][i]['environment'],i)
 
     # pprint(yaml.dump(deployment))
     # print(compose['services'][i])
@@ -110,8 +121,10 @@ def main():
     deployment=k8_files['deployment']
     if '-cs' in sys.argv:
         create_configmap()
+    
+    
     for i in test_dict['services']:
-        create_deployment(test_dict,i)
+        create_deployment(test_dict['services'][i],i)
         # deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
         # deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
         # pprint(yaml.dump(deployment))
