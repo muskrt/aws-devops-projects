@@ -98,13 +98,17 @@ def create_deployment(service,name):
     secret_name=''
     configmap_names=[]
     deployment=k8_files['deployment']
-    
+    deployment=eval(str(deployment).replace('DEPLOYMENTNAME',name.lower()))
+
     containers=deployment['spec']['template']['spec']['containers']
     volumes=deployment['spec']['template']['spec']['volumes']
-    print(volumes)
+
+    containers[0]['image']=service['image']
+    
+    deployment['spec']['template']['spec']['containers'][0]=containers[0]
+    pprint(deployment)
     exit()
-    deployment['spec']['template']['spec']['containers'][0]['image']=service['image']
-    deployment=eval(str(deployment).replace('DEPLOYMENTNAME',name.lower()))
+    
     if  'volumes' in service:
         configmap_names=create_configmap(service['volumes'],name)
     if 'environment' in service:
