@@ -1,6 +1,7 @@
 #!/bin/python3
 import os 
 import sys 
+import subprocess
 import yaml
 from pprint import pprint
 import base64
@@ -15,23 +16,38 @@ def prepare_templates():
         file=open(src_paths[ k8_file_names.index(name)])
         k8_files[name]=yaml.load(file, Loader=yaml.FullLoader)
         file.close()
-def create_secret():
+def create_service():
     pass 
-def create_configmap():
-    pass 
-def create_deployment():
+def create_secret(vars):
+    print(vars)
     
-    pass 
+def create_configmap():
+    files = str(subprocess.check_output("ls *.sql", shell=True).decode())
+    print('------',files)
+def create_deployment(compose,i):
+    deployment=k8_files['deployment']
+    deployment['spec']['template']['spec']['containers'][0]['image']=compose['services'][i]['image']
+    deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
+    
+    if 'environment' in compose['services'][i]:
+        create_secret(compose['services'][i]['environment'])
+    if '-cs' in sys.argv:
+        create_configmap()
+    # pprint(yaml.dump(deployment))
+    # print(compose['services'][i])
+
+     
 
 def main():
     file=open('docker-compose.yml','r')
     test_dict=yaml.load(file, Loader=yaml.FullLoader)
     deployment=k8_files['deployment']
     for i in test_dict['services']:
-        deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
-        deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
-        pprint(yaml.dump(deployment))
-        print(test_dict['services'][i])
+        create_deployment(test_dict,i)
+        # deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
+        # deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
+        # pprint(yaml.dump(deployment))
+        # print(test_dict['services'][i])
 
 
         
