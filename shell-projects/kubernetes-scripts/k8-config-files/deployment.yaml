@@ -36,12 +36,9 @@ spec:
       volumeMounts:
       - name: config
         mountPath: DESTINATION
-        readOnly: true
+      restartPolicy: Always
+      imagePullPolicy: Always
   volumes:
   - name: config
     configMap:
       name: CONFIGMAPNAME
-      items:
-      - path: FILENAME
-      restartPolicy: Always
-      imagePullPolicy: Always
