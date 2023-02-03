@@ -51,7 +51,7 @@ def create_secret(vars,name):
     yaml.dump(secret, f, sort_keys=False, default_flow_style=False)
     f.close()
     print('##### secret-created --> ' + f'{secret_name}.yaml')
-    return secret_name
+    return secret_name,vars
     
 def create_configmap(volumes,name):
     configmap_names=[]
@@ -136,9 +136,10 @@ def create_deployment(service,name):
         volume_mounts=volume_mounts_from_cm
         volumes=volume_from_cm
     if 'environment' in service:
-        secret_name=create_secret(service['environment'],name)
+        secret_name,vars=create_secret(service['environment'],name)
         if secret_name:
-            pass 
+            print(vars)
+            exit() 
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
     deployment['spec']['template']['spec']['volumes']=volumes
     deployment['spec']['template']['spec']['containers'][0]['volumeMounts']=volume_mounts
