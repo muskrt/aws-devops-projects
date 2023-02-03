@@ -56,6 +56,7 @@ def create_secret(vars,name):
 def create_configmap(volumes,name):
     configmap_names=[]
     for i in volumes:
+
         for key,value in i.items():
             if (value.__contains__('.sql') and key=='source')  or ( value.__contains__('.cnf') and key=='source'):
                 path=value
@@ -71,7 +72,7 @@ def create_configmap(volumes,name):
                 if int(check_file)==1:
                     configmap=k8_files['configmap']
                     configmap_name=name.lower()+'-'+filename.replace('.','-')+'-configmap'
-                    configmap_names.append(configmap_name)
+                    configmap_names.append([configmap_name])
                     
                     
                     # sql_configmap_name=sql_configmap_name.strip('\n')
@@ -89,7 +90,12 @@ def create_configmap(volumes,name):
                     print(f'-------------{name}-----------------')
                     print(f'file not found->{value}')
                     print(f'-------------{name}-----------')
-    
+        index=0
+        for key,value in i.items():
+            if (value.__contains__('.sql') and key=='target')  or ( value.__contains__('.cnf') and key=='target'):
+                configmap_names[index].append(value)
+                index+=1
+        del index
     return configmap_names
     
    
@@ -112,11 +118,13 @@ def create_deployment(service,name):
     if  'volumes' in service:
         configmap_names=create_configmap(service['volumes'],name)
         if configmap_names:
-            pass 
+           pass
     if 'environment' in service:
         secret_name=create_secret(service['environment'],name)
+        if secret_name:
+            print(secret_name)
 
-    pprint(yaml.dump(deployment))
+    # pprint(yaml.dump(deployment))
     # print(compose['services'][i])
 
      
