@@ -43,7 +43,7 @@ def prepare_templates():
     'image': 'IMAGENAME', 'name': 'DEPLOYMENTNAME', 
     'resources': {'limits': {'cpu': '20m', 'memory': '55M'}}, 
     'env': [{'name': 'MARIADB_PASSWORD', 'valueFrom': {'secretKeyRef': {'name': 'user-password', 'key': 'db-password'}}}],
-    'ports': [{'containerPort': 5000, 'name': 'my-name'}], 
+    'ports': [{'containerPort': 5000}], 
     'volumeMounts': [{'name': 'config', 'mountPath': 'DESTINATION'}], 'restartPolicy': 'Always', 'imagePullPolicy': 'Always'}],
     'volumes': [{
     'name': 'SQL-CONFIG', 'configMap': {
@@ -79,8 +79,19 @@ def prepare_templates():
     #     file=open(src_paths[ k8_file_names.index(name)])
     #     k8_files[name]=yaml.load(file, Loader=yaml.FullLoader)
     #     file.close()
-def create_service():
-    pass 
+def create_service(service,name):
+    k8_service=k8_files['service']
+
+    k8_service_name=(name.lower()+'-service')
+    k8_service['metadata']['name']=name
+    k8_service['spec']['selector']={'name':f'{name.lower()}'}
+    k8_service['spec']['ports'][0]['name']=service['ports'][0].split(':')[1]
+    k8_service['spec']['ports'][0]['port']=int(service['ports'][0].split(':')[0])
+    k8_service['spec']['ports'][0]['targetPort']=int(service['ports'][0].split(':')[1])
+    f=open(k8_service_name+'.yaml','w')
+    yaml.dump(k8_service, f, sort_keys=False, default_flow_style=False)
+    f.close()
+    print('##### service-created --> ' + f'{k8_service_name}.yaml') 
 def create_secret(vars,name):
     for i in vars:
         vars[i]=code_base64(vars[i],'encode')
@@ -156,6 +167,8 @@ def create_deployment(service,name):
     volumes=deployment['spec']['template']['spec']['volumes']
     volume_mounts=deployment['spec']['template']['spec']['containers'][0]['volumeMounts']
     env=deployment['spec']['template']['spec']['containers'][0]['env']
+    deployment['spec']['template']['spec']['containers'][0]['ports'][0]['containerPort']=int(service['ports'][0].split(':')[1])
+
 
     containers[0]['image']=service['image']
     
@@ -168,8 +181,9 @@ def create_deployment(service,name):
         
         if configmap_names:
             for i in configmap_names:
-                volume_mount={'name': f'{i[0]}', 'mountPath': f'{i[1]}'}
-                volume={'name': f'{i[0]}', 'configMap': {'name':  f'{i[0]}'}}
+                volume_name=str(i[0]).split('-')[2]
+                volume_mount={'name': f'{volume_name}', 'mountPath': f'{i[1]}'}
+                volume={'name': f'{volume_name}', 'configMap': {'name':  f'{i[0]}'}}
                 volume_mounts_from_cm.append(volume_mount)
                 volume_from_cm.append(volume)
             volume_mounts=volume_mounts_from_cm
@@ -184,7 +198,6 @@ def create_deployment(service,name):
         del deployment['spec']['template']['spec']['containers'][0]['volumeMounts'] 
     if 'environment' in service:
         secret_name,env_vars=create_secret(service['environment'],name)
-        print(secret_name,env_vars)
         if secret_name:
             env_from_sk=[]
             for key,value in env_vars.items():
@@ -193,7 +206,6 @@ def create_deployment(service,name):
             env=env_from_sk
             deployment['spec']['template']['spec']['containers'][0]['env']=env
     else :
-        print(type(deployment['spec']['template']['spec']['containers'][0]))
         del deployment['spec']['template']['spec']['containers'][0]['env']
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
     
@@ -202,8 +214,7 @@ def create_deployment(service,name):
     f=open(name.lower()+'-deployment.yaml','w')
     yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
     f.close()
-    # pprint(yaml.dump(deployment))
-    # print(compose['services'][i])
+    print('##### Deployment-created --> ' + f'{name.lower()}-deployment.yaml')
 
      
 
@@ -213,32 +224,9 @@ def main():
     deployment=k8_files['deployment']
     SERVICES=test_dict['services']
     for i in SERVICES:
+        create_service(SERVICES[i],i)
         create_deployment(SERVICES[i],i)
-        # deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
-        # deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
-        # pprint(yaml.dump(deployment))
-        # print(test_dict['services'][i])
-
-
-        
-        # f=open('testDeployment.yaml','w')
-        # yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
-        # break
-        # pprint(test_dict['services'][i])
-        
-    
-    
-    exit()
-    file=open('testdeployment.yaml','w')
-    file.write(deployment)
-    file.close()
-
-
-    
-
-
-
-
+  
 
 if __name__=="__main__":
     prepare_templates()
