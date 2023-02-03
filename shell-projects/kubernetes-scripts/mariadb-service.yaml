@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: MARIADB
+spec:
+  selector:
+    name: mariadb
+  type: NodePort
+  ports:
+  - name: '3306'
+    port: 3306
+    targetPort: 3306
