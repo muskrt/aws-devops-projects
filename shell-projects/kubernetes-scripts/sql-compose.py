@@ -111,6 +111,8 @@ def create_deployment(service,name):
     
     if  'volumes' in service:
         configmap_names=create_configmap(service['volumes'],name)
+        if configmap_names:
+            pass 
     if 'environment' in service:
         secret_name=create_secret(service['environment'],name)
 
