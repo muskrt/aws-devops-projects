@@ -40,14 +40,12 @@ def prepare_templates():
         file.close()
 def create_service():
     pass 
-def create_secret(vars):
-    # print(vars)
+def create_secret(vars,name):
     for i in vars:
         vars[i]=code_base64(vars[i],'encode')
-    print(vars)
-    
     secret=k8_files['secret']
     secret['data']=vars
+    secret['metadata']['name']=(name.lower()+'-secret')
     print(secret)
 
     
@@ -99,7 +97,7 @@ def create_deployment(compose,i):
     deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
     
     if 'environment' in compose['services'][i]:
-        create_secret(compose['services'][i]['environment'])
+        create_secret(compose['services'][i]['environment'],i)
 
     # pprint(yaml.dump(deployment))
     # print(compose['services'][i])
