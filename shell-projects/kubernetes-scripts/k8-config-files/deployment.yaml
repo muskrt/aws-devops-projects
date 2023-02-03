@@ -20,7 +20,6 @@ spec:
       - image:  IMAGENAME
         name:  DEPLOYMENTNAME
         resources:
-          
           limits:
             cpu: "20m"
             memory: "55M"
@@ -33,12 +32,15 @@ spec:
         ports:
         - containerPort:  5000
           name:  my-name
-      volumeMounts:
-      - name: config
-        mountPath: DESTINATION
-      restartPolicy: Always
-      imagePullPolicy: Always
-  volumes:
-  - name: config
-    configMap:
-      name: CONFIGMAPNAME
+        volumeMounts:
+        - name: config
+          mountPath: DESTINATION
+        restartPolicy: Always
+        imagePullPolicy: Always
+      volumes:
+      - name: SQL-CONFIG
+        configMap:
+          name: CONFIGMAPNAME
+      - name: CNF-CONFIG 
+        configMap:
+          name: CONFIGMAPNAME
