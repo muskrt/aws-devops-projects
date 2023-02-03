@@ -114,7 +114,7 @@ def create_deployment(service,name):
     containers=deployment['spec']['template']['spec']['containers']
     volumes=deployment['spec']['template']['spec']['volumes']
     volume_mounts=deployment['spec']['template']['spec']['containers'][0]['volumeMounts']
-    print(type(volume_mounts))
+    print(volumes)
   
 
     containers[0]['image']=service['image']
@@ -125,18 +125,22 @@ def create_deployment(service,name):
     if  'volumes' in service:
         configmap_names=create_configmap(service['volumes'],name)
         volume_mounts_from_cm=[]
+        volume_from_cm=[]
         
         if configmap_names:
             for i in configmap_names:
                 volume_mount={'name': f'{i[0]}', 'mountPath': f'{i[1]}'}
+                volume={'name': f'{i[0]}', 'configMap': {'name':  f'{i[0]}'}}
                 volume_mounts_from_cm.append(volume_mount)
+                volume_from_cm.append(volume)
         volume_mounts=volume_mounts_from_cm
+        volumes=volume_from_cm
     if 'environment' in service:
         secret_name=create_secret(service['environment'],name)
         if secret_name:
             pass 
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
-    deployment['spec']['template']['spec']['volumes'][0]=volumes[0]
+    deployment['spec']['template']['spec']['volumes']=volumes
     deployment['spec']['template']['spec']['containers'][0]['volumeMounts']=volume_mounts
 
     pprint(yaml.dump(deployment))
