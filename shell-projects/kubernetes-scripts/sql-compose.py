@@ -14,11 +14,14 @@ def prepare_templates():
         file=open(src_paths[ k8_file_names.index(name)])
         k8_files[name]=file.read()
         file.close()
-
+    return k8_files
 def main():
     file=open('docker-compose.yml','r')
     test_dict=yaml.load(file, Loader=yaml.FullLoader)
-    # pprint(test_dict['services'])
+    for i in test_dict['services']:
+        pprint(test_dict['services'][i])
+        break
+    pprint(prepare_templates()['deployment'])
 
 
     
