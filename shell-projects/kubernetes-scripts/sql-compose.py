@@ -15,6 +15,14 @@ def prepare_templates():
         file=open(src_paths[ k8_file_names.index(name)])
         k8_files[name]=yaml.load(file, Loader=yaml.FullLoader)
         file.close()
+def create_secret():
+    pass 
+def create_configmap():
+    pass 
+def create_deployment():
+    
+    pass 
+
 def main():
     file=open('docker-compose.yml','r')
     test_dict=yaml.load(file, Loader=yaml.FullLoader)
