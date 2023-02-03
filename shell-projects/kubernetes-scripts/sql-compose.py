@@ -23,9 +23,13 @@ def main():
         deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
         deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
         pprint(yaml.dump(deployment))
-        f=open('testDeployment.yaml','w')
-        yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
-        break
+        print(test_dict['services'][i])
+
+
+        
+        # f=open('testDeployment.yaml','w')
+        # yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
+        # break
         # pprint(test_dict['services'][i])
         
     
