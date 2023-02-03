@@ -3,6 +3,7 @@ import os
 import sys 
 import yaml
 from pprint import pprint
+import base64
 
 def prepare_templates():
     k8_file_names=['deployment','service','secret','configmap','hpa']
@@ -17,11 +18,18 @@ def prepare_templates():
 def main():
     file=open('docker-compose.yml','r')
     test_dict=yaml.load(file, Loader=yaml.FullLoader)
-    for i in test_dict['services']:
-        pprint(test_dict['services'][i])
-        
     deployment=k8_files['deployment']
-    pprint(deployment['spec']['template']['spec']['containers'][0]['env'])
+    for i in test_dict['services']:
+        deployment['spec']['template']['spec']['containers'][0]['image']=test_dict['services'][i]['image']
+        deployment=eval(str(deployment).replace('DEPLOYMENTNAME',i.lower()))
+        pprint(yaml.dump(deployment))
+        f=open('testDeployment.yaml','w')
+        yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
+        break
+        # pprint(test_dict['services'][i])
+        
+    
+    
     exit()
     file=open('testdeployment.yaml','w')
     file.write(deployment)

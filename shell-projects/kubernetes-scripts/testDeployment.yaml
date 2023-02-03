@@ -1,0 +1,47 @@
+apiVersion: api/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    name: web
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - image: muskrt/kubernetes-01-app
+        name: web
+        resources:
+          limits:
+            cpu: 20m
+            memory: 55M
+        env:
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: user-password
+              key: db-password
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: MARIADB_ROOT_PASSWORD
+              name: db-config
+        ports:
+        - containerPort: 5000
+          name: my-name
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      volumes:
+      - name: data
+        emptyDir: {}
+      restartPolicy: Always
+      imagePullPolicy: Always

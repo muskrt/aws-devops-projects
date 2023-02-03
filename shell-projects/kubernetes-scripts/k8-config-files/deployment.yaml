@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name:  DEPLOYMENTNAME
   labels:
-    name:  DEPLOYMENTLABEL
+    name:  DEPLOYMENTNAME
 spec:
   replicas: 1
   strategy:
@@ -14,16 +14,16 @@ spec:
   template:
     metadata:
       labels:
-        name:  CONTAINERLABEL
+        name:  DEPLOYMENTNAME
     spec:
       containers:
       - image:  IMAGENAME
         name:  DEPLOYMENTNAME
         resources:
-          - requests:
-              - limits:
-                cpu: "20m"
-                memory: "55M"
+          
+          limits:
+            cpu: "20m"
+            memory: "55M"
         env:
           - name: MARIADB_PASSWORD
             valueFrom:
