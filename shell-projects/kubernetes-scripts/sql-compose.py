@@ -155,9 +155,6 @@ def main():
     file=open('docker-compose.yml','r')
     test_dict=yaml.load(file, Loader=yaml.FullLoader)
     deployment=k8_files['deployment']
-    if '-cs' in sys.argv:
-        create_configmap()
-    
     SERVICES=test_dict['services']
     for i in SERVICES:
         create_deployment(SERVICES[i],i)
