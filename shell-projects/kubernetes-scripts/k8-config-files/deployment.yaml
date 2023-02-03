@@ -41,6 +41,3 @@ spec:
       - name: SQL-CONFIG
         configMap:
           name: CONFIGMAPNAME
-      - name: CNF-CONFIG 
-        configMap:
-          name: CONFIGMAPNAME
