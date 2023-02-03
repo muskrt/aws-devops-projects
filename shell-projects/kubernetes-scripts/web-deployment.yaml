@@ -1,0 +1,30 @@
+apiVersion: api/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    name: web
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - image: muskrt/kubernetes-01-app
+        name: web
+        resources:
+          limits:
+            cpu: 20m
+            memory: 55M
+        ports:
+        - containerPort: 5000
+          name: my-name
+        restartPolicy: Always
+        imagePullPolicy: Always

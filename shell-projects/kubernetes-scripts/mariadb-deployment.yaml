@@ -1,0 +1,63 @@
+apiVersion: api/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  labels:
+    name: mariadb
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: mariadb
+    spec:
+      containers:
+      - image: mariadb:10.5
+        name: mariadb
+        resources:
+          limits:
+            cpu: 20m
+            memory: 55M
+        env:
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_ROOT_PASSWORD
+        - name: MARIADB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_USER
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_PASSWORD
+        - name: MARIADB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: MARIADB_DATABASE
+        ports:
+        - containerPort: 5000
+          name: my-name
+        volumeMounts:
+        - name: mariadb-data-sql-configmap
+          mountPath: /docker-entrypoint-initdb.d/data.sql
+        - name: mariadb-dbconfig-cnf-configmap
+          mountPath: /etc/mysql/conf.d/dbconfig.cnf
+        restartPolicy: Always
+        imagePullPolicy: Always
+      volumes:
+      - name: mariadb-data-sql-configmap
+        configMap:
+          name: mariadb-data-sql-configmap
+      - name: mariadb-dbconfig-cnf-configmap
+        configMap:
+          name: mariadb-dbconfig-cnf-configmap

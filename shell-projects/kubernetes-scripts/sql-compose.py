@@ -31,13 +31,54 @@ yaml.representer.SafeRepresenter.add_representer(str, str_presenter)
 def prepare_templates():
     k8_file_names=['deployment','service','secret','configmap','hpa']
     global k8_files
-    k8_files={'deployment':{},'service':{},'secret':{},'configmap':{},'hpa':{}}
+    k8_files = {
+    'deployment':
+    {'apiVersion': 'api/v1', 'kind': 'Deployment', 
+    'metadata': {'name': 'DEPLOYMENTNAME', 'labels': {'name': 'DEPLOYMENTNAME'}}, 
+    'spec': {'replicas': 1, 
+    'strategy': {'rollingUpdate': {'maxSurge': 1, 'maxUnavailable': 1}, 'type': 'RollingUpdate'}, 
+    'template': {'metadata': {'labels': {'name': 'DEPLOYMENTNAME'}}, 
+    'spec': {
+    'containers': [{
+    'image': 'IMAGENAME', 'name': 'DEPLOYMENTNAME', 
+    'resources': {'limits': {'cpu': '20m', 'memory': '55M'}}, 
+    'env': [{'name': 'MARIADB_PASSWORD', 'valueFrom': {'secretKeyRef': {'name': 'user-password', 'key': 'db-password'}}}],
+    'ports': [{'containerPort': 5000, 'name': 'my-name'}], 
+    'volumeMounts': [{'name': 'config', 'mountPath': 'DESTINATION'}], 'restartPolicy': 'Always', 'imagePullPolicy': 'Always'}],
+    'volumes': [{
+    'name': 'SQL-CONFIG', 'configMap': {
+    'name': 'CONFIGMAPNAME'}}]}}}},
+    'service':
+    {'kind': 'Service', 'apiVersion': 'v1',
+    'metadata': {'name': 'Service Name'}, 
+    'spec': {
+    'selector': {'app': 'Selector Label'}, 
+    'type': 'NodePort', 'ports': [{
+    'name': 'name-of-the-port', 'port': 80, 'targetPort': 8080}]}},
+    'secret':
+    {'apiVersion': 'v1', 'kind': 'Secret',
+    'metadata': {'name': 'secretName'},
+    'data': {'secretKey': 'BASE64_ENCODED_VALUE'}, \
+    'type': 'Opaque'},
+    'configmap':
+    {'kind': 'ConfigMap', 'apiVersion': 'v1', 
+    'metadata': {'name': 'CM', 'namespace': 'default'}, 
+    'data': {'KEY': 'SQLDATA\n'}},
+    'hpa':
+    {'apiVersion': 'autoscaling/v2', 'kind': 'HorizontalPodAutoscaler', 
+    'metadata': {'name': 'myapp'}, 
+    'spec': {'scaleTargetRef': {'apiVersion': 'apps/v1', 'kind': 'Deployment', 'name': 'myapp'}, 'minReplicas': 1,
+    'maxReplicas': 3, 'metrics': [{
+    'type': 'Resource', 
+    'resource': {
+    'name': 'cpu', 'target': {'type': 'Utilization', 'averageUtilization': 50}}}]}}
+    }
 
-    src_paths=['k8-config-files/deployment.yaml','k8-config-files/service.yaml','k8-config-files/secret.yaml','k8-config-files/configmap.yaml','k8-config-files/hpa.yaml']
-    for name in k8_file_names:
-        file=open(src_paths[ k8_file_names.index(name)])
-        k8_files[name]=yaml.load(file, Loader=yaml.FullLoader)
-        file.close()
+    # src_paths=['k8-config-files/deployment.yaml','k8-config-files/service.yaml','k8-config-files/secret.yaml','k8-config-files/configmap.yaml','k8-config-files/hpa.yaml']
+    # for name in k8_file_names:
+    #     file=open(src_paths[ k8_file_names.index(name)])
+    #     k8_files[name]=yaml.load(file, Loader=yaml.FullLoader)
+    #     file.close()
 def create_service():
     pass 
 def create_secret(vars,name):
@@ -131,22 +172,37 @@ def create_deployment(service,name):
                 volume={'name': f'{i[0]}', 'configMap': {'name':  f'{i[0]}'}}
                 volume_mounts_from_cm.append(volume_mount)
                 volume_from_cm.append(volume)
-        volume_mounts=volume_mounts_from_cm
-        volumes=volume_from_cm
+            volume_mounts=volume_mounts_from_cm
+            volumes=volume_from_cm
+            deployment['spec']['template']['spec']['volumes']=volumes
+            deployment['spec']['template']['spec']['containers'][0]['volumeMounts']=volume_mounts
+        else:
+            del deployment['spec']['template']['spec']['volumes']
+            del deployment['spec']['template']['spec']['containers'][0]['volumeMounts'] 
+    else:
+        del deployment['spec']['template']['spec']['volumes']
+        del deployment['spec']['template']['spec']['containers'][0]['volumeMounts'] 
     if 'environment' in service:
         secret_name,env_vars=create_secret(service['environment'],name)
+        print(secret_name,env_vars)
         if secret_name:
             env_from_sk=[]
             for key,value in env_vars.items():
                 env={'name': f'{key}', 'valueFrom': {'secretKeyRef': {'name': f'{secret_name}', 'key': f'{key}'}}}
                 env_from_sk.append(env)
             env=env_from_sk
+            deployment['spec']['template']['spec']['containers'][0]['env']=env
+    else :
+        print(type(deployment['spec']['template']['spec']['containers'][0]))
+        del deployment['spec']['template']['spec']['containers'][0]['env']
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
-    deployment['spec']['template']['spec']['containers'][0]['env']=env
-    deployment['spec']['template']['spec']['volumes']=volumes
-    deployment['spec']['template']['spec']['containers'][0]['volumeMounts']=volume_mounts
+    
 
-    pprint(yaml.dump(deployment))
+
+    f=open(name.lower()+'-deployment.yaml','w')
+    yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
+    f.close()
+    # pprint(yaml.dump(deployment))
     # print(compose['services'][i])
 
      
