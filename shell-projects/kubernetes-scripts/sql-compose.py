@@ -90,12 +90,17 @@ def create_configmap(volumes,name):
                     print(f'-------------{name}-----------------')
                     print(f'file not found->{value}')
                     print(f'-------------{name}-----------')
-        index=0
+    index=0
+    for i in volumes:
         for key,value in i.items():
-            if (value.__contains__('.sql') and key=='target')  or ( value.__contains__('.cnf') and key=='target'):
+            
+            if (value.__contains__('.sql') and key=='target'):
                 configmap_names[index].append(value)
                 index+=1
-        del index
+            elif ( value.__contains__('.cnf') and key=='target'):
+                configmap_names[index].append(value)
+                index+=1
+    del index
     return configmap_names
     
    
@@ -108,23 +113,33 @@ def create_deployment(service,name):
 
     containers=deployment['spec']['template']['spec']['containers']
     volumes=deployment['spec']['template']['spec']['volumes']
+    volume_mounts=deployment['spec']['template']['spec']['containers'][0]['volumeMounts']
+    print(type(volume_mounts))
+  
 
     containers[0]['image']=service['image']
     
-    deployment['spec']['template']['spec']['containers'][0]=containers[0]
-    deployment['spec']['template']['spec']['volumes'][0]=volumes[0]
+
 
     
     if  'volumes' in service:
         configmap_names=create_configmap(service['volumes'],name)
+        volume_mounts_from_cm=[]
+        
         if configmap_names:
-           pass
+            for i in configmap_names:
+                volume_mount={'name': f'{i[0]}', 'mountPath': f'{i[1]}'}
+                volume_mounts_from_cm.append(volume_mount)
+        volume_mounts=volume_mounts_from_cm
     if 'environment' in service:
         secret_name=create_secret(service['environment'],name)
         if secret_name:
-            print(secret_name)
+            pass 
+    deployment['spec']['template']['spec']['containers'][0]=containers[0]
+    deployment['spec']['template']['spec']['volumes'][0]=volumes[0]
+    deployment['spec']['template']['spec']['containers'][0]['volumeMounts']=volume_mounts
 
-    # pprint(yaml.dump(deployment))
+    pprint(yaml.dump(deployment))
     # print(compose['services'][i])
 
      
