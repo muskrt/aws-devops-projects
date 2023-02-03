@@ -25,16 +25,8 @@ spec:
                 cpu: "20m"
                 memory: "55M"
         env:
-          - name: MARIADB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: user-password 
-                key: db-password
-          - name: MARIADB_ROOT_PASSWORD
-            valueFrom: 
-              configMapKeyRef:
-                key: MARIADB_ROOT_PASSWORD
-                name: db-config      
+        - name:  ENVVARNAME
+          value:  ENVVARVALUE       
         ports:
         - containerPort:  5000
           name:  my-name
