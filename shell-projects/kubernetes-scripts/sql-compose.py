@@ -106,8 +106,8 @@ def create_deployment(service,name):
     containers[0]['image']=service['image']
     
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
-    pprint(deployment)
-    exit()
+    deployment['spec']['template']['spec']['volumes'][0]=volumes[0]
+
     
     if  'volumes' in service:
         configmap_names=create_configmap(service['volumes'],name)
