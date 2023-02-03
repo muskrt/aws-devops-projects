@@ -17,9 +17,9 @@ def prepare_templates():
 def main():
     file=open('docker-compose.yml','r')
     test_dict=yaml.load(file, Loader=yaml.FullLoader)
-    # for i in test_dict['services']:
-    #     pprint(test_dict['services'][i])
-    #     break
+    for i in test_dict['services']:
+        pprint(test_dict['services'][i])
+        
     deployment=k8_files['deployment']
     pprint(deployment['spec']['template']['spec']['containers'][0]['env'])
     exit()
