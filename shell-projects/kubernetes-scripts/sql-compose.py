@@ -114,12 +114,10 @@ def create_deployment(service,name):
     containers=deployment['spec']['template']['spec']['containers']
     volumes=deployment['spec']['template']['spec']['volumes']
     volume_mounts=deployment['spec']['template']['spec']['containers'][0]['volumeMounts']
-    print(volumes)
-  
+    env=deployment['spec']['template']['spec']['containers'][0]['env']
 
     containers[0]['image']=service['image']
     
-
 
     
     if  'volumes' in service:
@@ -136,11 +134,15 @@ def create_deployment(service,name):
         volume_mounts=volume_mounts_from_cm
         volumes=volume_from_cm
     if 'environment' in service:
-        secret_name,vars=create_secret(service['environment'],name)
+        secret_name,env_vars=create_secret(service['environment'],name)
         if secret_name:
-            print(vars)
-            exit() 
+            env_from_sk=[]
+            for key,value in env_vars.items():
+                env={'name': f'{key}', 'valueFrom': {'secretKeyRef': {'name': f'{secret_name}', 'key': f'{key}'}}}
+                env_from_sk.append(env)
+            env=env_from_sk
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
+    deployment['spec']['template']['spec']['containers'][0]['env']=env
     deployment['spec']['template']['spec']['volumes']=volumes
     deployment['spec']['template']['spec']['containers'][0]['volumeMounts']=volume_mounts
 
