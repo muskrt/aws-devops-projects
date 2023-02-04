@@ -4,8 +4,8 @@ services:
     image: muskrt/kubernetes-01-app:1.0
     restart: always
     depends_on:
-      - redisdb_database
-      - mariadb_database
+      - redisdb-database
+      - mariadb-database
     # network_mode: "host"
     ports:
       - "5000:5000"
@@ -14,12 +14,12 @@ services:
         source: ./
         target: /APP
 
-  redisdb_database:
+  redisdb-database:
     image: redis:alpine
     ports:
       - "6379:6379"
 
-  mariadb_database:
+  mariadb-database:
     image: mariadb:10.5
 
     environment:

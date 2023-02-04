@@ -6,7 +6,7 @@ app = Flask(__name__)
 def db_init():
     # mariadb
     config = {
-    'host': 'mariadb_database',
+    'host': 'mariadb-database',
     'port': 3306,
     'user': 'mustafa',
     'password': 'toor1',
@@ -19,7 +19,7 @@ def db_init():
     
     # redis 
     global REDISDB 
-    REDISDB=redis.Redis(host='redisdb_database',port=6379)
+    REDISDB=redis.Redis(host='redisdb-database',port=6379)
     REDISDB.set('mustafa','kurt')
 
 def db_get(sourcedb,query_string): 

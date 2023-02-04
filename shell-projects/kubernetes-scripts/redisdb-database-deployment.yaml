@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redisdb_database
+  name: redisdb-database
   labels:
-    name: redisdb_database
+    name: redisdb-database
 spec:
   selector:
     matchLabels:
-      name: redisdb_database
+      name: redisdb-database
   replicas: 1
   strategy:
     rollingUpdate:
@@ -17,12 +17,12 @@ spec:
   template:
     metadata:
       labels:
-        name: redisdb_database
+        name: redisdb-database
     spec:
       containers:
       - image: redis:alpine
         imagePullPolicy: Always
-        name: redisdb_database
+        name: redisdb-database
         resources:
           limits:
             cpu: 100m

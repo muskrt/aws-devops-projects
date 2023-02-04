@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb_database
+  name: mariadb-database
   labels:
-    name: mariadb_database
+    name: mariadb-database
 spec:
   selector:
     matchLabels:
-      name: mariadb_database
+      name: mariadb-database
   replicas: 1
   strategy:
     rollingUpdate:
@@ -17,12 +17,12 @@ spec:
   template:
     metadata:
       labels:
-        name: mariadb_database
+        name: mariadb-database
     spec:
       containers:
       - image: mariadb:10.5
         imagePullPolicy: Always
-        name: mariadb_database
+        name: mariadb-database
         resources:
           limits:
             cpu: 100m
@@ -31,34 +31,34 @@ spec:
         - name: MARIADB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mariadb_database-secret
+              name: mariadb-database-secret
               key: MARIADB_ROOT_PASSWORD
         - name: MARIADB_USER
           valueFrom:
             secretKeyRef:
-              name: mariadb_database-secret
+              name: mariadb-database-secret
               key: MARIADB_USER
         - name: MARIADB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mariadb_database-secret
+              name: mariadb-database-secret
               key: MARIADB_PASSWORD
         - name: MARIADB_DATABASE
           valueFrom:
             secretKeyRef:
-              name: mariadb_database-secret
+              name: mariadb-database-secret
               key: MARIADB_DATABASE
         ports:
         - containerPort: 3306
         volumeMounts:
-        - name: sql
+        - name: data
           mountPath: /docker-entrypoint-initdb.d/data.sql
-        - name: cnf
+        - name: dbconfig
           mountPath: /etc/mysql/conf.d/dbconfig.cnf
       volumes:
-      - name: sql
+      - name: data
         configMap:
-          name: mariadb_database-data-sql-configmap
-      - name: cnf
+          name: mariadb-database-data-sql-configmap
+      - name: dbconfig
         configMap:
-          name: mariadb_database-dbconfig-cnf-configmap
+          name: mariadb-database-dbconfig-cnf-configmap

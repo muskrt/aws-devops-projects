@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: mariadb_database-data-sql-configmap
+  name: mariadb-database-data-sql-configmap
   namespace: default
 data:
   data.sql: |-
