@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from flask import Flask , render_template, url_for, request
 import redis 
 import mariadb 
@@ -7,7 +6,7 @@ app = Flask(__name__)
 def db_init():
     # mariadb
     config = {
-    'host': 'mariadb',
+    'host': 'mariadb_database',
     'port': 3306,
     'user': 'mustafa',
     'password': 'toor1',
@@ -20,7 +19,7 @@ def db_init():
     
     # redis 
     global REDISDB 
-    REDISDB=redis.Redis(host='redisdb',port=6379)
+    REDISDB=redis.Redis(host='redisdb_database',port=6379)
     REDISDB.set('mustafa','kurt')
 
 def db_get(sourcedb,query_string): 
@@ -149,4 +148,4 @@ def login():
 
 if __name__=="__main__":
     db_init()
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0",port=5000)

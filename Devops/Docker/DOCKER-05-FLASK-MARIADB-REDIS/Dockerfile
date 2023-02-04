@@ -1,6 +1,6 @@
 FROM python:alpine
 RUN apk update && apk add bash
-ENTRYPOINT /bin/bash
+# ENTRYPOINT /bin/bash
 SHELL ["/bin/bash", "-c"]
 RUN apk add libc-dev 
 RUN apk add python3-dev 
@@ -14,5 +14,5 @@ RUN pip install -r requirements.txt
 
 
 COPY . . 
-RUN chmod +x app.py
-CMD ./app.py 
+
+CMD python app.py 
