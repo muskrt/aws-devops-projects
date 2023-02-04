@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    image: muskrt/kubernetes-01-app
+    image: muskrt/kubernetes-01-app:1.0
     restart: always
     depends_on:
       - REDISDB
