@@ -1,4 +1,4 @@
-from flask import Flask , render_template, url_for, request
+from flask import Flask , render_template, url_for, request, redirect, Response
 import redis 
 import mariadb 
 from json2html import *
@@ -125,7 +125,10 @@ def delete():
             return render_template('secure_page.html')
         else:
             return render_template('error.html')
-
+@app.route('/health',methods=['GET','POST'])
+def health():
+    if request.method == 'GET':
+        return Response("{'lesson':'k8s'}", status=200)
 @app.route('/', methods=['GET','POST'])
 def login():
     if request.method =='GET':

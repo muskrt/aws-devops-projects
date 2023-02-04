@@ -38,22 +38,25 @@ def prepare_templates():
     'spec': {
     'selector':{
     'matchLabels':{
-    'name': 'DEPLOYMENTNAME'}},'replicas': 1, 
+    'name': 'DEPLOYMENTNAME'}},'replicas': 2, 
     'strategy': {'rollingUpdate': {'maxSurge': 1, 'maxUnavailable': 1}, 'type': 'RollingUpdate'}, 
     'template': {'metadata': {'labels': {'name': 'DEPLOYMENTNAME'}}, 
     'spec': {
     'containers': [{
     'image': 'IMAGENAME','imagePullPolicy': 'Always', 'name': 'DEPLOYMENTNAME', 
-    'resources': {'limits': {'cpu': '100m', 'memory': '200Mi'}}, 
+    'livenessProbe':{'httpGet':{'path': '/health','port': 5000},'initialDelaySeconds': 20,'periodSeconds': 5},
+    'resources': {'limits': {'cpu': '200m', 'memory': '250Mi'}}, 
     'env': [{'name': 'MARIADB_PASSWORD', 'valueFrom': {'secretKeyRef': {'name': 'user-password', 'key': 'db-password'}}}],
     'ports': [{'containerPort': 5000}], 
-    'volumeMounts': [{'name': 'config', 'mountPath': 'DESTINATION'}]}],
+    'volumeMounts': [{'name': 'config', 'mountPath': 'DESTINATION','subPath':'filename'}]}],
+    'restartPolicy': 'Always',
     'volumes': [{
     'name': 'SQL-CONFIG', 'configMap': {
-    'name': 'CONFIGMAPNAME'}}]}}}},
+    'name': 'CONFIGMAPNAME','items':[{'key':'cmkey','path':'filename'}]}
+    }]}}}},
     'service':
     {'kind': 'Service', 'apiVersion': 'v1',
-    'metadata': {'name': 'Service Name'}, 
+    'metadata': {'name': 'Service Name','labels':{'name': 'Deploymentname'}}, 
     'spec': {
     'selector': {'app': 'Selector Label'}, 
     'type': 'NodePort', 'ports': [{
@@ -87,6 +90,8 @@ def create_service(service,name):
 
     k8_service_name=(name.lower()+'-service')
     k8_service['metadata']['name']=name.lower()
+    k8_service['metadata']['labels']['name']=name.lower()
+
     k8_service['spec']['selector']={'name':f'{name.lower()}'}
     k8_service['spec']['ports'][0]['name']=service['ports'][0].split(':')[1]
     k8_service['spec']['ports'][0]['port']=int(service['ports'][0].split(':')[0])
@@ -163,13 +168,18 @@ def create_configmap(volumes,name):
 def create_deployment(service,name):
     secret_name=''
     configmap_names=[]
-    deployment=k8_files['deployment']
-
+    deployment=k8_files['deployment'].copy()
+     
     deployment=eval(str(deployment).replace('DEPLOYMENTNAME',name.lower()))
 
     containers=deployment['spec']['template']['spec']['containers']
     volumes=deployment['spec']['template']['spec']['volumes']
     volume_mounts=deployment['spec']['template']['spec']['containers'][0]['volumeMounts']
+    if name.__contains__('db'):
+        del deployment['spec']['template']['spec']['containers'][0]['livenessProbe'] 
+    else:
+        pass  
+    
     env=deployment['spec']['template']['spec']['containers'][0]['env']
     deployment['spec']['template']['spec']['containers'][0]['ports'][0]['containerPort']=int(service['ports'][0].split(':')[1])
 
@@ -186,8 +196,8 @@ def create_deployment(service,name):
         if configmap_names:
             for i in configmap_names:
                 volume_name=str(i[0]).split('-')[2]
-                volume_mount={'name': f'{volume_name}', 'mountPath': f'{i[1]}'}
-                volume={'name': f'{volume_name}', 'configMap': {'name':  f'{i[0]}'}}
+                volume_mount={'name': f'{volume_name}', 'mountPath': f'{i[1]}','subPath':f'{(i[1]).split("/")[-1]}'}
+                volume={'name': f'{volume_name}', 'configMap': {'name':  f'{i[0]}','items':[{'key':f'{(i[1]).split("/")[-1]}','path':f'{(i[1]).split("/")[-1]}'}]}}
                 volume_mounts_from_cm.append(volume_mount)
                 volume_from_cm.append(volume)
             volume_mounts=volume_mounts_from_cm
