@@ -42,6 +42,15 @@ cmd="${!index}"
     elif [ "$cmd" = "build" ];
     then 
         echo test 
+    elif [ "$cmd" = "--help" ];
+    then 
+        echo "Usage tfpac <command> <options...>"
+        echo "commands:"
+        echo -e '\tcreate'
+        echo -e '\tpackage'
+        echo -e '\tunpackage'
+        echo -e '\tbuild'
+        echo "options":
         
 
     fi 
