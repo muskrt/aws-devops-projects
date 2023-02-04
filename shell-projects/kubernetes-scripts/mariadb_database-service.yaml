@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: MARIADB
+  name: mariadb_database
 spec:
   selector:
-    name: mariadb
+    name: mariadb_database
   type: NodePort
   ports:
   - name: '3306'

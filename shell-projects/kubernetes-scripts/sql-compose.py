@@ -33,18 +33,21 @@ def prepare_templates():
     global k8_files
     k8_files = {
     'deployment':
-    {'apiVersion': 'api/v1', 'kind': 'Deployment', 
+    {'apiVersion': 'apps/v1', 'kind': 'Deployment', 
     'metadata': {'name': 'DEPLOYMENTNAME', 'labels': {'name': 'DEPLOYMENTNAME'}}, 
-    'spec': {'replicas': 1, 
+    'spec': {
+    'selector':{
+    'matchLabels':{
+    'name': 'DEPLOYMENTNAME'}},'replicas': 1, 
     'strategy': {'rollingUpdate': {'maxSurge': 1, 'maxUnavailable': 1}, 'type': 'RollingUpdate'}, 
     'template': {'metadata': {'labels': {'name': 'DEPLOYMENTNAME'}}, 
     'spec': {
     'containers': [{
-    'image': 'IMAGENAME', 'name': 'DEPLOYMENTNAME', 
-    'resources': {'limits': {'cpu': '20m', 'memory': '55M'}}, 
+    'image': 'IMAGENAME','imagePullPolicy': 'Always', 'name': 'DEPLOYMENTNAME', 
+    'resources': {'limits': {'cpu': '100m', 'memory': '200Mi'}}, 
     'env': [{'name': 'MARIADB_PASSWORD', 'valueFrom': {'secretKeyRef': {'name': 'user-password', 'key': 'db-password'}}}],
     'ports': [{'containerPort': 5000}], 
-    'volumeMounts': [{'name': 'config', 'mountPath': 'DESTINATION'}], 'restartPolicy': 'Always', 'imagePullPolicy': 'Always'}],
+    'volumeMounts': [{'name': 'config', 'mountPath': 'DESTINATION'}]}],
     'volumes': [{
     'name': 'SQL-CONFIG', 'configMap': {
     'name': 'CONFIGMAPNAME'}}]}}}},
@@ -83,7 +86,7 @@ def create_service(service,name):
     k8_service=k8_files['service']
 
     k8_service_name=(name.lower()+'-service')
-    k8_service['metadata']['name']=name
+    k8_service['metadata']['name']=name.lower()
     k8_service['spec']['selector']={'name':f'{name.lower()}'}
     k8_service['spec']['ports'][0]['name']=service['ports'][0].split(':')[1]
     k8_service['spec']['ports'][0]['port']=int(service['ports'][0].split(':')[0])
@@ -161,6 +164,7 @@ def create_deployment(service,name):
     secret_name=''
     configmap_names=[]
     deployment=k8_files['deployment']
+
     deployment=eval(str(deployment).replace('DEPLOYMENTNAME',name.lower()))
 
     containers=deployment['spec']['template']['spec']['containers']

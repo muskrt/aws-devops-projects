@@ -1,10 +1,13 @@
-apiVersion: api/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
   labels:
     name: web
 spec:
+  selector:
+    matchLabels:
+      name: web
   replicas: 1
   strategy:
     rollingUpdate:
@@ -17,13 +20,12 @@ spec:
         name: web
     spec:
       containers:
-      - image: muskrt/kubernetes-01-app
+      - image: muskrt/kubernetes-01-app:1.0
+        imagePullPolicy: Always
         name: web
         resources:
           limits:
-            cpu: 20m
-            memory: 55M
+            cpu: 100m
+            memory: 200Mi
         ports:
         - containerPort: 5000
-        restartPolicy: Always
-        imagePullPolicy: Always

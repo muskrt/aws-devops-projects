@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: mariadb-dbconfig-cnf-configmap
+  name: mariadb_database-dbconfig-cnf-configmap
   namespace: default
 data:
   dbconfig.cnf: |

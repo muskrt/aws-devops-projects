@@ -1,25 +1,25 @@
 version: "3"
 services:
   web:
-    image: muskrt/kubernetes-01-app
+    image: muskrt/kubernetes-01-app:1.0
     restart: always
     depends_on:
-      - REDISDB
-      - MARIADB
+      - redisdb_database
+      - mariadb_database
     # network_mode: "host"
     ports:
-      - "80:5000"
+      - "5000:5000"
     volumes:
       - type: bind 
         source: ./
         target: /APP
 
-  REDISDB:
+  redisdb_database:
     image: redis:alpine
     ports:
       - "6379:6379"
 
-  MARIADB:
+  mariadb_database:
     image: mariadb:10.5
 
     environment:

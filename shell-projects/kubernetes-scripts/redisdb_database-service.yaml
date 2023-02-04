@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: REDISDB
+  name: redisdb_database
 spec:
   selector:
-    name: redisdb
+    name: redisdb_database
   type: NodePort
   ports:
   - name: '6379'
