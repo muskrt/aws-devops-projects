@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: mariadb-database
+  labels:
+    name: mariadb-database
+spec:
+  selector:
+    name: mariadb-database
+  type: NodePort
+  ports:
+  - name: '3306'
+    port: 3306
+    targetPort: 3306

@@ -9,6 +9,8 @@ import yaml
 from pprint import pprint
 import base64
 
+folder='kubernetes-config-files'
+os.system(f'mkdir {folder}')
 def code_base64(data,code_type):
     if code_type == 'encode': 
         data_bytes = data.encode("ascii")
@@ -96,7 +98,9 @@ def create_service(service,name):
     k8_service['spec']['ports'][0]['name']=service['ports'][0].split(':')[1]
     k8_service['spec']['ports'][0]['port']=int(service['ports'][0].split(':')[0])
     k8_service['spec']['ports'][0]['targetPort']=int(service['ports'][0].split(':')[1])
-    f=open(k8_service_name+'.yaml','w')
+    filename=k8_service_name+'.yaml'
+    path=os.path.join(folder,filename)
+    f=open(path,'w')
     yaml.dump(k8_service, f, sort_keys=False, default_flow_style=False)
     f.close()
     print('##### service-created --> ' + f'{k8_service_name}.yaml') 
@@ -107,7 +111,9 @@ def create_secret(vars,name):
     secret['data']=vars
     secret_name=(name.lower()+'-secret')
     secret['metadata']['name']=secret_name
-    f=open(secret_name+'.yaml','w')
+    filename=secret_name+'.yaml'
+    path=os.path.join(folder,filename)
+    f=open(path,'w')
     yaml.dump(secret, f, sort_keys=False, default_flow_style=False)
     f.close()
     print('##### secret-created --> ' + f'{secret_name}.yaml')
@@ -141,7 +147,8 @@ def create_configmap(volumes,name):
                     configmap=eval(str(configmap).replace('KEY',filename))
                     configmap=eval(str(configmap).replace('CM',configmap_name))
                     configmap['data'][filename]=file_data
-                    f=open(configmap_name+'.yaml','w')
+                    path=os.path.join(folder,configmap_name+'.yaml')
+                    f=open(path,'w')
                     yaml.dump(configmap, f, sort_keys=False, default_flow_style=False)
                     f.close()
                     FILE.close()
@@ -224,8 +231,8 @@ def create_deployment(service,name):
     deployment['spec']['template']['spec']['containers'][0]=containers[0]
     
 
-
-    f=open(name.lower()+'-deployment.yaml','w')
+    path=os.path.join(folder,name.lower()+'-deployment.yaml')
+    f=open(path,'w')
     yaml.dump(deployment, f, sort_keys=False, default_flow_style=False)
     f.close()
     print('##### Deployment-created --> ' + f'{name.lower()}-deployment.yaml')
