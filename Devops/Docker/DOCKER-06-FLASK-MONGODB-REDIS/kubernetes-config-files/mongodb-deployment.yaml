@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    name: mongodb
+spec:
+  selector:
+    matchLabels:
+      name: mongodb
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: mongodb
+    spec:
+      containers:
+      - image: mongo
+        imagePullPolicy: Always
+        name: mongodb
+        resources:
+          limits:
+            cpu: 200m
+            memory: 250Mi
+        env:
+        - name: MONGO_INITDB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: MONGO_INITDB_DATABASE
+        ports:
+        - containerPort: 27017
+      restartPolicy: Always
