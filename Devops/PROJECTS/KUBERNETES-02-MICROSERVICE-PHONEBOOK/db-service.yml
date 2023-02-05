@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  db
+  labels:
+    name: db
+spec:
+  selector:
+    name:  db
+  type:   ClusterIP 
+  ports:
+  - name:  '3306'
+    port:  3306
+    targetPort: 3306
+    

@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: result-server
+  minReadySeconds: 15
+  template:
+    metadata:
+      labels:
+        name: result-server
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: result-server
+        image: muskrt/kubernetes-02-phonebook:result-server
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        env:
+          - name:  MYSQL_DATABASE_HOST
+            valueFrom:
+              secretKeyRef:
+                name:  result-server
+                key:  MYSQL_DATABASE_HOST
+          - name:  MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name:  result-server
+                key:  MYSQL_PASSWORD
+          - name:  MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name:  result-server
+                key:  MYSQL_DATABASE
+          - name:  MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name:  result-server
+                key:  MYSQL_USER                               
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80

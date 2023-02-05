@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  selector:
+    matchLabels:
+      name: db
+  template:
+    metadata:
+      labels:
+        name: db
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: db
+        image: mysql:5.7
+        ports:
+          - containerPort: 3306
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "100m"
+        env:
+          - name:  MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name:  db-server
+                key:  MYSQL_ROOT_PASSWORD
+
+          - name:  MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name:  db-server
+                key:  MYSQL_PASSWORD
+          - name:  MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                name:  db-server
+                key:  MYSQL_DATABASE
+          - name:  MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name:  db-server
+                key:  MYSQL_USER  
+
