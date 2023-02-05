@@ -1,0 +1,6 @@
+variable "Num" {
+  
+}
+variable "KEYNAME" {
+  
+}
