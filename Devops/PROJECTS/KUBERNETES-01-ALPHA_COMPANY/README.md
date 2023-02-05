@@ -1,8 +1,7 @@
- ## Flask Hello-World Application
+ ## Kubernetes ALPHA_COMPANY MicroService Application
 
  ## Description
- BASIC WEB SERVER APPLICATION FITH FLASK 
- FRAMEWORK
+ BASIC KUBERNETES APPLICATION FITH FLASK,MARIADB AND REDIS
 
  # Table of Contents
  
@@ -13,7 +12,7 @@
 
 
  ## How to Install and Run the Project
-```python
+```shell
 kubectl apply -f .
 goto http://127.0.0.1:5000
 Enter The Login Credentials
