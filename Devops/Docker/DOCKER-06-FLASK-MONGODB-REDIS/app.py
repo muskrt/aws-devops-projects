@@ -10,8 +10,8 @@ import time
 
 
 app = Flask(__name__)
-redisdb=redis.Redis(host='redis',port=6379)
-mongodb=MongoClient('mongodb', 27017)
+redisdb=redis.Redis(host='redis-database',port=6379)
+mongodb=MongoClient('mongodb-database', 27017)
 db=mongodb.flask_db
 def mongo_read():
     data=list(db.posts.find())
