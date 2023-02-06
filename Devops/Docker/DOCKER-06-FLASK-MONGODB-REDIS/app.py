@@ -1,4 +1,4 @@
-from flask import Flask , render_template,request ,jsonify, Response 
+from flask import Flask , render_template,request ,jsonify, Response , redirect ,url_for
 import json 
 import json2table
 from json2html import *
@@ -49,13 +49,16 @@ def mongo_page():
     dtestict = request.form
     
     for key in dtestict:
-        print ('form key'+dict[key])
-    return 'ok'
+        print ('form key'+dtestict[key])
+    return jsonify('sucess')
         
 @app.route('/mongoGet')
 def mongo_get():
     return json2html.convert(json=mongo_read())
-@app.route('/',methods=['GET','POST'])
+@app.route('/')
+def error():
+    return redirect(url_for('main_page'))
+@app.route('/login',methods=['GET','POST'])
 def main_page():
     if request.method == "POST":
         NAME = request.form['username']
