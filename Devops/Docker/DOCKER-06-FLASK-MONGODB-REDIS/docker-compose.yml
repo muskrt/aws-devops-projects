@@ -1,23 +1,23 @@
 version: "3"
 services: 
   web:
-    image: muskrt/kubernetes-02-app:1.0
+    image: Name=muskrt/kubernetes-03-blog_site
     restart: always
     depends_on:
-      - redis 
-      - mongodb 
+      - redis-database 
+      - mongodb-database 
     ports:
       - "5000:5000"
     
       
-  mongodb:
+  mongodb-database:
     image: mongo 
     environment:
       MONGO_INITDB_DATABASE: flask_db
     ports:
       - "27017:27017"
 
-  redis:
+  redis-database:
     image: "redis:alpine"
     ports:
       - "6379:6379"
