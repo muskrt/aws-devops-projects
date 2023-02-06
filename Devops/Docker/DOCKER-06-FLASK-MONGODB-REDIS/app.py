@@ -44,13 +44,11 @@ def db_search(name):
 
 @app.route('/mongoPost',methods=["POST"])
 def mongo_page():
-    
-    mongo_insert()
     dtestict = request.form
     
     for key in dtestict:
         print ('form key'+dtestict[key])
-    return jsonify('sucess')
+    return "success"
         
 @app.route('/mongoGet')
 def mongo_get():
