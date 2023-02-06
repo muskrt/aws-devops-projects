@@ -7,12 +7,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
 function add_post(){
-  
+
   document.getElementById("first").style.display='none';
   document.getElementById("addpost").style.display='initial';
   
 
 }
+function submit_post(){
+
+document.getElementById("first").style.display='initial';
+document.getElementById("addpost").style.display='none';
+// fetch("http://localhost:60775/mongoPost", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     userId: 1,
+//     title: "Fix my bugs",
+//     completed: false
+//   }),
+//   headers: {
+//     "Content-type": "application/json; charset=UTF-8"
+//   }
+// });
+fetch("http://localhost:60775/mongoPost",
+{
+    method: "POST",
+    body: JSON.stringify({
+    userId: 1,
+    title: "Fix my bugs",
+    completed: false
+  }),
+})
+.then(function(res){ return res.json(); })
+.then(function(JSON.stringify({
+    userId: 1,
+    title: "Fix my bugs",
+    completed: false
+  }),){ alert( JSON.stringify( JSON.stringify({
+    userId: 1,
+    title: "Fix my bugs",
+    completed: false
+  }), ) ) })
+
+}
+
 
 </script>
 <style>
@@ -41,6 +78,7 @@ body {
     background-color: burlywood;
 }
 #first{
+  
   overflow: scroll;
 	padding-left: 0px;
     width: 90%;
@@ -91,6 +129,25 @@ body {
       </div>
 
       <div id="addpost"><h2 style="text-align:center; height: 2vh;">You are in add-post page.</h2>
+
+        <form style="height:80vh; padding: 0 0 0 0; padding: 0 20% 0 20%;">
+          <ul style="list-style: none; height:100%; width: 100%; padding-left: 0;">
+            <li style="width:100%; display: inline-block; margin-top: 5px;">
+              <label style="width:20%;display: inline-block;" > Tag</label>
+              <input style="width:40%; height: 5vh; display: inline-block; font-size: 18px;"></input>
+            </li>
+            <li style="width:100%; display: inline-block; margin-top: 5px;">
+              <label style="width:20%;display: inline-block;"> Comment</label>
+              <textarea  style="height: 20vh; resize: none; width:40%; display: inline-block; font-size: 18px;"></textarea>
+            </li>
+            <li style="padding-left:35% ;width:100%; display: inline-block; margin-top: 5px;" >
+              <input type="submit" value="Add Post" onclick="submit_post()" style=" height: 7vh; width:15%;display: inline-block;
+              font-size: medium;"></input>
+            </li>
+          </ol>
+
+
+        </form>
         
         </div>
 

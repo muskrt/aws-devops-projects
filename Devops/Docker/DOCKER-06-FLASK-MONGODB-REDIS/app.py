@@ -15,7 +15,6 @@ mongodb=MongoClient('mongodb-database', 27017)
 db=mongodb.flask_db
 def mongo_read():
     data=list(db.posts.find())
-    print(data)
     for post in data:
         # post["_id"]=str(post["_id"])
         del post["_id"]
@@ -43,11 +42,16 @@ def db_init():
 def db_search(name):
     return redisdb.get(name)
 
-@app.route('/mongoPost',methods=["GET","POST"])
+@app.route('/mongoPost',methods=["POST"])
 def mongo_page():
-    if request.method == "GET":
-        mongo_insert()
-        return "success"
+    
+    mongo_insert()
+    dtestict = request.form
+    
+    for key in dtestict:
+        print ('form key'+dict[key])
+    return 'ok'
+        
 @app.route('/mongoGet')
 def mongo_get():
     return json2html.convert(json=mongo_read())
