@@ -1,13 +1,17 @@
 version: "3"
 services: 
   web:
-    image: Name=muskrt/kubernetes-03-blog_site
+    build: . 
     restart: always
     depends_on:
       - redis-database 
       - mongodb-database 
     ports:
       - "5000:5000"
+    volumes:
+      - type: bind 
+        source: ./
+        target: /code
     
       
   mongodb-database:

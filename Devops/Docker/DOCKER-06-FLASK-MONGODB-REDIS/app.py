@@ -45,8 +45,9 @@ def db_search(name):
 
 @app.route('/mongoPost',methods=["GET","POST"])
 def mongo_page():
-    if request.method == "POST":
-        return mongo_insert()
+    if request.method == "GET":
+        mongo_insert()
+        return "success"
 @app.route('/mongoGet')
 def mongo_get():
     return json2html.convert(json=mongo_read())
@@ -59,7 +60,7 @@ def main_page():
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:
-            return render_template('secure_page.html')
+            return render_template('secure_page.html',posts=json2html.convert(json=mongo_read()))
         else:
             return render_template('error.html')
 
@@ -69,4 +70,4 @@ def main_page():
 
 if __name__=="__main__":
     db_init()
-    app.run(host="0.0.0.0",port=5000 )
+    app.run(host="0.0.0.0",debug=True,port=5000 )

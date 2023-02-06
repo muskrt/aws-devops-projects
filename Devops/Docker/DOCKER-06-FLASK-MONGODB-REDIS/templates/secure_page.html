@@ -5,6 +5,7 @@
    </title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -13,47 +14,50 @@ body {
 * {
   box-sizing: border-box;
 }
-
-/* style the container */
-.container {
-  position: relative;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px 0 30px 0;
-} 
-
-
-.col {
-  top: 25%;
-  left: 50%;
-
-  width: 50%;
-  margin: auto;
-  padding: 75px 50px;
-  margin-top: 2px;
+#parent {
+    width: 100%;
+    float: left;
+    height: auto;
+    
+    background-color: powderblue;
+    
 }
+#first{
+  overflow: scroll;
+	padding-left: 0px;
+    width: 90%;
+    float: left;
+    height: 100vh;
+        background-color: burlywood;
+        background-image: url('static/mantar_pano.jpg'); background-size: cover; 
+
+}
+#second{
+    
+    width: 10%;
+    float: left;
+    height: 100vh;
+
+        
+
+}
+
+
+
 .comment{
-
-  left: 50%;
+  position: fixed;
+  bottom: 0;
+  height: 6vh;
+  padding-top: 5px;
+  background-color:chartreuse;
+  /* left: 50%; */
   text-align:center;
-  width:50%; 
+  width:100%; 
   margin: auto;
-  margin-top: 15px; 
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
+  
 }
 
 
-.bottom-container {
-  text-align: center;
-  background-color: #666;
-  border-radius: 0px 0px 4px 4px;
-}
 
 </style>
 </head>
@@ -61,11 +65,16 @@ body {
 
 <div class="container">
 
-    <div class="row">
+    <div id="parent">
       
-      <div class="vl"></div>
-      <h2 style="text-align:center">You are in secure page.</h2>
-
+      
+      <div id="first"><h2 style="text-align:center; height: 2vh;">You are in secure page.</h2>
+      <label >{{ posts|safe }}</label>
+      </div>
+      <div id="second">
+        <button style="font-size: 1vw; margin-top: 3px; margin-left: 5px; height: 5vh;" >ADD POST</button>
+        <button style="font-size: 1vw; margin-top: 3px; margin-left: 5px; height: 5vh;"  >DELETE POST</button>
+      </div>
 
       
     </div>
@@ -74,5 +83,6 @@ body {
 
 
 </body>
-<h2 class="comment">CREATED BY MUSTAFA KURT</h2>
+
+<h3 class="comment" >CREATED BY MUSTAFA KURT</h3>
 </html>
