@@ -40,16 +40,24 @@ var payload = {
 var data = new FormData();
 data.append( "json", JSON.stringify( payload ) );
 
-fetch("http://localhost:60775/mongoPost",
-{
-    method: "POST",
-    redirect: 'manual',
+// fetch("http://localhost:60775/mongoPost",
+// {
+//     method: "POST",
+//     redirect: 'manual',
     
-    body: data
+//     body: data
     
-})
-.then(function(res){ if (res.ok) return res.json(); })
-.then(function(data){ alert( JSON.stringify( data ) ) })
+// })
+// .then(function(res){ if (res.ok) return res.json(); })
+// .then(function(data){ alert( JSON.stringify( data ) ) })
+
+$.post( "http://localhost:60775/mongoPost", {
+      canvas_data: JSON.stringify("test data")
+    }, function(err, req, resp){
+      alert(res.json());
+    });
+
+
 
 }
 

@@ -25,12 +25,12 @@ def mongo_insert():
     post={"tag":"mustafa","comment":"kurt"}
     dbresponse=db.posts.insert_one(post)
 
-    return Response(
-        response=json.dumps({"message":"user created"
-        ,"id":f"{dbresponse.inserted_id}"}),
-        status=200,
-        mimetype="application/json"
-    )
+    # return Response(
+    #     response=json.dumps({"message":"user created"
+    #     ,"id":f"{dbresponse.inserted_id}"}),
+    #     status=200,
+    #     mimetype="application/json"
+    # )
 
 
 def db_init():
