@@ -19,6 +19,8 @@ def mongo_read():
         # post["_id"]=str(post["_id"])
         del post["_id"]
     return json.dumps(data)
+
+    
 def mongo_insert(get_post):
     print(get_post,flush=True)
     
@@ -42,6 +44,10 @@ def db_init():
         print("cant connect")
 def db_search(name):
     return redisdb.get(name)
+
+@app.route('/health',methods=["GET"])
+def health():
+    return response('ok',status=200)
 
 @app.route('/mongoPost',methods=["POST"])
 def mongo_page():
