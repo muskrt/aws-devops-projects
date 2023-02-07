@@ -1,4 +1,4 @@
-# Name=muskrt/kubernetes-03-app 
+# Name=muskrt/kubernetes-04-app 
 FROM python:alpine
 RUN apk update 
 WORKDIR /APP 
