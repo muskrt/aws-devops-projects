@@ -19,11 +19,12 @@ def mongo_read():
         # post["_id"]=str(post["_id"])
         del post["_id"]
     return json.dumps(data)
-def mongo_insert():
-    post={"tag":"mustafa","comment":"kurt"}
+def mongo_insert(get_post):
+    print(get_post,flush=True)
+    
+    post=json.loads(get_post)
     dbresponse=db.posts.insert_one(post)
-    post={"tag":"mustafa","comment":"kurt"}
-    dbresponse=db.posts.insert_one(post)
+
 
     # return Response(
     #     response=json.dumps({"message":"user created"
@@ -45,10 +46,10 @@ def db_search(name):
 @app.route('/mongoPost',methods=["POST"])
 def mongo_page():
     dtestict = request.form
-    
     for key in dtestict:
-        print ('form key'+dtestict[key])
-    return "success"
+        mongo_insert(dtestict[key])
+        print('form key'+dtestict[key] + '\n', flush=True)
+    return jsonify("Post Sended")
         
 @app.route('/mongoGet')
 def mongo_get():
@@ -62,6 +63,7 @@ def main_page():
         NAME = request.form['username']
         USER_PASSWORD=request.form['password']
         PASSWORD=db_search(NAME)
+        
         if PASSWORD :
                 PASSWORD=PASSWORD.decode()
         if str(USER_PASSWORD) == PASSWORD:

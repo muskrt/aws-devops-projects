@@ -17,6 +17,7 @@ body {
 /* style the container */
 .container {
   position: relative;
+  height: 95vh;
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px 0 30px 0;
@@ -68,12 +69,12 @@ input[type=submit]:hover {
   margin-top: 2px;
 }
 .comment{
-
-  left: 50%;
+  position: fixed;
+  bottom: 0;
+  height: 5vh;
   text-align:center;
-  width:50%; 
-  margin: auto;
-  margin-top: 15px; 
+  width:100%; 
+  
 }
 
 /* Clear floats after the columns */
@@ -128,8 +129,8 @@ input[type=submit]:hover {
       <h2 style="text-align:center">Login</h2>
 
       <div class="col">
-        <input type="text" id="username" name="username" placeholder="Username" required>
-        <input type="password" id="password" name="password" placeholder="Password" required>
+        <input type="text" id="username" name="username" placeholder="Username=mustafa" required>
+        <input type="password" id="password" name="password" placeholder="Password=kurt" required>
         <input type="submit" value="Login" >
       </div>
 
