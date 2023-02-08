@@ -24,11 +24,12 @@ resource "aws_db_instance" "db-server" {
     instance_class = "db.t2.micro"
     allocated_storage = 10 
     vpc_security_group_ids = [aws_security_group.db-sg.id]
+    db_subnet_group_name    = "${aws_db_subnet_group.db-subnet.name}"
     allow_major_version_upgrade = false 
     auto_minor_version_upgrade = true 
     backup_retention_period = 0 
     identifier = "phonebook-app-db"
-    name = "phonebook"
+    db_name = "phonebook"
     engine = "mysql"
     engine_version = "8.0.23"
     username = "admin"
@@ -44,7 +45,7 @@ resource "aws_db_instance" "db-server" {
 
 
 resource "local_file" "dbendpoint" {
-  content  = aws_db_instane.db-server.address
+  content  = aws_db_instance.db-server.address
   filename = "./APP/dbserver.endpoint"
 }
 
@@ -53,7 +54,7 @@ resource "local_file" "dbendpoint" {
 resource "aws_launch_template" "asg-lt" {
     name = "phonebook-lt"
     image_id = data.aws_ami.amazon-linux-2.id 
-    key_name = linux 
+    key_name = "linux" 
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.server-sg.id]
     user_data = filebase64("user-data.sh")
@@ -85,9 +86,9 @@ resource "aws_alb" "app-lb" {
     name = "phonebook-lb-tf"
     ip_address_type = "ipv4"
     internal = false 
-    laod_balancer_type = "application"
+    load_balancer_type = "application"
     security_groups = [aws_security_group.alb-sg.id]
-    subnets = data.aws_subnets.subnets.ids 
+    subnets = [aws_subnet.public-subnet-1b.id ,aws_subnet.public-subnet-1a.id] 
   
 }
 
