@@ -5,7 +5,7 @@ data "aws_vpc" "selected" {
 data "aws_subnets" "subnets" {
     filter {
       name = "vpc-id"
-      values = [ data.aws_vpc.selected.id]
+      values = [ aws_vpc.test-vpc.id]
     }
   
 }
@@ -22,7 +22,7 @@ data "aws_ami" "amazon-linux-2" {
 
 resource "aws_db_instance" "db-server" {
     instance_class = "db.t2.micro"
-    allocated_storage = 20 
+    allocated_storage = 10 
     vpc_security_group_ids = [aws_security_group.db-sg.id]
     allow_major_version_upgrade = false 
     auto_minor_version_upgrade = true 
@@ -32,7 +32,7 @@ resource "aws_db_instance" "db-server" {
     engine = "mysql"
     engine_version = "8.0.23"
     username = "admin"
-    password = "toor1"
+    password = "MUSTAFATOOR"
     monitoring_interval = 0 
     multi_az = false 
     port = 3306 
@@ -41,18 +41,11 @@ resource "aws_db_instance" "db-server" {
 
 }
 
-resource "github_repository_file" "dbendpoint" {
-    content = aws_db_instane.db-server.address
-    file = "dbserver.endpoint"
-    repository = "phonebook"
-    overwrite_on_create = true 
-    branch = "main"
-  
-}
+
 
 resource "local_file" "dbendpoint" {
   content  = aws_db_instane.db-server.address
-  filename = "${path.module}/foo.bar"
+  filename = "./APP/dbserver.endpoint"
 }
 
 
@@ -78,7 +71,7 @@ resource "aws_alb_target_group" "app-lb-tg" {
     name = "phonebook-lb-tg"
     port = 80 
     protocol = "HTTP"
-    vpc_id = data.aws_vpc.selected.id 
+    vpc_id = aws_vpc.test-vpc.id
     target_type = "instance"
     health_check {
         healthy_threshold = 2 

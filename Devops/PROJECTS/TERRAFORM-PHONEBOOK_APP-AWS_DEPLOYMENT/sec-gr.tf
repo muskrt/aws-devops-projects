@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb-sg" {
     name = "albsecuritygroup"
-    vpc_id=data.aws_vpc.selected.id
+    vpc_id=aws_vpc.test-vpc.id
     tags = {
       Name = "Tf+Albsecuritygroup"
     }
@@ -20,7 +20,7 @@ resource "aws_security_group" "alb-sg" {
 
 resource "aws_security_group" "server-sg" {
     name = "webserversecuritygruop"
-    vpc_id=data.aws_vpc.selected.id
+    vpc_id=aws_vpc.test-vpc.id
     tags = {
       Name = "Tf_webserversecuritygroup"
     }
@@ -46,7 +46,7 @@ resource "aws_security_group" "server-sg" {
 
 resource "aws_security_group" "db-sg" {
     name = "RDSsecuritygroup"
-    vpc_id=data.aws_vpc.selected.id
+    vpc_id=aws_vpc.test-vpc.id
     tags = {
       Name = "TF_rdsSecurityGroup"
     }
