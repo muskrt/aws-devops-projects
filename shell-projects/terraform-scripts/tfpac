@@ -4,6 +4,11 @@
 #tfpac PACKAGE SRC_FOLDER_WITHOUT_TRAILING_SLASH DEST_PATH
 #tfpac UNPACKAGE SRC_PATH DEST_PATH
 #tfpac BUILD package_path dest_path 
+if [ $UID -ne 0 ];
+then 
+    echo "please run as root"
+fi 
+
 
 files_to_create=(main.tf providers.tf outputs.tf $USER.auto.tfvars variable.tf)
  for index in $(seq 1 $#) ;
