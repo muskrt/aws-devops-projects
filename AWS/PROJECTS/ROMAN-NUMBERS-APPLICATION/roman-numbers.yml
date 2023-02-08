@@ -44,8 +44,8 @@ Resources:
         yum install subversion -y 
         pip3 install flask 
         cd /home/ec2-user/
-        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/aws/project-2
-        cd project-2/
+        svn export https://github.com/muskrt/aws-devops-projects.git/trunk/AWS/PROJECTS/ROMAN-NUMBERS-APPLICATION
+        cd ROMAN-NUMBERS-APPLICATION/
         python3 app.py
 
 Outputs:

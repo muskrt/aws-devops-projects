@@ -36,7 +36,7 @@ Resources:
             yum update -y 
             yum install httpd -y
             yum install subversion -y
-            svn export https://github.com/muskrt/aws-devops-projects.git/trunk/aws/project-1/src-files
+            svn export https://github.com/muskrt/aws-devops-projects.git/trunk/AWS/PROJECTS/KITTENS-CAROUSEL-APPLICATION/src-files
             mv src-files/* /var/www/html/
             systemctl start httpd 
             systemctl enable httpd 
