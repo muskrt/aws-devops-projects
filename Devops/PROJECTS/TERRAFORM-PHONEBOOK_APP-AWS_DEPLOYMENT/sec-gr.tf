@@ -15,7 +15,8 @@ resource "aws_security_group" "alb-sg" {
         protocol ="-1"
         to_port = 0
         cidr_blocks = ["0.0.0.0/0"]
-    }} 
+    }
+    } 
 
 resource "aws_security_group" "server-sg" {
     name = "webserversecuritygruop"
@@ -40,7 +41,8 @@ resource "aws_security_group" "server-sg" {
         protocol = "-1"
         to_port = 0
         cidr_blocks = ["0.0.0.0/0"]
-    } } 
+    }
+     } 
 
 resource "aws_security_group" "db-sg" {
     name = "RDSsecuritygroup"
@@ -59,5 +61,6 @@ resource "aws_security_group" "db-sg" {
         protocol = "-1"
         to_port = 0
         cidr_blocks = ["0.0.0.0/0"]
-    } } 
+    } 
+    } 
 
