@@ -37,7 +37,7 @@ cmd="${!index}"
 
         dst_path=${dst%%/}/$file_name
 
-        tar cvzf $dst_path $src
+        tar cvzf $dst_path $src 
     elif [ "$cmd" = "unpackage" ];
     then 
         NEXT=`expr $index + 1`
