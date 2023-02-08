@@ -1,0 +1,3 @@
+tf refresh for changes 
+tf output just for outputs 
+tf apply -target=aws_instance.example -target=aws_instance.example2 // to run only specific targets 

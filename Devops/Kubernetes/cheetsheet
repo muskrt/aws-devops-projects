@@ -1,0 +1,13 @@
+## Apply files 
+k apply -f .
+k delete -f . 
+## show resources 
+k get po,deploy
+## show versions and abbreviations
+k api-resources
+## for troubleshoot ### 
+k logs pod-name 
+k describe pod-name 
+## shell to pod 
+k exec -it pods/pod -- bash 
+

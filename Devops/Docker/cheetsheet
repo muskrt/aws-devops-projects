@@ -1,0 +1,7 @@
+## build image 
+docker build -t repo-name . 
+## compose build and delete 
+docker-compose up 
+docker-compose down
+## shell to container 
+docker container exec -it container_id /bin/bash
