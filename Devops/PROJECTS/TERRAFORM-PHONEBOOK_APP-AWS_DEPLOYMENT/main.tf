@@ -47,6 +47,13 @@ resource "aws_db_instance" "db-server" {
 resource "local_file" "dbendpoint" {
   content  = aws_db_instance.db-server.address
   filename = "./APP/dbserver.endpoint"
+
+  provisioner "local-exec" {
+    command = "cd /home/mustafa/Desktop/aws-devops-projects && git add . && git commit -m 'test' && git push "
+    
+
+  
+  }
 }
 
 
