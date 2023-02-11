@@ -10,15 +10,15 @@ chmod +x /usr/local/bin/docker-compose
 cd /home/ec2-user/
 until ls App 2>/dev/null 
 do 
-    echo "waiting for files..."
+echo "waiting for files..."
 done 
 cd App/ 
 
 
 # while [  true ]; do  docker-compose up 2>/dev/null && break || continue;  done
 until docker-compose up 2>/dev/null
-    do 
-        echo "waiting for docker-compose..."
-        sleep 1 
-    done 
+do 
+echo "waiting for docker-compose..."
+sleep 1 
+done 
 
