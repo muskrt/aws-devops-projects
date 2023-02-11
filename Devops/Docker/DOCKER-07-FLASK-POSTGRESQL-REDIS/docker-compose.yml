@@ -4,7 +4,7 @@ services:
   web:
     image: muskrt/kubernetes-04-bookworm_api 
     ports:
-      - "80:5000"
+      - "5000:5000"
     depends_on:
       - redis-db
       - postgre-db
