@@ -5,7 +5,7 @@ data "aws_ami" "MYAMIID" {
     owners = ["amazon"]
     most_recent=true 
     filter{
-      key="name"
+      name="name"
       values=["amzn2-ami-hvm*"]
     }
 
