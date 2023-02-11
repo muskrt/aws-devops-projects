@@ -1,19 +1,21 @@
 version: "3"
 services:
-  db:
-    image: mysql 
-    environment:
-      MYSQL_ROOT_PASSWORD: "toor"
-      MYSQL_DATABASE_HOST : 'database'
-      DATABASE_USER : 'mustafa'
-      DATABASE_PASSWORD : 'toor1'
-      DATABASE_DB : 'bookstore_db'
-    ports:
-      - "3306:3306"
   web:
     build: . 
     restart: always
+    depends_on:
+      - mysql-database
     ports:
-      - 80:5000
+      - "80:80"
+  mysql-database:
+    image: mysql 
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_USER : mustafa
+      MYSQL_PASSWORD : toor1
+      MYSQL_DATABASE : bookstore_db
+    ports:
+      - "3306:3306"
+
 
 

@@ -36,13 +36,17 @@ resource "aws_instance" "MYSERVER" {
     count=var.Num
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.MYSERVER-SEC-GRP.id]
+    user_data = file("user-data.sh")
     
     provisioner "local-exec" {
-        command = "echo http://${self.public_ip} > public_ip.txt"
+        command = "echo ${self.public_ip} > public_ip.txt"
     }
 
+}
+resource "null_resource" "config" {
+    depends_on = [aws_instance.MYSERVER]
     connection {
-    host = self.public_ip
+    host = file("public_ip.txt")
     type = "ssh"
     user = "ec2-user"
     private_key = file("~/linux.pem")
@@ -52,19 +56,13 @@ resource "aws_instance" "MYSERVER" {
     destination = "/home/ec2-user/"
   }
   provisioner "remote-exec" {
+
     inline = [
-        "sudo yum update -y",
-        "sudo amazon-linux-extras install docker -y",
-        "sudo systemctl start docker",
-        "sudo systemctl enable docker",
-        "sudo usermod -a -G docker ec2-user",
-        "sudo curl -L \"https://github.com/docker/compose/releases/latest/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
-        "sudo chmod +x /usr/local/bin/docker-compose",
         "cd /home/ec2-user/App",
-        "docker-compose up"
+        "docker-compose up "
     ]
   }
 
-
+  
 }
 
