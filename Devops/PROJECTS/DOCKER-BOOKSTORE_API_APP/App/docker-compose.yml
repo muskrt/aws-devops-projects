@@ -3,11 +3,13 @@ services:
   db:
     image: mysql 
     environment:
-      - MYSQL_ROOT_PASSWORD: toor 
+      MYSQL_ROOT_PASSWORD: "toor"
+      MYSQL_DATABASE_HOST : 'database'
+      DATABASE_USER : 'mustafa'
+      DATABASE_PASSWORD : 'toor1'
+      DATABASE_DB : 'bookstore_db'
     ports:
       - "3306:3306"
-
-
   web:
     build: . 
     restart: always
