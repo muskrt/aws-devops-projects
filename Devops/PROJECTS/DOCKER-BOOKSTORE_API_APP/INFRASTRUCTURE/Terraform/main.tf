@@ -55,22 +55,3 @@ resource "aws_instance" "MYSERVER" {
  
   }
 }
-# resource "null_resource" "config" {
-#     depends_on = [aws_instance.MYSERVER]
-#     connection {
-#     host = aws_instance.MYSERVER[0].public_ip
-#     type = "ssh"
-#     user = "ec2-user"
-#     private_key = file("~/linux.pem")
-#   }
-
-#   provisioner "remote-exec" {
-#     inline = [
-#         "cd /home/ec2-user/App",
-#         "while [  true ]; do  docker-compose up 2>/dev/null && break || continue;  done "
-#     ]
-#   }
-
-  
-# }
-
