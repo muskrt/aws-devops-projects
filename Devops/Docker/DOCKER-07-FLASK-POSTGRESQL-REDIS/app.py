@@ -51,15 +51,30 @@ def db_get(sourcedb,query_string):
             print("--------db server data------",i)
             data.append(i)
         return data
-def db_insert(sourcedb=''): pass 
+def db_insert(sourcedb=''):
+def db_get(sourcedb,query_string):
+    if sourcedb =="REDISDB":
+        return REDISDB.set(query_string[0],query_string[1])
+    elif  sourcedb =="POSTGREDB":
+        POSTGREDB.execute(query_string)
+        # data=[]
+        # for i in POSTGREDB:
+        #     print("--------db server data------",i)
+        #     data.append(i)
+        # return data 
 def db_delete(sourcedb=''): pass 
 def db_update(sourcedb=''): pass 
+
+@app.route('/add',methods=['GET','POST'])
+def add_to_unread():
+    pass 
 
 @app.route('/',methods=['GET','POST'])
 def login():
     if request.method == "GET":
         return render_template('login.html')  
     elif request.method == "POST":
+        print(request.args)
         data=db_get('POSTGREDB','select * from books;')
         return render_template('secure_page.html',data = data)
     
