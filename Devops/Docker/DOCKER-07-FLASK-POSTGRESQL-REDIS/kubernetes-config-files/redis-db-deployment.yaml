@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-db
+  labels:
+    name: redis-db
+spec:
+  selector:
+    matchLabels:
+      name: redis-db
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: redis-db
+    spec:
+      containers:
+      - image: redis
+        imagePullPolicy: Always
+        name: redis-db
+        resources:
+          limits:
+            cpu: 200m
+            memory: 250Mi
+        ports:
+        - containerPort: 6379
+      restartPolicy: Always

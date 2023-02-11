@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgre-db
+  labels:
+    name: postgre-db
+spec:
+  selector:
+    matchLabels:
+      name: postgre-db
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: postgre-db
+    spec:
+      containers:
+      - image: postgres
+        imagePullPolicy: Always
+        name: postgre-db
+        resources:
+          limits:
+            cpu: 200m
+            memory: 250Mi
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgre-db-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgre-db-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgre-db-secret
+              key: POSTGRES_DB
+        ports:
+        - containerPort: 5432
+      restartPolicy: Always

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    name: web
+spec:
+  selector:
+    matchLabels:
+      name: web
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: web
+    spec:
+      containers:
+      - image: muskrt/kubernetes-04-bookworm_api
+        imagePullPolicy: IfNotPresent
+        name: web
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 200m
+            memory: 250Mi
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: web-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: web-secret
+              key: POSTGRES_PASSWORD
+        ports:
+        - containerPort: 5000
+      restartPolicy: Always

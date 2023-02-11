@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgre-db
+  labels:
+    name: postgre-db
+spec:
+  selector:
+    name: postgre-db
+  type: NodePort
+  ports:
+  - name: '5432'
+    port: 5432
+    targetPort: 5432

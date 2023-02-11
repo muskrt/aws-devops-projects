@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-db
+  labels:
+    name: redis-db
+spec:
+  selector:
+    name: redis-db
+  type: NodePort
+  ports:
+  - name: '6379'
+    port: 6379
+    targetPort: 6379
