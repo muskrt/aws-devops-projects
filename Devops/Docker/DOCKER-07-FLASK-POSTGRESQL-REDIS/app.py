@@ -47,9 +47,9 @@ def db_update(sourcedb=''): pass
 
 @app.route('/',methods=['GET','POST'])
 def login():
-    if req.method == "GET":
+    if request.method == "GET":
         return render_template('login.html')  
-    elif req.method == "POST":
+    elif request.method == "POST":
         return render_template('secure_page.html')
     
     
@@ -66,4 +66,4 @@ def add():
 
 
 if __name__=="__main__":
-    app.run()
+    app.run(host="0.0.0.0")
