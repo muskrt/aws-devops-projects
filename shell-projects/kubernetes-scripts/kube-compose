@@ -45,7 +45,7 @@ def prepare_templates():
     'template': {'metadata': {'labels': {'name': 'DEPLOYMENTNAME'}}, 
     'spec': {
     'containers': [{
-    'image': 'IMAGENAME','imagePullPolicy': 'Always', 'name': 'DEPLOYMENTNAME', 
+    'image': 'IMAGENAME','imagePullPolicy': 'IfNotPresent', 'name': 'DEPLOYMENTNAME', 
     'livenessProbe':{'httpGet':{'path': '/health','port': 5000},'initialDelaySeconds': 20,'periodSeconds': 5},
     'resources': {'limits': {'cpu': '200m', 'memory': '250Mi'}}, 
     'env': [{'name': 'MARIADB_PASSWORD', 'valueFrom': {'secretKeyRef': {'name': 'user-password', 'key': 'db-password'}}}],

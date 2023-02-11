@@ -1,4 +1,4 @@
-from flask import Flask , render_template, request, url_for
+from flask import Flask , render_template, request, url_for, Response
 import redis 
 import psycopg2
 import os 
@@ -66,6 +66,10 @@ def db_update(sourcedb=''): pass
 @app.route('/add',methods=['GET','POST'])
 def add_to_unread():
     pass 
+@app.route('/health',methods=['GET','POST'])
+def healthz():
+    if request.method == 'GET':
+        return Response('ok',status=200)
 
 @app.route('/',methods=['GET','POST'])
 def login():

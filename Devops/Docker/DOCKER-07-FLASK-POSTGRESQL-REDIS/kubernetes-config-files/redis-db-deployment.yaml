@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - image: redis
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: redis-db
         resources:
           limits:
