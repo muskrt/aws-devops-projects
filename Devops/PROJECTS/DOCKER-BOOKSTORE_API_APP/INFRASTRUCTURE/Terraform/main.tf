@@ -66,9 +66,8 @@ resource "null_resource" "config" {
 
   provisioner "remote-exec" {
     inline = [
-        "wait",
         "cd /home/ec2-user/App",
-        "while [  true ]; do sudo docker-compose up 2> /dev/null && break || continue;  done "
+        "while [  true ]; do  docker-compose up 2>/dev/null && break || continue;  done "
     ]
   }
 
