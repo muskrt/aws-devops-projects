@@ -41,25 +41,34 @@ resource "aws_instance" "MYSERVER" {
     provisioner "local-exec" {
         command = "echo ${self.public_ip} > public_ip.txt"
     }
-
-}
-resource "null_resource" "config" {
-    depends_on = [aws_instance.MYSERVER]
-    connection {
-    host = file("public_ip.txt")
+        connection {
+    host = self.public_ip
     type = "ssh"
     user = "ec2-user"
     private_key = file("~/linux.pem")
   }
-  provisioner "file" {
+    provisioner "file" {
+
     source = "/home/mustafa/Desktop/aws-devops-projects/Devops/PROJECTS/DOCKER-BOOKSTORE_API_APP/App"
     destination = "/home/ec2-user/"
-  }
-  provisioner "remote-exec" {
 
+ 
+  }
+}
+resource "null_resource" "config" {
+    depends_on = [aws_instance.MYSERVER]
+    connection {
+    host = aws_instance.MYSERVER[0].public_ip
+    type = "ssh"
+    user = "ec2-user"
+    private_key = file("~/linux.pem")
+  }
+
+  provisioner "remote-exec" {
     inline = [
+        "wait",
         "cd /home/ec2-user/App",
-        "docker-compose up "
+        "while [  true ]; do sudo docker-compose up 2> /dev/null && break || continue;  done "
     ]
   }
 

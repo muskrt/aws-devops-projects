@@ -4,5 +4,21 @@ Description: |
 Parameters:
   
 Resources:
+  # https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html
+  ec2-instance:
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: String
+      InstanceType: String
+      KeyName: String
+      SecurityGroupIds: 
+        - String
+      SecurityGroups: 
+        - String
+      SubnetId: String
+      Tags: 
+        - Tag
+      UserData: String
+
   
 Outputs:
