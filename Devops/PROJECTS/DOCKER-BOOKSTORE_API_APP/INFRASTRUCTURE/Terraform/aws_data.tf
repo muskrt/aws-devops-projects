@@ -4,9 +4,11 @@ data "aws_vpc" "default" {
 data "aws_ami_ids" "MYAMIID" {
     owners = ["amazon"]
     most_recent=true 
-    filter{}
-    filter{}
-    filter{}
+    filter{
+      key="name"
+      values=["amzn2-ami-hvm*"]
+    }
+
     
   
 }
