@@ -19,7 +19,7 @@
     </style>
     <body>
         <h1> list of unread books</h1>
-<table >
+<table class="table" >
     <tr >
       <th>Index</th>
       <th>title</th>
@@ -40,11 +40,23 @@
  {% endfor %}
  
   </table>
-  <form>
-    <button>Add</button>
+  <form action="/#" method="post">
+    <table >
+      <tr >
+         <td><input type="text" name="Title"></input></td>
+         <td><input type="text" name="Author"></input></td>
+         <td><input type="text" name="Title"></input></td>
+         <td><input type="text" name="pages_num"></input></td>
+         <td><input type="text" name="review"></input></td>
+         <td><input type="text" name="date_added"></input></td>
+       </tr>
+   
+    </table>
+
+    <input type="submit" value="Save"></input>
   </form>
   <h1> list of to be read books</h1>
-  <table >
+  <table class="table" >
     <tr >
       <th>Index</th>
       <th>Title</th>
