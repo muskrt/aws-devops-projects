@@ -2,7 +2,7 @@ version: "3"
 services:
 
   web:
-    build: . 
+    image: muskrt/kubernetes-04-bookworm_api 
     ports:
       - "80:5000"
     depends_on:
