@@ -1,6 +1,8 @@
 from flask import Flask , render_template, request, url_for
 import redis 
 import psycopg2
+import os 
+import sys
 
 
 app = Flask(__name__)
@@ -11,11 +13,11 @@ def init_db():
     global POSTGREDB
     conn = psycopg2.connect(
             host="postgre-db",
-            database="flask_db",
-            user=os.environ['DB_USERNAME'],
-            password=os.environ['DB_PASSWORD'])
-    conn.set_session(autocommit=True)
-    POSTGREDB= conn.cursor(withhold=True)
+            database="bookworm_api_db",
+            user=os.environ['POSTGRES_USER'],
+            password=os.environ['POSTGRES_PASSWORD'])
+    conn.set_session(autocommit=True) 
+    POSTGREDB= conn.cursor()
     POSTGREDB.execute('DROP TABLE IF EXISTS books;')
     POSTGREDB.execute('CREATE TABLE books (id serial PRIMARY KEY,'
                                     'title varchar (150) NOT NULL,'
@@ -39,8 +41,16 @@ def init_db():
                 864,
                 'Another great classic!')
                 )
-
-def db_get(sourcedb=''): pass 
+def db_get(sourcedb,query_string):
+    if sourcedb =="REDISDB":
+        return REDISDB.get(query_string[0])
+    elif  sourcedb =="POSTGREDB":
+        POSTGREDB.execute(query_string)
+        data=[]
+        for i in POSTGREDB:
+            print("--------db server data------",i)
+            data.append(i)
+        return data
 def db_insert(sourcedb=''): pass 
 def db_delete(sourcedb=''): pass 
 def db_update(sourcedb=''): pass 
@@ -50,7 +60,8 @@ def login():
     if request.method == "GET":
         return render_template('login.html')  
     elif request.method == "POST":
-        return render_template('secure_page.html')
+        data=db_get('POSTGREDB','select * from books;')
+        return render_template('secure_page.html',data = data)
     
     
 @app.route('/update')
@@ -66,4 +77,5 @@ def add():
 
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0")
+    init_db()
+    app.run(host="0.0.0.0",debug=True)

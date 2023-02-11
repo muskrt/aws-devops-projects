@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+    <body>
+        <h1> list of unread books</h1>
+<table >
+    <tr >
+      <th>Index</th>
+      <th>title</th>
+      <th>author</th>
+      <th>pages_num</th> 
+      <th>review</th> 
+      <th>date_added</th> 
+    </tr>
+    {% for i in data %}
+    <tr >
+       <td>{{ i[0] }}</td>
+       <td>{{ i[1] }}</td>
+       <td>{{ i[2] }}</td>
+       <td>{{ i[3] }}</td>
+       <td>{{ i[4] }}</td>
+       <td>{{ i[5] }}</td>
+     </tr>
+ {% endfor %}
+ 
+  </table>
+  <form>
+    <button>Add</button>
+  </form>
+  <h1> list of to be read books</h1>
+  <table >
+    <tr >
+      <th>Index</th>
+      <th>title</th>
+      <th>author</th>
+      <th>pages_num</th> 
+      <th>review</th> 
+      <th>date_added</th> 
+    </tr>
+    {% for i in data %}
+    <tr >
+       <td>{{ i[0] }}</td>
+       <td>{{ i[1] }}</td>
+       <td>{{ i[2] }}</td>
+       <td>{{ i[3] }}</td>
+       <td>{{ i[4] }}</td>
+       <td>{{ i[5] }}</td>
+     </tr>
+ {% endfor %}
+ 
+  </table>
+  <form>
+    <button>add</button>
+  </form>
+</body>
+
+  </html>

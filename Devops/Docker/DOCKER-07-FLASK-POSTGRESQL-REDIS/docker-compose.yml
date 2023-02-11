@@ -2,7 +2,11 @@ version: "3"
 services:
 
   web:
-    image: muskrt/kubernetes-04-bookworm_api 
+    image: muskrt/kubernetes-04-bookworm_api
+    restart: always
+    environment:
+      POSTGRES_USER: mustafa 
+      POSTGRES_PASSWORD: toor1 
     ports:
       - "80:5000"
     depends_on:
@@ -17,6 +21,9 @@ services:
 
   postgre-db:
     image: postgres
-
+    environment:
+      POSTGRES_USER: mustafa 
+      POSTGRES_PASSWORD: toor1
+      POSTGRES_DB: bookworm_api_db
 
   
