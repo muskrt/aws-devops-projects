@@ -6,16 +6,16 @@ services:
     ports:
       - "80:5000"
     depends_on:
-      - REDISDB
-      - POSTGREDB
+      - redis-db
+      - postgre-db
     volumes:
       - type: bind
         source: ./
         target: /APP
-  REDISDB:
+  redis-db:
     image: redis  
 
-  POSTGREDB:
+  postgre-db:
     image: postgres
 
 

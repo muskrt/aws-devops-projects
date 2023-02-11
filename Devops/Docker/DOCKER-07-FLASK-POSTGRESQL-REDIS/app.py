@@ -7,10 +7,10 @@ app = Flask(__name__)
 
 def init_db():
     global REDISDB 
-    REDISDB=redis.Redis(host='REDISDB',port=6379)
+    REDISDB=redis.Redis(host='redis-db',port=6379)
     global POSTGREDB
     conn = psycopg2.connect(
-            host="POSTGREDB",
+            host="postgre-db",
             database="flask_db",
             user=os.environ['DB_USERNAME'],
             password=os.environ['DB_PASSWORD'])
