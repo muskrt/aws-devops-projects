@@ -34,7 +34,7 @@ resource "aws_instance" "ANSIBLESERVER" {
     name="worker-node-${count.index}"
   }
     provisioner "local-exec" {
-    command="echo worker-node-${count.index} ${self.public_ip} >> inventory.txt"
+    command="echo worker-node-${count.index} ${self.public_ip} >> ../ansible/inventory.txt"
   
   }
 
