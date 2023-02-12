@@ -1,0 +1,14 @@
+ANSIBLESERVER = [
+  [
+    tomap({
+      "name" = "worker-node-0"
+    }),
+    tomap({
+      "name" = "worker-node-1"
+    }),
+  ],
+  [
+    "44.200.36.162",
+    "44.201.58.98",
+  ],
+]
