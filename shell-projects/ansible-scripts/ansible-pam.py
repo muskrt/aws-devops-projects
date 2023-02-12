@@ -11,11 +11,15 @@ def delete():
     print('delete')
 
 def main():
-    
-    os.system('touch inventory.txt')
+    file=open('inventory.txt','r')
+    group=''
+    for line in file.readline():
+        print(line)
+    file.close()
+
    
 
 
 
 if __name__=="__main__":
-    create()
+    main()
