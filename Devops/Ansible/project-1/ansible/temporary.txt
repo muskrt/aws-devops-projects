@@ -1,2 +1,2 @@
-worker-node-1 18.206.197.12
-worker-node-0 54.157.150.173
+worker-node-0 3.235.2.205
+worker-node-1 34.207.155.229
