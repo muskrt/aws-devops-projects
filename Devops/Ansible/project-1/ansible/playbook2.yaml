@@ -34,16 +34,46 @@
 #       become: yes 
 #       shell: "systemctl start httpd; systemctl enable httpd"
 
-- name: play 5
-  hosts: worker
-  gather_facts: false 
-  tasks:
-    - name: INSTALL HTTP AND WGET AND GIT 
-      become: true 
-      package:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - httpd
-        - wget
-        - git 
+# - name: play 5
+#   hosts: worker
+#   gather_facts: false 
+#   tasks:
+#     - name: INSTALL HTTP AND WGET AND GIT 
+#       become: true 
+#       package:
+#         name: "{{ item }}"
+#         state: present
+#       loop:
+#         - httpd
+#         - wget
+#         - git 
+
+
+# - name: show facts
+#   hosts: all
+#   tasks:
+#     - name: print facts
+#       debug:
+#         var: ansible_facts
+
+
+# - hosts: all
+#   tasks:
+#   - name: show IP address
+#     debug:
+#       msg: >
+#        This host uses IP address {{ ansible_facts.default_ipv4.address }}
+
+
+# - name: create a user
+#   hosts: all
+#   become: true
+#   vars_files:
+#     - secret.yml
+#   tasks:
+#     - name: creating user
+#       user:
+#         name: "{{ username }}"
+#         password: "{{ password }}"
+#         state: absent 
+#         remove: true 
