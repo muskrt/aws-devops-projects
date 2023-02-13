@@ -35,7 +35,7 @@ def main():
                 i=i.split(' ')
                 i=(i[0]+" ansible_host="+i[1]+f" ansible_user={user_names[group_name]}")
                 groups[group_name].append(i)
-    with open('inventory.txt','a') as file:
+    with open('inventory.txt','w') as file:
         for key in groups:
             file.write('['+key+']\n')
             for value in groups[key]:

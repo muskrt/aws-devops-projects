@@ -1,0 +1,36 @@
+- name: Copy for linux
+  hosts: worker
+  gather_facts: false
+  tasks:
+    - name: Copy your file to the webservers
+      copy:
+        src: app
+        dest: /home/ec2-user/
+    - name: INSTALL PIP 
+      become: yes 
+      package: 
+        name: 
+          - python-pip
+        state: latest 
+
+    - name: INSTALL JINJA TEMPLATE 
+      become: yes 
+      pip: 
+        name: 
+          - jinja2-ansible-filters
+        state: latest 
+    - name: UPDATE THE SYSTEM 
+      become: yes   
+      package:
+        state: latest
+        name: "*"
+    - name: INSTALL APACHE SERVER 
+      become: yes 
+      package: 
+        name: 
+          - httpd
+        state: latest
+    - name: START APACHE
+      become: yes 
+      shell: "systemctl start httpd; systemctl enable httpd"
+

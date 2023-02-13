@@ -57,7 +57,10 @@ resource "aws_instance" "ANSIBLESERVER" {
     name="worker-node-${count.index}"
   }
     provisioner "local-exec" {
-    command="echo worker-node-${count.index} ${self.public_ip}  >> ../ansible/temporary.txt"
+    command= join("",[
+    "echo worker-node-${count.index} ${self.public_ip}  >> ../ansible/temporary.txt"]
+    )
+     
   
   }
 
