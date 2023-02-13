@@ -41,6 +41,14 @@ def main():
             for value in groups[key]:
                 file.write(value+'\n')
         file.close()
+    with open('ansible.cfg','w') as file:
+        file.write("""[defaults]
+host_key_checking = False
+inventory = inventory.txt
+deprecation_warnings=False
+interpreter_python=auto_silent
+private_key_file =/home/mustafa/linux.pem""")
+        file.close()
     file.close()
     
 
