@@ -7,19 +7,15 @@
       yum: 
         name: "*"
         state: latest
-    - name: INSTALL MARIADB AND PYMYSQL
+    - name: INSTALL MARIADB  PYTHON3 PIP
       become: yes 
       yum: 
         name: 
           - mariadb-server
-        state: latest 
-    - name: INSTALL PYTHON3 
-      become: yes 
-      yum: 
-        name:
           - python3
           - pip
         state: latest
+        
     - name: INSTALL PYMYSQL
       pip:
         name: 
