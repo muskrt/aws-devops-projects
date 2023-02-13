@@ -1,0 +1,37 @@
+- name: DB CONFIGURATION
+  hosts: DB_SERVER
+  gather_facts: false 
+  tasks:
+    - name: UPDATE 
+      become: yes 
+      yum: 
+        name: "*"
+        state: latest
+    - name: INSTALL MARIADB AND PYMYSQL
+      become: yes 
+      yum: 
+        name: 
+          - mariadb-server
+        state: latest 
+    - name: INSTALL PYTHON3 
+      become: yes 
+      yum: 
+        name:
+          - python3
+          - pip
+        state: latest
+    - name: INSTALL PYMYSQL
+      pip:
+        name: 
+          - PyMySQL
+        state: latest
+
+    - name: START MARIADB
+      become: yes 
+      command: systemctl start mariadb
+    - name: ENABLE MARIADB 
+      become: yes 
+      systemd: 
+        name: mariadb 
+        enabled: true 
+

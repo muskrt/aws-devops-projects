@@ -18,8 +18,8 @@ def main():
     user_names={}
 
     for i in content.split('\n'):
-        if len(i.split('-')[0])>1:
-            group_names.add(i.split('-')[0])
+        if len(i.split(' ')[0])>1:
+            group_names.add(i.split(' ')[0])
 
     for i in group_names:
         groups[i]=[]
@@ -27,7 +27,7 @@ def main():
         user_names[i]=user_name
 
     for i in content.split('\n'):
-        group_name=i.split('-')[0]
+        group_name=i.split(' ')[0]
         if len(group_name)>1:
             if group_name in group_names:
                 # groups[group_name].append(i)
@@ -42,6 +42,7 @@ def main():
                 file.write(value+'\n')
         file.close()
     file.close()
+    
 
    
 
