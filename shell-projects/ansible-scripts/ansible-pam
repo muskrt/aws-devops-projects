@@ -3,6 +3,7 @@ import os
 import sys
 import subprocess
 import json
+import random
 
 global build_id
 build_id=0
@@ -13,13 +14,15 @@ groups={}
 global user_names
 user_names={}
 
+
+
 stackdata_path="/home/mustafa/.ansibleInventory/"
 
 def add_stack_data():
 
    
     path=os.path.join(stackdata_path,'group_names.txt')
-    with open(path,'w') as file:
+    with open(stackdata_path,'w') as file:
             file.write(str(group_names))
             file.close()
     os.path.join(stackdata_path,'groups.txt')
