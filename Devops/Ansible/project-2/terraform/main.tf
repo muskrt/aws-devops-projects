@@ -61,7 +61,10 @@ resource "aws_instance" "ANSIBLESERVER" {
     name="${var.tags[count.index]}"
   }
     provisioner "local-exec" {
-    command="echo ${self.tags.name} ${self.public_ip}  >> ../ansible/temporary.txt"
+    command=join("",[
+      "echo ${self.tags.name} ${self.public_ip} ",
+      ">> ../ansible/temporary.txt",])
+
 
      
   

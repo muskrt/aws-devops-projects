@@ -1,20 +1,55 @@
 #!/usr/bin/python3
 import os 
 import sys
+import subprocess
+from datetime import date,datetime
+from dateutil import parser
+import json
 
-def create():
-    file=open('ansible.cfg','w')
-    file.write("test")
-    file.close()
-    print('success')
-def delete():
-    print('delete')
 
-def main():
+def add_stack_data():
+    with open('stackdata.txt','w') as file:
+        file.write(str(group_names)+'#')
+        file.write(str(groups)+'#')
+        file.write(str(user_names)+'#')
+        file.close()
+def read_stack_data():
+    with open('stackdata.txt','r') as file:
+        data=file.read().split('#')
+        group_names=data[0].strip('{}').split(',')
+        for key,value in enumerate(group_names):
+            group_names[key]=value.strip('\' \'')
+        data[1]=data[1].replace('\'','"')
+        groups=json.loads(data[1])
+
+        data[2]=data[2].replace('\'','"')
+        user_names=json.loads(data[2])
+        print(group_names)
+        print(groups)
+        print(user_names)
+        
+        file.close()
+def create_cfg():
+    with open('ansible.cfg','w') as file:
+        file.write("""
+        [defaults]
+        host_key_checking = False
+        inventory = inventory.txt
+        deprecation_warnings=False
+        interpreter_python=auto_silent
+        private_key_file =/home/mustafa/linux.pem
+        """)
+        file.close()
+
+
+def create_stack_data():
     file=open('temporary.txt','r')
     content=file.read()
+    global group_names
     group_names=set()
+    global groups
     groups={}
+    global user_names
     user_names={}
 
     for i in content.split('\n'):
@@ -33,28 +68,51 @@ def main():
                 # groups[group_name].append(i)
                 
                 i=i.split(' ')
-                i=(i[0]+" ansible_host="+i[1]+f" ansible_user={user_names[group_name]}")
+                i=(i[0]+' ansible_host='+i[1]+f' ansible_user={user_names[group_name]}')
                 groups[group_name].append(i)
-    with open('inventory.txt','w') as file:
-        for key in groups:
-            file.write('['+key+']\n')
-            for value in groups[key]:
-                file.write(value+'\n')
-        file.close()
-    with open('ansible.cfg','w') as file:
-        file.write("""[defaults]
-host_key_checking = False
-inventory = inventory.txt
-deprecation_warnings=False
-interpreter_python=auto_silent
-private_key_file =/home/mustafa/linux.pem""")
-        file.close()
+    add_stack_data()
+
+    exit()
+    # with open('inventory.txt','w') as file:
+    #     for key in groups:
+    #         file.write('['+key+']\n')
+    #         for value in groups[key]:
+    #             file.write(value+'\n')
+    #     file.close()
+
     file.close()
     
 
-   
+def check_inventory(path):
+    files=os.listdir(path)
+    created_new=1
+    timestamp = str(subprocess.check_output(f"""
+                echo `stat '{path}'/inventory.txt | grep Birth`
+            """, shell=True).decode())
+    cr_time=datetime.now()
+
+    timestamp = (timestamp.split(' ')[1] +' '+ timestamp.split(' ')[2])
+    timestamp = parser.parse(timestamp)
+    print(str((cr_time-timestamp)))
+    exit()
+
+    if 'inventory.txt' in files:
+        with open('inventory.txt','r') as file:
+            content=file.read()
+            flag=content.split('\n')[0].split('=')[1]
+            created_new=int(flag)
+            file.close()
+        if created_new==0:
+            os.system('rm inventory.txt')
+
 
 
 
 if __name__=="__main__":
-    main()
+    if sys.argv[1]=="--check":
+        check_inventory(sys.argv[2])
+        
+        
+
+    elif sys.argv[1]=="--dyninv":
+        create_stack_data()
