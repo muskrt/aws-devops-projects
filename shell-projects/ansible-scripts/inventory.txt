@@ -1,5 +1,0 @@
-[db_worker]
-db_worker ansible_host=12.1.12.12 ansible_user=test
-db_worker ansible_host=12.1.12.12 ansible_user=test
-[web_worker]
-web_worker ansible_host=12.1.12.12 ansible_user=test

@@ -1,1 +1,0 @@
-#Name=muskrt/test-image
