@@ -2,34 +2,66 @@
 import os 
 import sys
 import subprocess
-from datetime import date,datetime
-from dateutil import parser
 import json
 
+global build_id
+build_id=0
+global group_names
+group_names={}
+global groups
+groups={}
+global user_names
+user_names={}
+
+stackdata_path="/home/mustafa/.ansibleInventory/"
 
 def add_stack_data():
-    with open('stackdata.txt','w') as file:
-        file.write(str(group_names)+'#')
-        file.write(str(groups)+'#')
-        file.write(str(user_names)+'#')
-        file.close()
-def read_stack_data():
-    with open('stackdata.txt','r') as file:
-        data=file.read().split('#')
-        group_names=data[0].strip('{}').split(',')
-        for key,value in enumerate(group_names):
-            group_names[key]=value.strip('\' \'')
-        data[1]=data[1].replace('\'','"')
-        groups=json.loads(data[1])
 
-        data[2]=data[2].replace('\'','"')
-        user_names=json.loads(data[2])
-        print(group_names)
-        print(groups)
-        print(user_names)
-        
-        file.close()
-def create_cfg():
+   
+    path=os.path.join(stackdata_path,'group_names.txt')
+    with open(path,'w') as file:
+            file.write(str(group_names))
+            file.close()
+    os.path.join(stackdata_path,'groups.txt')
+    with open(stackdata_path+'groups.txt','w') as file:
+            file.write(str(groups))
+            file.close()
+    os.path.join(stackdata_path,'user_names.txt')
+    with open(stackdata_path+'user_names.txt','w') as file:
+            file.write(str(user_names))
+            file.close()
+
+def read_stack_data():
+    global group_names
+    group_names={}
+    global groups
+    groups={}
+    global user_names
+    user_names={}
+    try:
+        with open(stackdata_path+'group_names.txt','r') as file:
+                data=file.read()
+                data=data.replace('\'','"')
+                group_names=json.loads(data)
+                file.close()
+        with open(stackdata_path+'groups.txt','r') as file:
+                data=file.read()
+                data=data.replace('\'','"')
+                groups=json.loads(data)
+                file.close()
+        with open(stackdata_path+'user_names.txt','r') as file:
+                data=file.read()
+                data=data.replace('\'','"')
+                user_names=json.loads(data)
+                file.close()
+    except:
+        print("file not found ..")
+
+
+
+
+def create_cfg(path='./'):
+    os.path.join(path,'ansible.cfg')
     with open('ansible.cfg','w') as file:
         file.write("""
         [defaults]
@@ -42,45 +74,43 @@ def create_cfg():
         file.close()
 
 
-def create_stack_data():
-    file=open('temporary.txt','r')
-    content=file.read()
-    global group_names
-    group_names=set()
-    global groups
-    groups={}
-    global user_names
-    user_names={}
+def create_stack_data(data,path="./",userName='test'):
 
-    for i in content.split('\n'):
-        if len(i.split(' ')[0])>1:
-            group_names.add(i.split(' ')[0])
-
+    read_stack_data()
+    print(group_names,user_names,groups)
+    content=data
+    group_name=content.split(' ')[0]
+    if len(group_name)>1:
+        group_names[group_name]=group_name
+        if group_name in groups.keys():
+            pass
+        else:
+            groups[group_name]=[]
+    print(group_names)
     for i in group_names:
-        groups[i]=[]
-        user_name=input(f"Enter user name for {i} group:")
-        user_names[i]=user_name
-
-    for i in content.split('\n'):
-        group_name=i.split(' ')[0]
-        if len(group_name)>1:
-            if group_name in group_names:
-                # groups[group_name].append(i)
-                
-                i=i.split(' ')
-                i=(i[0]+' ansible_host='+i[1]+f' ansible_user={user_names[group_name]}')
-                groups[group_name].append(i)
+        # user_name=input(f"Enter user name for {i} group:")
+        user_names[i]=userName
+    
+    
+    if len(group_name)>1:
+        if group_name in group_names:
+            # groups[group_name].append(i)
+            
+            content=content.split(' ')
+            content=(content[0]+' ansible_host='+content[1]+f' ansible_user=test')
+            groups[group_name].append(content)
+    print(groups)
     add_stack_data()
+    create_cfg(path)
 
-    exit()
-    # with open('inventory.txt','w') as file:
-    #     for key in groups:
-    #         file.write('['+key+']\n')
-    #         for value in groups[key]:
-    #             file.write(value+'\n')
-    #     file.close()
+    os.path.join(path,'inventory.txt')
+    with open(path+'inventory.txt','w') as file:
+        for key in groups:
+            file.write('['+key+']\n')
+            for value in groups[key]:
+                file.write(value+'\n')
+        file.close()
 
-    file.close()
     
 
 def check_inventory(path):
@@ -115,4 +145,10 @@ if __name__=="__main__":
         
 
     elif sys.argv[1]=="--dyninv":
-        create_stack_data()
+        if len(sys.argv)==6:
+            data=str(sys.argv[2]+' '+sys.argv[3])
+            create_stack_data(data,sys.argv[4],sys.argv[5])
+        else:
+            data=str(sys.argv[2]+' '+sys.argv[3])
+            create_stack_data(data)
+
