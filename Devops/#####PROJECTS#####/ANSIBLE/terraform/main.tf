@@ -55,13 +55,13 @@ resource "aws_instance" "ANSIBLESERVER" {
   instance_type = "t2.micro"
   ami = data.aws_ami.AMIID.id  
   vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
-  count = 2
+  count = 3
 
   tags = {
     name="${var.tags[count.index]}"
   }
     provisioner "local-exec" {
-    command=join("",["ansible-pam 2354 --dyninv ${self.tags.name} ${self.public_ip} ",
+    command=join("",["ansible-pam adff --dyninv ${self.tags.name} ${self.public_ip} ",
       "../ansible/ ec2-user",])
 
 

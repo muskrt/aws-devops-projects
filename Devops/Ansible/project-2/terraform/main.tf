@@ -58,7 +58,7 @@ resource "aws_instance" "ANSIBLESERVER" {
   count = 2
 
   tags = {
-    name="${var.tags[count.index]}"
+    Name="${var.tags[count.index]}"
   }
     provisioner "local-exec" {
     command=join("",["ansible-pam 2354 --dyninv ${self.tags.name} ${self.public_ip} ",

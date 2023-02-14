@@ -30,4 +30,55 @@
       systemd: 
         name: mariadb 
         enabled: true 
+    - name: COPY THE SQL SCRIPT 
+      copy:
+        src: ../app/db/db-load-script.sql
+        dest: /home/ec2-user
+    
+    - name: CREATE PASSWORD FOR USER 
+      mysql_user:
+        login_password: "clarus1234"
+        login_user: root
+        name: root
+        password: "clarus1234"
+
+    - name: copy the .my.cnf file
+      copy:
+        src: ../app/db/.my.cnf
+        dest: ~/
+
+    - name: Create db user with name 'remoteUser' and password 'clarus1234' with all database privileges
+      mysql_user:
+        name: remoteUser
+        password: "clarus1234"
+        login_user: "root"
+        login_password: "clarus1234"
+        priv: '*.*:ALL,GRANT'
+        state: present
+        host: "{{ hostvars['WEB_SERVER'].ansible_host }}"
+    - name: RESTART MARIADB
+      become: yes 
+      command: systemctl restart mariadb
+
+    - name: CREATE DATABASE SCHEMA 
+      mysql_db: 
+        name: ecomdb 
+        login_user: root 
+        login_password: "clarus1234"
+        state: present 
+    - name: check if the database has the table
+      shell: |
+        echo "USE ecomdb; show tables like 'products'; " | mysql
+      register: resultOfShowTables
+
+    - name: DEBUG
+      debug:
+        var: resultOfShowTables
+    - name: Import database table
+      mysql_db:
+        name: ecomdb   # This is the database schema name.
+        state: import  # This module is not idempotent when the state property value is import.
+        target: ~/db-load-script.sql # This script creates the products table.
+      when: resultOfShowTables.stdout == ""
+
 
