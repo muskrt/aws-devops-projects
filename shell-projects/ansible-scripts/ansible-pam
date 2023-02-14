@@ -64,7 +64,7 @@ def read_stack_data():
 
 def create_cfg(path='./'):
     os.path.join(path,'ansible.cfg')
-    with open('ansible.cfg','w') as file:
+    with open(path+'ansible.cfg','w') as file:
         file.write("""
         [defaults]
         host_key_checking = False
@@ -99,7 +99,7 @@ def create_stack_data(data,path="./",userName='test'):
             # groups[group_name].append(i)
             
             content=content.split(' ')
-            content=(content[0]+' ansible_host='+content[1]+f' ansible_user=test')
+            content=(content[0]+' ansible_host='+content[1]+f' ansible_user={userName}')
             groups[group_name].append(content)
     print(groups)
     add_stack_data()
@@ -141,6 +141,7 @@ def check_inventory(path):
 
 
 if __name__=="__main__":
+    read_stack_data()
     if sys.argv[1]=="--check":
         check_inventory(sys.argv[2])
     elif sys.argv[2]=="--dyninv":
