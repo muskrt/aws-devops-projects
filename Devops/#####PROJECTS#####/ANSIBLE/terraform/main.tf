@@ -1,5 +1,3 @@
-
-
 terraform {
   required_providers {
     aws = {
@@ -26,7 +24,7 @@ data "aws_ami" "AMIID" {
   
 }
 variable "tags" {
-    default = ["DB_SERVER","FRONTEND_SERVER","BACKEND_SERVER"]
+    default = ["DB_SERVER","WEB_SERVER"]
   
 }
 
@@ -57,13 +55,15 @@ resource "aws_instance" "ANSIBLESERVER" {
   instance_type = "t2.micro"
   ami = data.aws_ami.AMIID.id  
   vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
-  count = 3
+  count = 2
 
   tags = {
     name="${var.tags[count.index]}"
   }
     provisioner "local-exec" {
-    command="echo ${self.tags.name} ${self.public_ip}  >> ../ansible/temporary.txt"
+    command=join("",["ansible-pam 2354 --dyninv ${self.tags.name} ${self.public_ip} ",
+      "../ansible/ ec2-user",])
+
 
      
   
