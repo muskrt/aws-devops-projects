@@ -1,0 +1,2 @@
+[web1_worker]
+web1_worker ansible_host=12.12.13.13 ansible_user=test

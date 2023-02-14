@@ -15,14 +15,13 @@ global user_names
 user_names={}
 
 
-
 stackdata_path="/home/mustafa/.ansibleInventory/"
 
 def add_stack_data():
 
    
-    path=os.path.join(stackdata_path,'group_names.txt')
-    with open(stackdata_path,'w') as file:
+    os.path.join(stackdata_path,'group_names.txt')
+    with open(stackdata_path+'group_names.txt','w') as file:
             file.write(str(group_names))
             file.close()
     os.path.join(stackdata_path,'groups.txt')
@@ -144,14 +143,19 @@ def check_inventory(path):
 if __name__=="__main__":
     if sys.argv[1]=="--check":
         check_inventory(sys.argv[2])
-        
-        
-
-    elif sys.argv[1]=="--dyninv":
-        if len(sys.argv)==6:
-            data=str(sys.argv[2]+' '+sys.argv[3])
-            create_stack_data(data,sys.argv[4],sys.argv[5])
+    elif sys.argv[2]=="--dyninv":
+        build_number=sys.argv[1]
+        stackdata_path+=(build_number+'/')
+        try:
+            os.makedirs(stackdata_path)
+        except:
+            pass 
+        if len(sys.argv)==7:
+            #ansible-pam 1232132 --dyninv db_worker 12.1.12.12 testFolder/ ec2-user
+            data=str(sys.argv[3]+' '+sys.argv[4])
+            create_stack_data(data,sys.argv[5],sys.argv[6])
         else:
-            data=str(sys.argv[2]+' '+sys.argv[3])
+            #ansible-pam 2132323 --dyninv db_worker 12.1.12.12 
+            data=str(sys.argv[3]+' '+sys.argv[4])
             create_stack_data(data)
 
