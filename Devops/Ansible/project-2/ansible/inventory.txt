@@ -1,5 +1,0 @@
-[WEB_SERVER]
-WEB_SERVER ansible_host=44.193.203.201 ansible_user=ec2-user
-[DB_SERVER]
-DB_SERVER ansible_host=18.233.93.126 ansible_user=ec2-user
-DB_SERVER ansible_host=34.237.138.131 ansible_user=ec2-user

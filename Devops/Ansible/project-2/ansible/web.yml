@@ -5,8 +5,7 @@
     - name: INSTALL THE LATEST VERSION OF GIT ,APACHCE, PHP ,PYP-MYSQLIND 
       package: 
         name: 
-          - git 
-          - http 
+          - git  
           - httpd 
           - php 
           - php-mysqlnd 
@@ -36,8 +35,8 @@
         regexp: '172\.20\.1\.101'
         line: "$link = mysqli_connect('{{ hostvars['DB_SERVER'].ansible_host }}', 'remoteUser', 'clarus1234', 'ecomdb');"
       when: not result.stdout == "already cloned..."
-    - selinux:
-        state: disabled    
+    # - selinux:
+    #     state: disabled    
 
     - name: Restart service httpd
       service:

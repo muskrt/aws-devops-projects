@@ -37,7 +37,7 @@
     
     - name: CREATE PASSWORD FOR USER 
       mysql_user:
-        login_password: "clarus1234"
+        login_password: ""
         login_user: root
         name: root
         password: "clarus1234"
