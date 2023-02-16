@@ -1,5 +1,5 @@
-- name: CONFIGURE POSTGRESQL NODE 
-  hosts: DB 
+- name: CONFIGURE BACKEND  NODE 
+  hosts: BACKEND
   become : true 
   gather_facts: false 
   tasks: 
@@ -71,43 +71,38 @@
         state: started 
     - name: CREATE BUILD DIRECTORY 
       file:
-        path: /home/ec2-user/postgresql
+        path: /home/ec2-user/nodejs-server
         state: directory 
         owner: root 
         group: root 
         mode: "0755"
 
-    - name: COPY DOCKERFILE FILES 
+    - name: COPY SERVER FILES 
       copy:
-        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/Dockerfile
-        dest: /home/ec2-user/postgresql
+        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/backend/
+        dest: /home/ec2-user/nodejs-server
+    - name: COPY DOCKERFILE FILE
+      copy:
+        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/backend/Dockerfile
+        dest: /home/ec2-user/nodejs-server
 
-    - name: COPY SQL FILE
-      copy: 
-        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/init.sql
-        dest: /home/ec2-user/postgresql
     - name: REMOVE CONTAINER IF EXISTS 
-      shell: "docker ps -q --filter 'name=postgre' && docker stop postgre && docker rm -fv postgre && docker image rm -f postgre || echo 'not found'"
+      shell: "docker ps -q --filter 'name=NODEJS' && docker stop NODEJS && docker rm -fv NODEJS && docker image rm -f NODEJS || echo 'not found'"
 
     - name: BUILD CONTAINER 
       docker_image: 
-        name: postgre 
+        name: NODEJS 
         build:
-          path: /home/ec2-user/postgresql
+          path: /home/ec2-user/nodejs-server
         source: build 
         state: present 
     - name: CREATE POSTGRE DATABASE
       docker_container: 
-        name: postgre 
-        image: postgre 
+        name: NODEJS 
+        image: NODEJS 
         state: started 
         ports:
-          - "5432:5432"
-
-        env: 
-          POSTGRES_PASSWORD: "Pp123456789"
-        volumes: 
-          - /db-data:/var/lib/postgresql/data 
+          - "5000:5000"
       register: container_info 
     - name: 
       debug:

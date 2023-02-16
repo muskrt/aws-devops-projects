@@ -1,5 +1,5 @@
-- name: CONFIGURE POSTGRESQL NODE 
-  hosts: DB 
+- name: CONFIGURE FRONTEND NODE 
+  hosts: FRONTEND  
   become : true 
   gather_facts: false 
   tasks: 
@@ -71,7 +71,7 @@
         state: started 
     - name: CREATE BUILD DIRECTORY 
       file:
-        path: /home/ec2-user/postgresql
+        path: /home/ec2-user/FRONTEND
         state: directory 
         owner: root 
         group: root 
@@ -79,30 +79,26 @@
 
     - name: COPY DOCKERFILE FILES 
       copy:
-        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/Dockerfile
-        dest: /home/ec2-user/postgresql
+        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/frontend/
+        dest: /home/ec2-user/FRONTEND
 
-    - name: COPY SQL FILE
-      copy: 
-        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/init.sql
-        dest: /home/ec2-user/postgresql
     - name: REMOVE CONTAINER IF EXISTS 
-      shell: "docker ps -q --filter 'name=postgre' && docker stop postgre && docker rm -fv postgre && docker image rm -f postgre || echo 'not found'"
+      shell: "docker ps -q --filter 'name=FRONTEND' && docker stop FRONTEND && docker rm -fv FRONTEND && docker image rm -f FRONTEND || echo 'not found'"
 
     - name: BUILD CONTAINER 
       docker_image: 
-        name: postgre 
+        name: FRONTEND 
         build:
-          path: /home/ec2-user/postgresql
+          path: /home/ec2-user/FRONTEND
         source: build 
         state: present 
     - name: CREATE POSTGRE DATABASE
       docker_container: 
-        name: postgre 
-        image: postgre 
+        name: FRONTEND 
+        image: FRONTEND 
         state: started 
         ports:
-          - "5432:5432"
+          - "5000:5000"
 
         env: 
           POSTGRES_PASSWORD: "Pp123456789"
