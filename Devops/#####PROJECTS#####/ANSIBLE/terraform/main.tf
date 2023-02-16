@@ -15,37 +15,54 @@ provider "aws" {
 }
 
 data "aws_ami" "AMIID" {
-    owners = ["amazon"]
+    owners = ["309956199498"]
     most_recent = true 
     filter {
       name="name"
-      values=["amzn2-ami-hvm*"]
+      values=["RHEL-9.0.0_HVM-20230127-x86_64*"]
     }
+    # filter {
+    #   name="tag:Architecture"
+    #   values=["x86_64"]
+    # }
   
 }
-variable "tags" {
-    default = ["DB_SERVER","WEB_SERVER"]
+variable "intance_tags" {
+    default = ["BACKEND_SERVER","FRONTEND_SERVER","DB_SERVER"]
   
 }
 
 resource "aws_security_group" "ANSIBLESERVERSECGROUP" {
-  ingress{
-    from_port = 22
-    protocol="tcp"
-    to_port=22
-    cidr_blocks=["0.0.0.0/0"]
+  ingress {
+    from_port   = 22
+    protocol    = "tcp"
+    to_port     = 22
+    cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress{
-        from_port = 80
-    protocol="tcp"
-    to_port=80
-    cidr_blocks=["0.0.0.0/0"]
+  ingress {
+    from_port   = 5000
+    protocol    = "tcp"
+    to_port     = 5000
+    cidr_blocks = ["0.0.0.0/0"]
   }
-  egress{
-    from_port = 0
-    protocol="-1"
-    to_port=0
-    cidr_blocks=["0.0.0.0/0"]
+  ingress {
+    from_port   = 3000
+    protocol    = "tcp"
+    to_port     = 3000
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 5432
+    protocol    = "tcp"
+    to_port     = 5432
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    protocol    = -1
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
   }
   
 }
@@ -58,10 +75,10 @@ resource "aws_instance" "ANSIBLESERVER" {
   count = 3
 
   tags = {
-    name="${var.tags[count.index]}"
+    Name="${var.intance_tags[count.index]}"
   }
     provisioner "local-exec" {
-    command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.name} ${self.public_ip} ",
+    command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
       "${var.inventory_path}/ ec2-user",])
 
 
