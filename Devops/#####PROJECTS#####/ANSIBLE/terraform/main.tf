@@ -61,8 +61,8 @@ resource "aws_instance" "ANSIBLESERVER" {
     name="${var.tags[count.index]}"
   }
     provisioner "local-exec" {
-    command=join("",["ansible-pam adff --dyninv ${self.tags.name} ${self.public_ip} ",
-      "../ansible/ ec2-user",])
+    command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.name} ${self.public_ip} ",
+      "${var.inventory_path}/ ec2-user",])
 
 
      
