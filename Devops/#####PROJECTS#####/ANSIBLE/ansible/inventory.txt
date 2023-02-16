@@ -1,6 +1,0 @@
-[BACKEND]
-BACKEND_SERVER ansible_host=44.200.69.148 ansible_user=ec2-user
-[DB]
-DB_SERVER ansible_host=44.199.229.135 ansible_user=ec2-user
-[FRONTEND]
-FRONTEND_SERVER ansible_host=34.200.248.249 ansible_user=ec2-user

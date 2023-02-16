@@ -61,9 +61,9 @@
     # - name: START DOCKER GROUP 
     #   command: newgrp docker 
 
-    - name: reset ssh connection to allow user changes to affect ansible user
-      ansible.builtin.meta:
-        reset_connection
+    # - name: reset ssh connection to allow user changes to affect ansible user
+    #   ansible.builtin.meta:
+    #     reset_connection
     - name: START DOCKER SERVICE 
       systemd:
         name: docker 
@@ -106,7 +106,7 @@
 
         env: 
           POSTGRES_PASSWORD: "Pp123456789"
-          POSTGRES_DB: clarustodo
+          POSTGRES_DB: "clarustodo"
 
       register: container_info 
     - name: 
