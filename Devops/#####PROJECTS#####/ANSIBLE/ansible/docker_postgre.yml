@@ -1,0 +1,108 @@
+- name: CONFIGURE POSTGRESQL NODE 
+  hosts: DB_SERVER 
+  become : true 
+  tasks: 
+    - name: update the system 
+      package: 
+        name: "*"
+        state : latest 
+    - name: UNINSTALL DOCKER OLD VERSIONS 
+      package: 
+        name: "{{ item }}"
+        state: absent 
+      loop: 
+        - docker 
+        - docker-client \
+        - docker-client-latest \
+        - docker-common \
+        - docker-latest \
+        - docker-latest-logrotate \
+        - docker-logrotate \
+        - docker-engine
+    - name: INSTALL YUM UTILS
+      yum: 
+        name: yum-utils
+        state: latest 
+
+    - name: ADD DOCKER REPO 
+      yum_repository:
+        name: https://download.docker.com/linux/centos/docker-ce.repo
+        state: present 
+    - name: INSTALL DOCKER 
+      yum: 
+        name: "{{ item }}"
+        state: latest 
+      loop: 
+        - docker-ce 
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+    - name: INSTALL PIP 
+      package: 
+        name: python3-pip
+        state: latest 
+    - name: 
+      pip:
+        name: docker 
+        state: latest 
+    - name: ADD EC2-USER TO DOCKER GROUP 
+      user: 
+        name: ec2-user 
+        groups: docker 
+        append: yes 
+    - name: START DOCKER GROUP 
+      command: newgrp docker 
+    - name: START DOCKER SERVICE 
+      systemd:
+        name: docker 
+        enabled: yes 
+        state: started 
+    - name: CREATE BUILD DIRECTORY 
+      file:
+        path: /home/ec2-user/postgresql
+        state: directory 
+        owner: root 
+        group: root 
+        mode: "0755"
+
+    - name: COPY DOCKERFILE FILES 
+      copy:
+        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/Dockerfile
+        dest: /home/ec2-user/postgresql
+
+    - name: COPY SQL FILE
+      copy: 
+        src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/init.sql
+        dest: /home/ec2-user/postgresql
+    - name: REMOVE CONTAINER IF EXISTS 
+      shell: "docker ps -q --filter 'name=postgre' && docker stop postgre && docker rm -fv postgre && docker image rm -f postgre || echo 'not found'"
+
+    - name: BUILD CONTAINER 
+      docker_image: 
+        name: postgre 
+        build:
+          path: /home/ec2-user/postgresql
+        source: build 
+        state: present 
+    - name: CREATE POSTGRE DATABASE
+      docker_container: 
+        name: postgre 
+        image: postgre 
+        state: started 
+        ports:
+          - "5432:5432"
+
+        env: 
+          POSTGRES_PASSWORD: "Pp123456789"
+        volumes: 
+          - /db-data:/var/lib/postgresql/data 
+        register: container_info 
+    - name: 
+      debug:
+        var: container_info 
+        
+
+    
+
+
