@@ -87,27 +87,27 @@
         src: /home/mustafa/Desktop/aws-devops-projects/Devops/#####PROJECTS#####/ANSIBLE/App/database/init.sql
         dest: /home/ec2-user/postgresql
     - name: REMOVE CONTAINER IF EXISTS 
-      shell: "docker ps -q --filter 'name=postgre' && docker stop postgre && docker rm -fv postgre && docker image rm -f postgre || echo 'not found'"
+      shell: "docker ps -q --filter 'name=postgre_db' && docker stop postgre_db && docker rm -fv postgre_db && docker image rm -f postgre_image || echo 'not found'"
 
     - name: BUILD CONTAINER 
       docker_image: 
-        name: postgre 
+        name: postgre_image 
         build:
           path: /home/ec2-user/postgresql
         source: build 
         state: present 
     - name: CREATE POSTGRE DATABASE
       docker_container: 
-        name: postgre 
-        image: postgre 
+        name: postgre_db 
+        image: postgre_image 
         state: started 
         ports:
           - "5432:5432"
 
         env: 
           POSTGRES_PASSWORD: "Pp123456789"
-        volumes: 
-          - /db-data:/var/lib/postgresql/data 
+          POSTGRES_DB: clarustodo
+
       register: container_info 
     - name: 
       debug:

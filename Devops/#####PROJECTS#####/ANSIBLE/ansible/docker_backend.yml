@@ -104,6 +104,8 @@
         ports:
           - "5000:5000"
       register: container_info 
+    - selinux:
+        state: disabled   
     - name: 
       debug:
         var: container_info 
