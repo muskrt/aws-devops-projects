@@ -11,5 +11,36 @@
           - php 
           - php-mysqlnd 
         state: latest 
-        
+    - name: start the server and enable it
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: clone the repo of the website
+      shell: |
+        if [ -z "$(ls -al /var/www/html | grep .git)" ]; then
+          git clone https://github.com/kodekloudhub/learning-app-ecommerce.git /var/www/html/
+          echo "ok"
+        else
+          echo "already cloned..."
+        fi
+      register: result
+
+    - name: DEBUG
+      debug:
+        var: result
+
+    - name: Replace a default entry with our own
+      lineinfile:
+        path: /var/www/html/index.php
+        regexp: '172\.20\.1\.101'
+        line: "$link = mysqli_connect('{{ hostvars['DB_SERVER'].ansible_host }}', 'remoteUser', 'clarus1234', 'ecomdb');"
+      when: not result.stdout == "already cloned..."
+    - selinux:
+        state: disabled    
+
+    - name: Restart service httpd
+      service:
+        name: httpd
+        state: restarted
    
