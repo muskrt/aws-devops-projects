@@ -23,10 +23,7 @@ data "aws_ami" "AMIID" {
     }
   
 }
-variable "tags" {
-    default = ["DB_SERVER","WEB_SERVER"]
-  
-}
+
 
 resource "aws_security_group" "ANSIBLESERVERSECGROUP" {
   ingress{
@@ -67,8 +64,8 @@ resource "aws_instance" "ANSIBLESERVER" {
     Name="${var.tags[count.index]}"
   }
     provisioner "local-exec" {
-    command=join("",["ansible-pam 2354 --dyninv ${self.tags.Name} ${self.public_ip} ",
-      "../ansible/ ec2-user",])
+    command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
+      "${var.inventory_path}/ ec2-user",])
 
 
      
