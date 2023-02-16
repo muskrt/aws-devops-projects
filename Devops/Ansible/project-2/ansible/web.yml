@@ -1,2 +1,15 @@
 - name: CONFIGURE WEBSERVER 
-  
+  hosts: WEB_SERVER 
+  become: yes 
+  tasks: 
+    - name: INSTALL THE LATEST VERSION OF GIT ,APACHCE, PHP ,PYP-MYSQLIND 
+      package: 
+        name: 
+          - git 
+          - http 
+          - httpd 
+          - php 
+          - php-mysqlnd 
+        state: latest 
+        
+   
