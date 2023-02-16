@@ -87,19 +87,19 @@
         dest: /home/ec2-user/nodejs-server
 
     - name: REMOVE CONTAINER IF EXISTS 
-      shell: "docker ps -q --filter 'name=NODEJS' && docker stop NODEJS && docker rm -fv NODEJS && docker image rm -f NODEJS || echo 'not found'"
+      shell: "docker ps -q --filter 'name=nodejs_app' && docker stop nodejs_app && docker rm -fv nodejs_app && docker image rm -f nodejs_app || echo 'not found'"
 
     - name: BUILD CONTAINER 
       docker_image: 
-        name: NODEJS 
+        name: nodejs_app 
         build:
           path: /home/ec2-user/nodejs-server
         source: build 
         state: present 
     - name: CREATE POSTGRE DATABASE
       docker_container: 
-        name: NODEJS 
-        image: NODEJS 
+        name: nodejs_app
+        image: nodejs_app 
         state: started 
         ports:
           - "5000:5000"
