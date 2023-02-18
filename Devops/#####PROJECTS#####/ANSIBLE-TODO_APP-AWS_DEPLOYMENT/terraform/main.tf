@@ -91,16 +91,8 @@ resource "aws_instance" "ANSIBLESERVER" {
    
    
 
-# resource "null_resource" "localfile" {
-#     count=2
-#     provisioner "local-exec" {
-#     command="echo ${aws_instance.ANSIBLESERVER[count.index].tags} ${aws_instance.ANSIBLESERVER[count.index].public_ip}  >> ../ansible/temporary.txt"
 
-     
-  
-#   }
-  
-# }
+
 
 output "ANSIBLESERVER" {
     value = [aws_instance.ANSIBLESERVER[*].tags, aws_instance.ANSIBLESERVER[*].public_ip ]

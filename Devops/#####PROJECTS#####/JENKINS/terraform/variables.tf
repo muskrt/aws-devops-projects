@@ -1,0 +1,3 @@
+variable "inventory_path"{
+    
+}
