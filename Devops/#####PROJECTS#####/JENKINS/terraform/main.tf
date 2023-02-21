@@ -29,7 +29,7 @@ data "aws_ami" "AMIID" {
   
 }
 variable "intance_tags" {
-    default = ["JENKINS_SERVER"]
+    default = ["SLAVE_NODE1","SLAVE_NODE2"]
   
 }
 
@@ -57,8 +57,7 @@ resource "aws_security_group" "ANSIBLESERVERSECGROUP" {
   }
   
 }
-
-resource "aws_instance" "ANSIBLESERVER" {
+resource "aws_instance" "JENKINS_SERVER" {
   key_name = "linux"
   instance_type = "t2.micro"
   ami = data.aws_ami.AMIID.id  
@@ -67,6 +66,30 @@ resource "aws_instance" "ANSIBLESERVER" {
     }
   vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
   count = 1
+
+  tags = {
+    Name="JENKINS_SERVER"
+  }
+    provisioner "local-exec" {
+    command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
+      "${var.inventory_path}/ ec2-user",])
+
+  
+  }
+
+
+}
+   
+
+resource "aws_instance" "SLAVE_NODES" {
+  key_name = "linux"
+  instance_type = "t2.micro"
+  ami = data.aws_ami.AMIID.id 
+  count=2 
+  root_block_device {
+    volume_size = 8
+    }
+  vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
 
   tags = {
     Name="${var.intance_tags[count.index]}"
