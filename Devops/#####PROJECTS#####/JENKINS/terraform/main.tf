@@ -15,20 +15,21 @@ provider "aws" {
 }
 
 data "aws_ami" "AMIID" {
-    owners = ["309956199498"]
+    # owners = ["309956199498"] red hat 
+    owners=["amazon"]
     most_recent = true 
+    # filter {
+    #   name="name"
+    #   values=["RHEL-9.0.0_HVM-20230127-x86_64*"]
+    # }
     filter {
       name="name"
-      values=["RHEL-9.0.0_HVM-20230127-x86_64*"]
+      values=["amzn2-ami-hvm*"]
     }
-    # filter {
-    #   name="tag:Architecture"
-    #   values=["x86_64"]
-    # }
   
 }
 variable "intance_tags" {
-    default = ["BACKEND_SERVER","FRONTEND_SERVER","DB_SERVER"]
+    default = ["JENKINS_SERVER"]
   
 }
 
@@ -40,23 +41,13 @@ resource "aws_security_group" "ANSIBLESERVERSECGROUP" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    from_port   = 5000
+    from_port   = 8080
     protocol    = "tcp"
-    to_port     = 5000
+    to_port     = 8080
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    from_port   = 3000
-    protocol    = "tcp"
-    to_port     = 3000
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port   = 5432
-    protocol    = "tcp"
-    to_port     = 5432
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
+
 
   egress {
     from_port   = 0
@@ -71,8 +62,11 @@ resource "aws_instance" "ANSIBLESERVER" {
   key_name = "linux"
   instance_type = "t2.micro"
   ami = data.aws_ami.AMIID.id  
+  root_block_device {
+    volume_size = 12
+    }
   vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
-  count = 3
+  count = 1
 
   tags = {
     Name="${var.intance_tags[count.index]}"

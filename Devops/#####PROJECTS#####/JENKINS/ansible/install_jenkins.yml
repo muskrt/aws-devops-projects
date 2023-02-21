@@ -1,0 +1,44 @@
+- name: INSTALL JENKINS 
+  hosts: JENKINS_SERVER
+  gather_facts: false 
+  become: true 
+  tasks:
+    - name: UPDATE THE SYSTEM 
+      yum: 
+        name: "*"
+        state: latest 
+    
+    - name: INSTALL JDK 
+      command: amazon-linux-extras install java-openjdk11 -y
+
+    - name: INSTALL GIT 
+      yum:
+        name: git 
+        state: latest 
+
+    - name: ADD JENKINS REPO TO YUM REPO 
+      get_url: 
+        url: https://pkg.jenkins.io/redhat/jenkins.repo
+        dest: /etc/yum.repos.d/jenkins.repo
+
+    - name: ADD RPM KEY 
+      rpm_key:
+        key: https://pkg.jenkins.io/redhat/jenkins.io.key
+        state: present 
+
+    - name: ENABLE THE EPEL REPOSITORY FOR AMAZON EC2 INSTANCE
+      command: amazon-linux-extras install epel -y
+
+    - name: INSTALL JENKINS 
+      yum: 
+        name: jenkins 
+        state: latest 
+
+    - name: START AND ENABLE JENKINS 
+      systemd:
+        name: jenkins
+        state: started  
+        enabled: true 
+
+      
+
