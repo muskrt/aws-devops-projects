@@ -1,0 +1,51 @@
+- name: INSTALL MAVEN 
+  hosts: JENKINS_SERVER
+  gather_facts: false 
+  become : true 
+  tasks:
+    - name: INSTALL OPENJDK 
+      yum:
+        name: java-11-amazon-corretto
+        state: latest 
+    - name: FIND JAVAC  
+      shell: find /usr/lib -name javac 
+      register: javac_path
+    - name: LINK JAVAC
+      file:
+        src: "{{ javac_path.stdout }}"
+        dest: /bin/javac
+        state: link 
+    - name: REMOVE OLD VERSION OF MAVEN 
+      command: cd /opt && rm -rf maven 
+    - name: INSTALL MAVEN AND UNZIP THE MAVEN FOLDER
+      unarchive:
+        remote_src: true
+        src:  https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+        dest: /opt
+    - name: REMOVE MAVEN TAR FILE 
+      shell: cd /opt && rm -rf apache-maven-*-bin.tar.gz || echo "Not Found"
+
+    - name: GET MAVEN FOLDER 
+      shell: cd /opt && echo  $(ls | grep apache-maven-*)
+      register: maven_folder
+
+    - name: LINK MAVEN 
+      file: 
+        src: "{{ maven_folder.stdout }}"
+        dest: /opt/maven
+        state: link 
+    - name: MODIFY PATH  
+      become: true
+      shell: echo 'export M2_HOME=/opt/maven' > /etc/profile.d/maven.sh
+    - name: MODIFY PATH
+      become: true 
+      shell: echo 'export PATH=${M2_HOME}/bin:${PATH}' >> /etc/profile.d/maven.sh
+
+    - name: BIND BASHRC
+      become: false 
+      shell: source /etc/profile.d/maven.sh
+
+    - name: INSTALL GIT 
+      yum:
+        name: git 
+        state: latest 

@@ -1,0 +1,116 @@
+- name: INTALL TOMCAT
+  gather_facts: false 
+  hosts: TOMCAT 
+  become: true 
+  tasks:  
+    - name: UPDATE THE SYSTEM 
+      yum:
+        name: "*"
+        state: latest
+    - name: INSTALL JDK 
+      yum: 
+        name: java-1.8.0-openjdk
+    - name: INSTALL UNZIP AND WGET 
+      yum:
+        name:
+          - unzip
+          - wget 
+        state: latest 
+
+    - name: CREATE TOMCAT FOLDER 
+      file:
+        path: /opt/tomcat
+        state: directory 
+    - name: GET TOMCAT ZIP FILE 
+      unarchive: 
+        remote_src: true 
+        src: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.72/bin/apache-tomcat-9.0.72.tar.gz
+        dest: /opt
+    - name: MV TOMCAT FILES UNDER TOMCAT FOLDER 
+      copy:
+        remote_src: true 
+        src: /opt/apache-tomcat-9.0.72/
+        dest: /opt/tomcat/
+      
+    - name: CHANGE TOMCAT/BIN PERMISSIONS 
+      file:
+        path: /opt/tomcat/bin
+        recurse: true  
+        mode: '+x'
+    - name: CHANGE USERS 
+      become: true 
+      blockinfile:
+        path: /opt/tomcat/conf/tomcat-users.xml
+        insertbefore: "</tomcat-users>"
+        marker_begin: '' 
+        marker_end: ''
+        block: |
+            <role rolename="manager-script"/>
+            <role rolename="admin-gui"/>
+            <role rolename="manager-gui"/>
+            <user username="tomcat" password="tomcat" roles="manager-script, admin-gui, manager-gui"/>
+    - name: CHANGE COOKIE SETTINGS 
+      lineinfile:
+        path: /opt/tomcat/webapps/host-manager/META-INF/context.xml
+        insertbefore: '  <CookieProcessor '
+        line: "<!-- "
+        state: present 
+    - name: CHANGE COOKIE SETTINS 
+      lineinfile:
+        path: /opt/tomcat/webapps/host-manager/META-INF/context.xml
+        insertafter: '0:1" />'
+        state: present
+        line: " -->" 
+
+
+    - name: CHANGE COOKIE SETTINGS 
+      lineinfile:
+        path: /opt/tomcat/webapps/manager/META-INF/context.xml
+        insertbefore: '  <CookieProcessor '
+        line: "<!-- "
+        state: present  
+    - name: CHANGE COOKIE SETTINS 
+      lineinfile:
+        path: /opt/tomcat/webapps/manager/META-INF/context.xml
+        insertafter: '0:1" />'
+        state: present
+        line: " -->" 
+
+
+    - name: SHUTDOWN  TOMCAT SERVER 
+      become: true 
+      shell: bash /opt/tomcat/bin/shutdown.sh
+
+    - name: START TOMCAT SERVER 
+      become: true 
+      shell: bash /opt/tomcat/bin/startup.sh
+    - name: ENABLE TOMCAT SERVER 
+      copy:
+        dest: /etc/systemd/system/tomcat.service
+        content: |
+          [Unit]
+          Description=Apache Tomcat Web Application Container
+          After=syslog.target network.target
+
+          [Service]
+          Type=forking
+
+          Environment=JAVA_HOME=/usr/lib/jvm/jre
+          Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
+          Environment=CATALINA_HOME=/opt/tomcat
+          Environment=CATALINA_BASE=/opt/tomcat
+          Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
+          Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
+
+          ExecStart=/opt/tomcat/bin/startup.sh
+          ExecStop=/bin/kill -15 $MAINPID
+
+          [Install]
+          WantedBy=multi-user.target
+        
+    - name: ENABLE TOMCAT SERVER 
+      systemd: 
+        name: tomcat  
+        enabled: true 
+        state: started 
+
