@@ -37,21 +37,26 @@ resource "aws_instance" "MYSERVER" {
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.MYSERVER-SEC-GRP.id]
     user_data = file("user-data.sh")
-    
     provisioner "local-exec" {
-        command = "echo ${self.public_ip} > public_ip.txt"
+        command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
+      "${var.inventory_path}/ ec2-user",])
+
     }
-        connection {
+
+    connection {
     host = self.public_ip
     type = "ssh"
     user = "ec2-user"
     private_key = file("~/linux.pem")
-  }
+    }
     provisioner "file" {
 
     source = "/home/mustafa/Desktop/aws-devops-projects/Devops/PROJECTS/DOCKER-BOOKSTORE_API_APP/App"
     destination = "/home/ec2-user/"
 
  
-  }
+    }
 }
+
+
+
