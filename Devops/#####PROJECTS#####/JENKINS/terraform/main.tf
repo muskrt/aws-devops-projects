@@ -81,18 +81,18 @@ resource "aws_instance" "JENKINS_SERVER" {
 }
    
 
-resource "aws_instance" "SLAVE_NODES" {
+resource "aws_instance" "SLAVE_NODE" {
   key_name = "linux"
   instance_type = "t2.micro"
   ami = data.aws_ami.AMIID.id 
-  count=2 
+  count=1
   root_block_device {
-    volume_size = 8
+    volume_size = 12
     }
   vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
 
   tags = {
-    Name="${var.intance_tags[count.index]}"
+    Name="SLAVE_NODE"
   }
     provisioner "local-exec" {
     command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
