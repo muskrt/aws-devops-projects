@@ -13,8 +13,16 @@ provider "aws" {
   region = "us-east-1"
   profile = "default"
 }
-
-data "aws_ami" "AMIID" {
+data "aws_ami" "REDHAT" {
+  owners = ["309956199498"] 
+  most_recent = true 
+  filter {
+    name="name"
+    values=["RHEL-9.0.0_HVM-20230127-x86_64*"]
+  }
+  
+}
+data "aws_ami" "AMAZON-LINUX" {
     # owners = ["309956199498"] red hat 
     owners=["amazon"]
     most_recent = true 
@@ -60,7 +68,7 @@ resource "aws_security_group" "ANSIBLESERVERSECGROUP" {
 resource "aws_instance" "JENKINS_SERVER" {
   key_name = "linux"
   instance_type = "t2.micro"
-  ami = data.aws_ami.AMIID.id  
+  ami = data.aws_ami.AMAZON-LINUX  
   root_block_device {
     volume_size = 12
     }
@@ -84,15 +92,15 @@ resource "aws_instance" "JENKINS_SERVER" {
 resource "aws_instance" "SLAVE_NODE" {
   key_name = "linux"
   instance_type = "t2.micro"
-  ami = data.aws_ami.AMIID.id 
-  count=1
+  ami = data.aws_ami.REDHAT.id 
+  count=3
   root_block_device {
-    volume_size = 12
+    volume_size = 6
     }
   vpc_security_group_ids = [aws_security_group.ANSIBLESERVERSECGROUP.id]
 
   tags = {
-    Name="SLAVE_NODE"
+    Name="${var.intance_tags[count.index]}"
   }
     provisioner "local-exec" {
     command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
