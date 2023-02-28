@@ -82,8 +82,8 @@ resource "aws_instance" "JENKINS_SERVER" {
     provisioner "local-exec" {
     command=join("",["ansible-pam ${var.build_number} --dyninv ${self.tags.Name} ${self.public_ip} ",
       "${var.inventory_path}/ ec2-user",])
-
   
+
   }
 
 
