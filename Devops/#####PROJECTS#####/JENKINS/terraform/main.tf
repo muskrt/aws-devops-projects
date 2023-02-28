@@ -68,7 +68,8 @@ resource "aws_security_group" "ANSIBLESERVERSECGROUP" {
 resource "aws_instance" "JENKINS_SERVER" {
   key_name = "linux"
   instance_type = "t2.micro"
-  ami = data.aws_ami.AMAZON-LINUX  
+  ami = data.aws_ami.AMAZON-LINUX.id
+  user_data=file("jenkins.sh")  
   root_block_device {
     volume_size = 12
     }
