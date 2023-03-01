@@ -29,7 +29,8 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 ./aws/install
 amazon-linux-extras install ansible2 -y
-yum install python-boto3 -y
+yum install pip -y 
+pip  install boto3 botocore
 yum install -y yum-utils
 yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 yum -y install terraform

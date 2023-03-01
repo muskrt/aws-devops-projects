@@ -118,8 +118,8 @@ provider "aws" {
 
 
 
-output "ANSIBLESERVER" {
-    value = [aws_instance.ANSIBLESERVER[*].tags, aws_instance.ANSIBLESERVER[*].public_ip ]
-}
+# output "ANSIBLESERVER" {
+#     value = [aws_instance.ANSIBLESERVER[*].tags, aws_instance.ANSIBLESERVER[*].public_ip ]
+# }
 
 
