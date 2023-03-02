@@ -21,19 +21,20 @@ pipeline{
 
 
     stages{
-        // stage('export svn folder '){
-        //     steps{
-        //         sh 'which tfapt'
-        //         sh 'svn export https://'
-        //         sh """
-        //         mv FOLDER_NAME/* . &&\
-        //         rm -rf FOLDER_NAME 
-        //         """
-        //     }
-            
-
-        // }
-        
+        stage('clear worksapce'){
+            steps{
+                sh 'rm -rf *'
+            }
+        }
+        stage ('GET APPLICATION FOLDER')
+        {
+            steps{
+                echo "creating applicatoin folder"
+                sh 'svn export https://github.com/muskrt/aws-devops-projects.git/trunk/Devops/#####PROJECTS#####/JENKINS/app'
+                sh 'mv app/* .'
+                sh 'rm -rf app '
+            }
+        }  
         stage('create Infrastructure for the App')
         {
             steps{
