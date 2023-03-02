@@ -2,13 +2,9 @@ pipeline{
     agent any
     tools{
         terraform 'terraform'
-        
-        
     }
-    
 
     environment{
-        // TOOL=tool name: 'tfapt', type: 'com.cloudbees.jenkins.plugins.customtools.CustomTool'
         PATH=sh(script:"echo $PATH:/usr/local/bin",returnStdout:true).trim()
         AWS_REGION="us-east-1"
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin"&& aws sts get-caller-identity --query Account --output text',returnStdout:true).trim()
@@ -21,18 +17,17 @@ pipeline{
 
 
     stages{
-        // stage('export svn folder '){
-        //     steps{
-        //         sh 'which tfapt'
-        //         sh 'svn export https://'
-        //         sh """
-        //         mv FOLDER_NAME/* . &&\
-        //         rm -rf FOLDER_NAME 
-        //         """
-        //     }
+        stage('export svn folder '){
+            steps{
+                sh 'svn export https://'
+                sh """
+                mv FOLDER_NAME/* . &&\
+                rm -rf FOLDER_NAME 
+                """
+            }
             
 
-        // }
+        }
         
         stage('create Infrastructure for the App')
         {
