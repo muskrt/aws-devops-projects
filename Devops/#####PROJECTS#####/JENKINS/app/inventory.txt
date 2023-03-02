@@ -1,0 +1,2 @@
+[LOCALHOST]
+worker ansible_host=localhost ansible_user=ec2-user

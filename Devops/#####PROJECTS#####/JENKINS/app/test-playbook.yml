@@ -1,0 +1,13 @@
+- name: test for pipeline
+  gather_facts: false 
+  hosts: worker 
+  become: true 
+  tasks:
+    - name: get pip 
+      yum:
+        name: python3-pip 
+        state: latest 
+    - name: install pip-test 
+      pip: 
+        name: pip-install-test 
+        state: latest 
