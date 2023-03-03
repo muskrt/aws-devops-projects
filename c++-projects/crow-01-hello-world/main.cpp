@@ -7,7 +7,7 @@
 #include <exception.h>
 #include <resultset.h>
 #include <statement.h>
-#include <crow.h>
+#include "Crow/include/crow.h"
 using namespace std;
 using namespace sql;
 int main()
@@ -24,7 +24,7 @@ int main()
     
   CROW_ROUTE(app, "/")
       .name("hello")([] {
-          return "Hello World!";
+          return "multi stage build works";
       });
 
     app.port(5000).multithreaded().run();
