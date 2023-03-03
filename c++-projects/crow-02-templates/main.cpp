@@ -6,11 +6,7 @@
 #include <sstream>
 #include <vector>
 
-int db_init();
-int db_get();
-int db_post();
-int db_update();
-int db_delete();
+
 
 int main()
 {
