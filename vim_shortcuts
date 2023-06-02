@@ -1,0 +1,24 @@
+vim_shortcuts
+-> cmdm == command mode
+:set number ## show line number
+cmdm dd ## cut(delete) a line 
+cmdm u ## undo
+cmdm ctrl+r ## redo
+cmdm /string ## search the string in the file (n to next shift+n to back)
+cmdm shift+insert to paste 
+cmdm /string/new_string/g ## replace all string with new_string in the file
+cmdm travers keys are hl and jk
+cmdm zero to begin $ to end of line 
+cmdm x to delete one char under cursor
+cmdm yy to copy line 
+cmdm nyy to copy number of lines as n
+cmdm p or P to paste line
+
+visual_block
+v – select text using character mode
+V – select lines using line mode
+Ctrl+v – select text using block mode
+
+y – yank (copy) the marked text
+d – delete (cut) the marked text
+p – paste the text after the cursor

@@ -1,0 +1,65 @@
+linux_shortcuts
+~$ netstat -tupln # show ports,ips,process_ids
+
+process management
+~$ sudo pkill -u mustafa # kill all pids belongs to mustafa
+~$ sudo killall cups # kill all related cups pids
+~$ kill -l # list all signals
+~$ man 7 signal # info about signals
+~$ nice # to adjust priority of a process
+~$ strace 
+
+shortcut_commands
+date # show date and time
+last # show login info of a user
+ln -s # to create soft link
+xargs # ls . | xargs echo 
+
+cat > somefile.txt # to inser multiple lines to a file
+tar -zcfv archice.tar folder file # creat arvice 
+tar -xzfv
+if false; then echo "false"; else  echo "true"; fi 
+	# single line if logic
+if 1; then echo "1"; elif 2; then echo "2"; else echo "not found"; fi 
+	# single eliflogic
+
+!! # execute  last command
+script myscript.log # records the input commands to myscript.log file
+losf # files seen open by terminal
+lsof -p pid # show open files by a process
+lsof -u mustafa # open files by mustafa
+lsof -i :80 # which process is listening on port 80
+lsof -i tcp # which process is listening on tcp ports
+
+memory and storage 
+df -h # show disk info 
+du -sch file # show size of file 
+apropos python
+tee -a # append the file instead of overwriting it
+uname -a 
+uname -v 
+uname -r
+ls -i file # gives the begin and end of the sector file is in 
+state file # give detailed info about file
+
+journalctl # to deal with log files
+journalctl --disk-usage # gives size of log files
+journalctl --vacuum-time=2d # clean logs in every 2 day 
+journalctl --vacuum-size=500M # limit log size to 500 Megabyte
+
+systemctl daemon-reload # read all unit files again
+systemctl list-unit-files # list all the unit files
+tldr vim # show cheetsheet for vim 
+
+lastb -aiF # show bad logins 
+
+glances # show activity with network like htop
+whowatch # monitor users
+apt info git # show info about git 
+apt list git # list all available packages
+apt list --installed # show installed packages
+apt --showduplicates list git 
+
+
+
+

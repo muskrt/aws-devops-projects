@@ -1,0 +1,6 @@
+linux_topics_to_work_on
+
+how to make systemd service?
+how to write init file ?
+systemctl isolate 
+systemctl add-wants
